@@ -5,6 +5,13 @@
     color: #03A473 !important;
 }
 
+.link {
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #363636 !important;
+}
+
 .ant-menu-item-selected::after, .ant-menu-item-active::after, .ant-menu-item::after {
     border-bottom: none !important; 
 }
@@ -27,16 +34,7 @@
     border-color: #03A473;
 }
 
-.link {
-    text-decoration: none;
-    padding-left: 5px;
-    padding-right: 5px;
-    color: #363636 !important;
-}
-
 .menu {
-    /* display: flex;
-    justify-content: flex-start; */
     list-style: none;
     border-left: 2px solid rgba(167, 167, 167, 0.376);
 }
