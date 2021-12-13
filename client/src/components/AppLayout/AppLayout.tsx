@@ -3,17 +3,18 @@ import AppHeader from '../AppHeader/AppHeader';
 import AppContent from '../AppContent/AppContent';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
+import { IHeaderOption } from '../../interfaces/componentsInterface';
 
-const headerOptionsForAdmin = [
+
+
+const headerOptionsForAdmin: IHeaderOption[] = [
     { id: 0, name: 'Пользователи', to: '/admin/users' },
     { id: 1, name: 'Проекты', to: '/admin/projects' },
     { id: 2, name: 'Статистика', to: '/admin/statistics' },
     { id: 3, name: 'Отчеты о собоях', to: '/admin/crash_reports' },
-    // { id: 4, name: 'Выход', to: '/login' },
 ];
-const headerOptionsForDeveloper = [
+const headerOptionsForDeveloper: IHeaderOption[] = [
     { id: 0, name: 'Список проектов', to: '/developer/project-list' },
-    // { id: 1, name: 'Выход', to: '/login' },
 ];
 
 const AppLayout: FC = () => {

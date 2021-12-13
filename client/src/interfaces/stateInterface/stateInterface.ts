@@ -7,4 +7,5 @@ export interface IUser {
     email: string;
     project: string;
     userType: string;
+    password: string;
 }

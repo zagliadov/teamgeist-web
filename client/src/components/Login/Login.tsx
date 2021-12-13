@@ -84,7 +84,7 @@ const Login: FC = () => {
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 20 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button className='brand__btn' htmlType="submit">
                         Вход
                     </Button>
                 </Form.Item>

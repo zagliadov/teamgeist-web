@@ -15,6 +15,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test',
             project: 'teamgeist',
             userType: 'developer',
+            password: '000',
         },
         {
             key: '2',
@@ -23,6 +24,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'admin',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '3',
@@ -31,6 +33,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'daniil@gmail.com',
             project: 'teamgeist',
             userType: 'developer',
+            password: '000',
         },
         {
             key: '4',
@@ -39,6 +42,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '5',
@@ -47,6 +51,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '6',
@@ -55,6 +60,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '7',
@@ -63,6 +69,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '8',
@@ -71,6 +78,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '9',
@@ -79,6 +87,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '10',
@@ -87,6 +96,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '11',
@@ -95,6 +105,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '12',
@@ -103,6 +114,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '13',
@@ -111,6 +123,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '14',
@@ -119,6 +132,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '15',
@@ -127,6 +141,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '16',
@@ -135,6 +150,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '17',
@@ -143,6 +159,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '18',
@@ -151,6 +168,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '19',
@@ -159,6 +177,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '20',
@@ -167,6 +186,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '21',
@@ -175,6 +195,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '22',
@@ -183,6 +204,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '23',
@@ -191,6 +213,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '24',
@@ -199,6 +222,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '25',
@@ -207,6 +231,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '26',
@@ -215,6 +240,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '27',
@@ -223,6 +249,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '28',
@@ -231,6 +258,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '29',
@@ -239,6 +267,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '30',
@@ -247,6 +276,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '31',
@@ -255,6 +285,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '32',
@@ -263,6 +294,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '33',
@@ -271,6 +303,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '34',
@@ -279,6 +312,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '35',
@@ -287,6 +321,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '36',
@@ -295,6 +330,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
         {
             key: '37',
@@ -303,6 +339,7 @@ export const UserProvider: FC = ({ children }) => {
             email: 'test@gmail.com',
             project: 'teamgeist',
             userType: 'admin',
+            password: '000',
         },
     ]);
 

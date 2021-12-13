@@ -1,32 +1,34 @@
-import { FC } from 'react';
-import { Form, Input, Button, Select, message } from 'antd';
-
+import { FC, useContext } from 'react';
+import { Form, Input, Button, Select, message, Space } from 'antd';
+import { UserContext } from '../../../state/UserContext';
+import {IValueAddUserForm} from '../../../interfaces/componentsInterface';
 
 const { Option } = Select;
 
 const layout = {
     labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: { span: 24 },
 };
 
 interface IProps {
     setVisible: (arg0: boolean) => void;
 }
 
-const AddUserForm: FC<IProps> = ({setVisible}) => {
 
+const AddUserForm: FC<IProps> = ({ setVisible }) => {
+
+    const [user, setUser] = useContext(UserContext);
     const [form] = Form.useForm();
-    const onFinish = () => {
-        setVisible(false)
+
+    const onFinish = (value: IValueAddUserForm): void => {
+        setVisible(false);
+        console.log(value)
+
     }
 
-    const onFinishFailed = () => {
+    const onFinishFailed = (): void => {
         message.error('Submit failed!');
-        
+
     }
 
 
@@ -34,16 +36,18 @@ const AddUserForm: FC<IProps> = ({setVisible}) => {
         <Form {...layout} form={form} onFinish={onFinish}
             onFinishFailed={onFinishFailed} name="control-hooks" >
             <Form.Item name="email" label="E-mail:" rules={[{ required: true }]}>
-                <Input />
+                <Input className='input-border' />
             </Form.Item>
             <Form.Item name="firstName" label="Имя:" rules={[{ required: true }]}>
-                <Input />
+                <Input className='input-border' />
             </Form.Item>
             <Form.Item name="lastName" label="Фамилия:" rules={[{ required: true }]}>
-                <Input />
+                <Input className='input-border' />
             </Form.Item>
             <Form.Item name="userType" label="Тип пользователя:" rules={[{ required: true }]}>
                 <Select
+                    bordered={false}
+                    className='input-border'
                     placeholder="Developer"
                     allowClear
                 >
@@ -57,6 +61,8 @@ const AddUserForm: FC<IProps> = ({setVisible}) => {
 
             <Form.Item name="project" label="Проект:" rules={[{ required: true }]}>
                 <Select
+                    bordered={false}
+                    className='input-border'
                     placeholder="Выберирите проект..."
                     allowClear
                 >
@@ -69,17 +75,34 @@ const AddUserForm: FC<IProps> = ({setVisible}) => {
             </Form.Item>
 
             <Form.Item name="password" label="Пароль:" rules={[{ required: true }]}>
-                <Input />
+                <Input className='input-border' />
             </Form.Item>
             <Form.Item name="password2" label="Подтвердите пароль:" rules={[{ required: true }]}>
-                <Input />
+                <Input className='input-border' />
             </Form.Item>
-            <Form.Item {...tailLayout}>
-                <Button type="primary" onClick={() => setVisible(false)}>Отмена</Button>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
+
+            <Form.Item>
+                <Space style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    paddingTop: '10px',
+                }}>
+                    <Button className={'white__btn'} onClick={() => setVisible(false)}>
+                        Отмена
+                    </Button>
+
+
+                    <Button htmlType="submit" className="brand__btn">
+                        Добавить
+                    </Button>
+                </Space>
+
+
+
             </Form.Item>
+
+
+
         </Form>
     );
 };

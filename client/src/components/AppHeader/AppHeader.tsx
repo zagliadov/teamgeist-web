@@ -36,7 +36,6 @@ const AppHeader: FC<any> = ({ headerOption }) => {
                                         {item.name}
                                     </NavLink>
                                 </Menu.Item>
-
                             )
                         })}
                     </Menu>

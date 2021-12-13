@@ -1,4 +1,4 @@
-
+import {IValueFromLoginForm} from '../interfaces/componentsInterface';
 
 
 
@@ -10,5 +10,8 @@ export const localStorageGetItem = (name: string) => {
     return localStorage.getItem(name);
 }
 
-
-
+// export const findUser = (obj: IValueFromLoginForm[], values) => {
+//     obj.filter((item: IValueFromLoginForm) => {
+//         return item.email === values.email
+//     });
+// }

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import './app.css';
+import './app.sass';
 /////////////////////////////////////pages
 import Login from '../Login/Login';
 import Users from '../Users/Users';

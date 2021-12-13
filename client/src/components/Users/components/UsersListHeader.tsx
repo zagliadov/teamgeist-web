@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Col, Button, Typography, Row, Modal } from 'antd';
+import '../../App/app.sass';
 import AddUserForm from './AddUserForm';
 const { Title } = Typography;
 
@@ -32,7 +33,7 @@ const UsersListHeader: FC = () => {
                 </Title>
             </Col>
             <Col span={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button style={{ background: '#1ba77d' }}
+                <Button className="brand__btn"
                     onClick={showModal}>
                     Добавить пользователя
                 </Button>
