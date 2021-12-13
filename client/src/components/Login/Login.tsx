@@ -2,7 +2,7 @@ import { Button, Form, Input, Modal } from 'antd';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserContext } from '../../state/UserContext';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
 
 const Login: FC = () => {
