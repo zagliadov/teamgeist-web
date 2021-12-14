@@ -29,8 +29,8 @@ const App: FC = () => {
                 </Route>
                 {/* Route prototype for developer */}
                 <Route element={<ProtectedRoute />}>
-                        <Route path='/' element={<AppLayout />} />
-                        <Route path='/developer/project-list' element={<ProjectList />} />
+                    <Route path='/' element={<AppLayout />} />
+                    <Route path='/developer/project-list' element={<ProjectList />} />
                 </Route>
 
                 <Route path='/login' element={<Login />} />

@@ -6,10 +6,10 @@ import UsersListHeader from './components/UsersListHeader';
 
 const Users: FC = () => {
     return (
-        <>
+        <div style={{boxSizing: 'border-box'}}>
             <UsersListHeader />
             <UsersList />
-        </>
+        </div>
     );
 };
 

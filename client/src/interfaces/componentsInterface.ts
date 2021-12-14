@@ -20,3 +20,8 @@ export interface IValueAddUserForm {
     project: string;
     userType: string;
 }
+
+export interface IPropsSetVisible {
+    setVisible: (arg0: boolean) => void
+    person?: any
+}
