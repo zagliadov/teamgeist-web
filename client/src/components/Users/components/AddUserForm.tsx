@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { Form, Input, Button, Select, message, Space } from 'antd';
 import { UserContext } from '../../../state/UserContext';
-import {IValueAddUserForm} from '../../../interfaces/componentsInterface';
+import {IValueAddUserForm, IPropsSetVisible} from '../../../interfaces/componentsInterface';
 
 const { Option } = Select;
 
@@ -10,12 +10,9 @@ const layout = {
     wrapperCol: { span: 24 },
 };
 
-interface IProps {
-    setVisible: (arg0: boolean) => void;
-}
 
 
-const AddUserForm: FC<IProps> = ({ setVisible }) => {
+const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [user, setUser] = useContext(UserContext);
     const [form] = Form.useForm();
@@ -23,12 +20,10 @@ const AddUserForm: FC<IProps> = ({ setVisible }) => {
     const onFinish = (value: IValueAddUserForm): void => {
         setVisible(false);
         console.log(value)
-
     }
 
     const onFinishFailed = (): void => {
         message.error('Submit failed!');
-
     }
 
 
@@ -61,8 +56,10 @@ const AddUserForm: FC<IProps> = ({ setVisible }) => {
 
             <Form.Item name="project" label="Проект:" rules={[{ required: true }]}>
                 <Select
+                    mode='multiple'
                     bordered={false}
                     className='input-border'
+
                     placeholder="Выберирите проект..."
                     allowClear
                 >
@@ -96,9 +93,6 @@ const AddUserForm: FC<IProps> = ({ setVisible }) => {
                         Добавить
                     </Button>
                 </Space>
-
-
-
             </Form.Item>
 
 
