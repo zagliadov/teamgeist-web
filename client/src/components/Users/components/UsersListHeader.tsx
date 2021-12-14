@@ -45,6 +45,7 @@ const UsersListHeader: FC = () => {
                 footer={null}
                 confirmLoading={confirmLoading}
                 onCancel={handleCancel}
+                maskClosable={false}
             >
         
             <AddUserForm setVisible={setVisible}/>
