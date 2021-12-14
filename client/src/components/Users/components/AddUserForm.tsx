@@ -14,7 +14,6 @@ const layout = {
 
 const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
-    const [user, setUser] = useContext(UserContext);
     const [form] = Form.useForm();
 
     const onFinish = (value: IValueAddUserForm): void => {
