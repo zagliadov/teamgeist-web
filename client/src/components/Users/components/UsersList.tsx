@@ -7,12 +7,10 @@ import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-
-
 const UsersList: FC = () => {
 
     const [user, setUser] = useContext(UserContext);
-    const [person, setPerson] = useState<IUser>();
+    const [editUser, setEditUser] = useState<any>();
     const [visible, setVisible] = useState<boolean>(false);
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
 
@@ -50,7 +48,6 @@ const UsersList: FC = () => {
             }: FilterDropdownProps) => {
                 return (
                     <div style={{
-                        border: '1px solid red',
                         width: '230px',
                         position: 'relative'
                     }}>
@@ -88,7 +85,6 @@ const UsersList: FC = () => {
             }: FilterDropdownProps) => {
                 return (
                     <div style={{
-                        border: '1px solid red',
                         width: '230px',
                         position: 'relative'
                     }}>
@@ -126,7 +122,6 @@ const UsersList: FC = () => {
             }: FilterDropdownProps) => {
                 return (
                     <div style={{
-                        border: '1px solid red',
                         width: '230px',
                         position: 'relative'
                     }}>
@@ -169,7 +164,6 @@ const UsersList: FC = () => {
             }: FilterDropdownProps) => {
                 return (
                     <div style={{
-                        border: '1px solid red',
                         width: '230px',
                         position: 'relative'
                     }}>
@@ -207,8 +201,8 @@ const UsersList: FC = () => {
                         <EditOutlined
                             style={{ padding: '0px 5px' }}
                             onClick={() => {
+                                setEditUser(record);
                                 showModal();
-                                setPerson(record)
                             }}
                         />
                         <DeleteOutlined
@@ -226,12 +220,18 @@ const UsersList: FC = () => {
 
 
     const onDeleteUser = (value: boolean, record: IUser) => {
-        setUser((previos: IUser[]) => {
-            return previos.filter((item: IUser) => item.key !== record.key)
+        Modal.confirm({
+            title: 'Are your sure, you want to delete this User record?',
+            okText: 'Yes',
+            okType: 'danger',
+            maskClosable: false,
+            onOk: () => {
+                setUser((pre: IUser[]) => {
+                    return pre.filter((item: IUser) => item.key !== record.key)
+                })
+            }
         })
     }
-
-
 
     return (
         <>
@@ -240,8 +240,7 @@ const UsersList: FC = () => {
                 dataSource={user}
                 columns={columns}
             />
-
-
+            
 
             <Modal
                 title="Редактировать пользователя"
@@ -250,9 +249,12 @@ const UsersList: FC = () => {
                 footer={null}
                 confirmLoading={confirmLoading}
                 onCancel={handleCancel}
+                maskClosable={false}
             >
 
-                <EditUserForm setVisible={setVisible} person={person} />
+
+                <EditUserForm setVisible={setVisible} editUser={editUser} setEditUser={setEditUser}/>
+
             </Modal>
         </>
 

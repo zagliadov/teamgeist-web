@@ -15,7 +15,7 @@ const layout = {
 const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [form] = Form.useForm();
-    const [user, setUser] = useContext(UserContext);
+    const [, setUser] = useContext(UserContext);
 
     const onAddUser = (value: any) => {
         let rndmnum = Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 111111);
@@ -38,8 +38,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
     const onFinish = (value: IValueAddUserForm): void => {
         setVisible(false);
         onAddUser(value);
-        console.log(value)
-
     }
 
     const onFinishFailed = (): void => {
