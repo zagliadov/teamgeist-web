@@ -17,7 +17,7 @@ export interface IValueAddUserForm {
     lastName: string;
     password: string;
     password2: string;
-    project: string;
+    project: [string];
     userType: string;
 }
 
