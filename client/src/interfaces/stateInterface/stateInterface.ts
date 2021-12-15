@@ -5,7 +5,7 @@ export interface IUser {
     lastName: string;
     firstName: string;
     email: string;
-    project: [string];
+    project: Array<string>;
     userType: string;
     password: string;
 }
