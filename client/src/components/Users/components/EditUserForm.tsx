@@ -1,30 +1,24 @@
 import { FC, useContext } from 'react';
 import { IPropsEditUserForm } from '../../../interfaces/componentsInterface';
+import FormItemForInput from './FormItemForInput/FormItemForInput';
+import FormItemForSelect from './FormItemForSelect/FormItemForSelect';
 import {
     Typography,
     Divider,
     Form,
-    Input,
     Button,
-    Select,
     message,
     Space
 } from 'antd';
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 
-const { Option } = Select;
 const { Text } = Typography;
 
 const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUser }) => {
 
-    const [user, setUser] = useContext(UserContext);
+    const [, setUser] = useContext(UserContext);
     const [form] = Form.useForm();
-
-
-    console.log(editUser, 'user')
-
-
 
     const onDeleteUser = (editUser: IUser) => {
         setUser((previos: IUser[]) => {
@@ -35,7 +29,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
 
     const onFinish = (): void => {
         setVisible(false);
-        setUser((pre: any) => {
+        setUser((pre: IUser[]) => {
             return pre.map((user: IUser) => {
                 if (user.key !== editUser.key) return user;
                 return editUser
@@ -54,113 +48,79 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 User ID:
             </Text>
             <Divider />
-            <Form.Item style={{ marginBottom: "2px" }} label="E-mail:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid email',
-                    },
-                    {
-                        type: "email",
-                        message: 'Please enter a valid email'
-                    }
-                ]}
-                hasFeedback>
-                <Input className='input-border' value={editUser?.email}
-                    onChange={(e) => {
-                        setEditUser((pre: any) => {
-                            return { ...pre, email: e.target.value }
-                        })
-                    }}
-                />
-            </Form.Item>
-            <Form.Item style={{ marginBottom: "2px" }} label="Имя:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid first name',
-                    },
-                    {
-                        whitespace: true,
-                    }
-                ]}
-                hasFeedback>
-                <Input className='input-border' value={editUser?.firstName}
-                    onChange={(e) => {
-                        setEditUser((pre: any) => {
-                            return { ...pre, firstName: e.target.value }
-                        })
-                    }}
-                />
-            </Form.Item>
-            <Form.Item style={{ marginBottom: "10px" }} label="Фамилия:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid last name',
-                    },
-                    {
-                        whitespace: true,
-                    }
-                ]}
-                hasFeedback>
-                <Input className='input-border' value={editUser?.lastName}
-                    onChange={(e) => {
-                        setEditUser((pre: any) => {
-                            return { ...pre, lastName: e.target.value }
-                        })
-                    }}
-                />
-            </Form.Item>
 
-            <Form.Item style={{ marginBottom: "10px" }} label="Тип пользователя:" rules={[{ required: true }]}>
-                <Select
-                    bordered={false}
-                    className='input-border'
-                    allowClear
-                    value={editUser?.userType}
-                    onChange={(value) => {
-                        setEditUser((pre: any) => {
-                            return { ...pre, userType: value }
-                        })
-                    }}
-                >
-                    <Option value="Developer"
-                    >Developer</Option>
-                    <Option value="Manager">Manager</Option>
-                    <Option value="Admin company">Admin company</Option>
-                    <Option value="Owner company">Owner company</Option>
-                    <Option value="Sys Admin all system">Sys Admin all system</Option>
-                </Select>
-            </Form.Item>
+            <FormItemForInput
+                style={{ marginBottom: "2px" }}
+                label={"E-mail"}
+                required={true}
+                message={"Please enter a valid email"}
+                type={"email"}
+                value={editUser?.email}
+                setter={setEditUser}
+                editable={'email'}
+            />
 
-            <Form.Item style={{ marginBottom: "10px" }} label="Проект:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid user type',
-                    },
+            <FormItemForInput
+                style={{ marginBottom: "2px" }}
+                label={"Имя:"}
+                required={true}
+                message={"Please enter a valid first name"}
+                type={"name"}
+                value={editUser?.firstName}
+                setter={setEditUser}
+                editable={"firstName"}
+            />
+
+            <FormItemForInput
+                style={{ marginBottom: "10px" }}
+                label={"Фамилия:"}
+                required={true}
+                message={"Please enter a valid last name"}
+                type={"name"}
+                value={editUser?.lastName}
+                setter={setEditUser}
+                editable={"lastName"}
+            />
+
+            <FormItemForSelect
+                style={{ marginBottom: "10px" }}
+                className={"input-border"}
+                label={"Тип пользователя:"}
+                required={true}
+                value={editUser?.userType}
+                setter={setEditUser}
+                editable={"userType"}
+                optionValue={[
+                    { id: 0, value: 'Developer' },
+                    { id: 1, value: 'Manager' },
+                    { id: 2, value: 'Admin company' },
+                    { id: 3, value: 'Owner company' },
+                    { id: 4, value: 'Sys Admin all system' },
                 ]}
-                hasFeedback>
-                <Select
-                    mode='multiple'
-                    bordered={false}
-                    className='input-border'
-                    allowClear
-                    value={[editUser?.project]}
-                    onChange={(value) => {
-                        setEditUser((pre: any) => {
-                            return { ...pre, project: [...value] }
-                        })
-                    }}
-                >
-                    <Option value="Teamgeist ">Teamgeist1</Option>
-                    <Option value="Teamgeist2 ">Teamgeist2</Option>
-                    <Option value="Teamgeist3 ">Teamgeist3</Option>
-                    <Option value="Teamgeist4 ">Teamgeist4</Option>
-                    <Option value="Teamgeist5 ">Teamgeist5</Option>
-                </Select>
-            </Form.Item>
+            />
+
+            <FormItemForSelect
+                style={{ marginBottom: "10px" }}
+                className={"input-border"}
+                label={"Проект:"}
+                mode={'multiple'}
+                required={true}
+                value={editUser?.project}
+                setter={setEditUser}
+                editable={"project"}
+                optionValue={[
+                    { id: 0, value: 'Project 0' },
+                    { id: 1, value: 'Project 1' },
+                    { id: 2, value: 'Project 2' },
+                    { id: 3, value: 'Project 3' },
+                    { id: 4, value: 'Project 4' },
+                ]}
+            />
+
+
+
+
+
 
             <Form.Item>
                 <Space style={{
@@ -197,12 +157,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                         Отмена
                     </Button>
 
-
                     <Button
-                        // onClick={() => {
-                        //     if (typeof userKey === "undefined") return
-                        //     editUser(userKey)
-                        // }}
                         htmlType="submit"
                         className="brand__btn">
                         Обновить

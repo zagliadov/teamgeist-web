@@ -9,6 +9,8 @@ import { FilterDropdownProps } from 'antd/lib/table/interface';
 
 const UsersList: FC = () => {
 
+
+
     const [user, setUser] = useContext(UserContext);
     const [editUser, setEditUser] = useState<any>();
     const [visible, setVisible] = useState<boolean>(false);
@@ -240,7 +242,7 @@ const UsersList: FC = () => {
                 dataSource={user}
                 columns={columns}
             />
-            
+
 
             <Modal
                 title="Редактировать пользователя"
@@ -252,9 +254,7 @@ const UsersList: FC = () => {
                 maskClosable={false}
             >
 
-
-                <EditUserForm setVisible={setVisible} editUser={editUser} setEditUser={setEditUser}/>
-
+                <EditUserForm setVisible={setVisible} editUser={editUser} setEditUser={setEditUser} />
             </Modal>
         </>
 
