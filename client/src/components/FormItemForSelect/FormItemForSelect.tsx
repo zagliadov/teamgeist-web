@@ -1,6 +1,5 @@
 import { Form, Select } from 'antd';
 import { FC } from 'react';
-import { IUser } from '../../../../interfaces/stateInterface/stateInterface';
 
 const { Option } = Select;
 
@@ -11,21 +10,27 @@ interface IOption {
 }
 
 interface IPropsFormItemForSelect {
-    style: any;
+    style?: any;
     className: any;
     label: string;
+    message?: string;
+    name?: string;
+    placeholder?: string;
     mode?: 'multiple';
     required: boolean;
-    value: string | Array<string>;
-    setter: (arg0: any) => void;
-    editable: string;
+    value?: string | Array<string>;
+    setter?: (arg0: any) => void;
+    editable?: string;
     optionValue: IOption[]
 }
 
 const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
     style,
     className,
+    message,
     label,
+    name,
+    placeholder,
     mode,
     required,
     value,
@@ -34,14 +39,25 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
     optionValue,
 }) => {
     return (
-        <Form.Item style={style} label={label} rules={[{ required: required }]}>
+        <Form.Item style={style} name={name} label={label}
+            rules={[
+                {
+                    required: required,
+                    message: message,
+                },
+            ]}
+            hasFeedback>
             <Select
                 bordered={false}
                 className={className}
                 mode={mode}
+                placeholder={placeholder}
                 allowClear
                 value={value}
                 onChange={(value) => {
+                    if (typeof setter === 'undefined') return
+                    if (typeof editable === 'undefined') return
+
                     setter((pre: any) => {
                         return { ...pre, [editable]: value }
                     })

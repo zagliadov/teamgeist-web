@@ -1,13 +1,28 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import UsersList from './components/UsersList';
-import UsersListHeader from './components/UsersListHeader';
-
+import TableHeader from '../TableHeader/TableHeader';
+import AddUserForm from './components/AddUserForm';
 
 
 const Users: FC = () => {
+
+    let [visible, setVisible] = useState<boolean>(false);
+
     return (
         <>
-            <UsersListHeader />
+            <TableHeader
+                title={"Список пользователей"}
+                whatDoesTheButtonDo={"Добавить пользователя"}
+                modalTitle={"Добавить пользователя"}
+                footer={null}
+                setVisible={setVisible}
+                visible={visible}
+                maskClosable={false}
+            >
+                <AddUserForm setVisible={setVisible} />
+
+            </TableHeader>
+
             <UsersList />
         </>
     );

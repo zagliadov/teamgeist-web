@@ -1,10 +1,11 @@
 import { FC, useContext } from 'react';
-import { Form, Input, Button, Select, message, Space } from 'antd';
+import { Form, Button, message, Space } from 'antd';
 import { IValueAddUserForm, IPropsSetVisible } from '../../../interfaces/componentsInterface';
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
+import FormItemForInput from '../../FormItemForInput/FormItemForInput';
+import FormItemForSelect from '../../FormItemForSelect/FormItemForSelect';
 
-const { Option } = Select;
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 24 },
@@ -44,93 +45,71 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
         message.error('Submit failed!');
     }
 
-
     return (
         <Form {...layout} form={form} onFinish={onFinish}
             onFinishFailed={onFinishFailed} name="control-hooks" >
 
-            <Form.Item name="email" label="E-mail:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid email',
-                    },
-                    {
-                        type: "email",
-                        message: 'Please enter a valid email'
-                    }
-                ]}
-                hasFeedback
-            >
-                <Input className='input-border' />
-            </Form.Item>
+            <FormItemForInput
+                className={"input-border"}
+                placeholder={"Введите email"}
+                label={"E-mail:"}
+                required={true}
+                message={"Please enter a valid email"}
+                type={"email"}
+                name={"email"}
+            />
 
-            <Form.Item name="firstName" label="Имя:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid first name',
-                    },
-                    {
-                        whitespace: true,
-                    }
-                ]}
-                hasFeedback>
-                <Input className='input-border' placeholder="Введите имя" />
-            </Form.Item>
-            <Form.Item name="lastName" label="Фамилия:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid last name',
-                    },
-                    {
-                        whitespace: true,
-                    }
-                ]}
-                hasFeedback>
-                <Input className='input-border' placeholder="Введите фамилию" />
-            </Form.Item>
-            <Form.Item name="userType" label="Тип пользователя:"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please enter valid user type',
-                    },
-                    {
-                        whitespace: true,
-                    }
-                ]}
-                hasFeedback>
-                <Select
-                    bordered={false}
-                    className='input-border'
-                    placeholder="Developer"
-                    allowClear
-                >
-                    <Option value="Developer">Developer</Option>
-                    <Option value="Manager">Manager</Option>
-                    <Option value="Admin company">Admin company</Option>
-                    <Option value="Owner company">Owner company</Option>
-                    <Option value="Sys Admin all system">Sys Admin all system</Option>
-                </Select>
-            </Form.Item>
+            <FormItemForInput
+                className={"input-border"}
+                placeholder={"Введите имя"}
+                label={"Имя:"}
+                required={true}
+                message={"Please enter valid first name"}
+                name={"firstName"}
+            />
 
-            <Form.Item name="project" label="Проект:" hasFeedback>
-                <Select
-                    mode='multiple'
-                    bordered={false}
-                    className='input-border'
-                    placeholder="Выберирите проект..."
-                    allowClear
-                >
-                    <Option value="Teamgeist">Teamgeist</Option>
-                    <Option value="Teamgeist2">Teamgeist</Option>
-                    <Option value="Teamgeist3">Teamgeist</Option>
-                    <Option value="Teamgeist4">Teamgeist</Option>
-                    <Option value="Teamgeist5">Teamgeist</Option>
-                </Select>
-            </Form.Item>
+            <FormItemForInput
+                className={"input-border"}
+                placeholder={"Введите фамилию"}
+                label={"Фамилия:"}
+                required={true}
+                message={"Please enter valid last name"}
+                name={"lastName"}
+            />
+
+            <FormItemForSelect
+                name={"userType"}
+                label={"Тип пользователя:"}
+                required={true}
+                message={"Please enter valid user type"}
+                placeholder={"Выберить тип пользователя"}
+                className={"input-border"}
+                optionValue={[
+                    { id: 0, value: 'Developer' },
+                    { id: 1, value: 'Manager' },
+                    { id: 2, value: 'Admin company' },
+                    { id: 3, value: 'Owner company' },
+                    { id: 4, value: 'Sys Admin all system' },
+                ]}
+            />
+
+            <FormItemForSelect
+                name={"project"}
+                label={"Проект:"}
+                required={false}
+                mode={"multiple"}
+                message={"Please enter valid project"}
+                placeholder={"Выберирите проект..."}
+                className={"input-border"}
+                optionValue={[
+                    { id: 0, value: 'Teamgeist 0 ' },
+                    { id: 1, value: 'Teamgeist 1 ' },
+                    { id: 2, value: 'Teamgeist 2 ' },
+                    { id: 3, value: 'Teamgeist 3 ' },
+                    { id: 4, value: 'Teamgeist 4 ' },
+                ]}
+            />
+
 
             <Form.Item>
                 <Space style={{

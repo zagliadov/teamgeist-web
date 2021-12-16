@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { IPropsEditUserForm } from '../../../interfaces/componentsInterface';
-import FormItemForInput from './FormItemForInput/FormItemForInput';
-import FormItemForSelect from './FormItemForSelect/FormItemForSelect';
+import FormItemForInput from '../../FormItemForInput/FormItemForInput';
+import FormItemForSelect from '../../FormItemForSelect/FormItemForSelect';
 import {
     Typography,
     Divider,
@@ -51,6 +51,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
 
             <FormItemForInput
                 style={{ marginBottom: "2px" }}
+                className={"input-border"}
                 label={"E-mail"}
                 required={true}
                 message={"Please enter a valid email"}
@@ -62,6 +63,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
 
             <FormItemForInput
                 style={{ marginBottom: "2px" }}
+                className={"input-border"}
                 label={"Имя:"}
                 required={true}
                 message={"Please enter a valid first name"}
@@ -73,6 +75,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
 
             <FormItemForInput
                 style={{ marginBottom: "10px" }}
+                className={"input-border"}
                 label={"Фамилия:"}
                 required={true}
                 message={"Please enter a valid last name"}

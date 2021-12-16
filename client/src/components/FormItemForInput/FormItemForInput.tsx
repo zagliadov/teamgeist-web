@@ -1,41 +1,38 @@
 import { Form, Input } from 'antd';
 import { FC } from 'react';
-import { IUser } from '../../../../interfaces/stateInterface/stateInterface';
 
-
-interface ISetterProps {
-    email: string;
-    firstName: string;
-    lastName: string;
-    userType: string;
-    project: Array<string>;
-}
 
 interface IPropsFormItemForInput {
-    style: any;
+    style?: any;
+    className?: string;
+    name?: string;
     label: string;
     required: boolean;
     message: string;
-    type: any;
-    value: string;
-    setter: (arg0: any) => void;
-    editable: string;
+    type?: any;
+    placeholder?: string;
+    value?: string;
+    setter?: (arg0: any) => void;
+    editable?: string;
 }
 
 
 
 const FormItemForInput: FC<IPropsFormItemForInput> = ({
     style,
+    className,
     label,
+    name,
     required,
     message,
+    placeholder,
     type,
     value,
     setter,
     editable
 }) => {
     return (
-        <Form.Item style={style} label={label}
+        <Form.Item style={style} label={label} name={name}
             rules={[
                 {
                     required: required,
@@ -47,9 +44,10 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
                 }
             ]}
             hasFeedback>
-            <Input className='input-border' value={value}
+            <Input className={className} value={value} placeholder={placeholder}
                 onChange={(e) => {
-
+                    if (typeof setter === 'undefined') return
+                    if (typeof editable === 'undefined') return
 
                     setter((pre: any) => {
                         return {

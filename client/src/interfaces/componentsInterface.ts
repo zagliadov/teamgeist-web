@@ -32,3 +32,13 @@ export interface IPropsEditUserForm {
     setEditUser: (arg0: any) => void;
 
 }
+
+export interface IPropsTableHeader {
+    title: string;
+    whatDoesTheButtonDo: string;
+    modalTitle: string;
+    footer?: null;
+    maskClosable: boolean;
+    setVisible(arg0: boolean): void;
+    visible: boolean;
+}

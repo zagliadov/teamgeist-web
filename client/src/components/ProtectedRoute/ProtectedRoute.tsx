@@ -1,5 +1,5 @@
-import { FC, useState, useEffect, useContext } from 'react';
-import { Route, useNavigate, Outlet, Navigate } from 'react-router-dom';
+import { FC, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../state/AuthContext';
 import AppLayout from '../AppLayout/AppLayout';
 
