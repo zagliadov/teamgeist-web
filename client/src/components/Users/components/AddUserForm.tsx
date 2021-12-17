@@ -1,5 +1,5 @@
-import { FC, useContext } from 'react';
-import { Form, Button, message, Space } from 'antd';
+import { FC, useContext, useEffect, useState } from 'react';
+import { Form, Button, message, Space, Progress } from 'antd';
 import { IValueAddUserForm, IPropsSetVisible } from '../../../interfaces/componentsInterface';
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
@@ -17,6 +17,9 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [form] = Form.useForm();
     const [, setUser] = useContext(UserContext);
+
+
+
 
     const onAddUser = (value: any) => {
         let rndmnum = Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 111111);
@@ -36,7 +39,10 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
         })
     }
 
+
+
     const onFinish = (value: IValueAddUserForm): void => {
+        console.log(value.project)
         setVisible(false);
         onAddUser(value);
     }
@@ -97,16 +103,16 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 name={"project"}
                 label={"Проект:"}
                 required={false}
-                mode={"multiple"}
+                mode={"tags"}
                 message={"Please enter valid project"}
                 placeholder={"Выберирите проект..."}
                 className={"input-border"}
                 optionValue={[
-                    { id: 0, value: 'Teamgeist 0 ' },
-                    { id: 1, value: 'Teamgeist 1 ' },
-                    { id: 2, value: 'Teamgeist 2 ' },
-                    { id: 3, value: 'Teamgeist 3 ' },
-                    { id: 4, value: 'Teamgeist 4 ' },
+                    { id: 0, value: ' Teamgeist 0 ' },
+                    { id: 1, value: ' Teamgeist 1 ' },
+                    { id: 2, value: ' Teamgeist 2 ' },
+                    { id: 3, value: ' Teamgeist 3 ' },
+                    { id: 4, value: ' Teamgeist 4 ' },
                 ]}
             />
 
@@ -127,8 +133,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                     </Button>
                 </Space>
             </Form.Item>
-
-
 
         </Form>
     );

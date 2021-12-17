@@ -1,7 +1,6 @@
 import { Form, Input } from 'antd';
 import { FC } from 'react';
 
-
 interface IPropsFormItemForInput {
     style?: any;
     className?: string;
@@ -32,7 +31,7 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
     editable
 }) => {
     return (
-        <Form.Item style={style} label={label} name={name}
+        <Form.Item style={style} label={label} name={name} 
             rules={[
                 {
                     required: required,
@@ -40,12 +39,18 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
                 },
                 {
                     type: type,
-                    message: message
+                    message: message,
+                    validateTrigger : 'onBlur' 
                 }
             ]}
             hasFeedback>
-            <Input className={className} value={value} placeholder={placeholder}
+            <Input
+                className={className}
+                value={value}
+                placeholder={placeholder}
+                allowClear
                 onChange={(e) => {
+
                     if (typeof setter === 'undefined') return
                     if (typeof editable === 'undefined') return
 
@@ -63,3 +68,7 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
 };
 
 export default FormItemForInput;
+
+
+
+

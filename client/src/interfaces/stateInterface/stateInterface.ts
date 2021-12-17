@@ -8,4 +8,7 @@ export interface IUser {
     project: Array<string>;
     userType: string;
     password: string;
+    status: 'Открыт' | 'Удален';
+    description: string;
+    projectType: 'Внутренний' | 'Внешний'
 }

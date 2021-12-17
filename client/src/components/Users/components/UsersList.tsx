@@ -35,8 +35,8 @@ const UsersList: FC = () => {
     const columns: ColumnsType<IUser> = [
         {
             title: '#',
-            defaultSortOrder: 'descend',
-            sorter: (a, b) => Number(a.key) - Number(b.key),
+            // defaultSortOrder: 'descend',
+            // sorter: (a, b) => Number(a.key) - Number(b.key),
             dataIndex: 'key',
             key: 'key',
 

@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, Modal, Spin } from 'antd';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserContext } from '../../state/UserContext';
@@ -7,6 +7,7 @@ import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
 
 const Login: FC = () => {
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [isModalVisible, setIsModalVisible] = useState(true);
     const [, setAuth] = useContext(AuthContext);
     const [user,] = useContext(UserContext);
@@ -16,26 +17,30 @@ const Login: FC = () => {
 
 
     const onFinish = (values: IValueFromLoginForm) => {
-        const person = user.filter((item: IValueFromLoginForm) => {
-            return item.email === values.email
-        });
-        localStorage.clear();
-        switch (person[0].userType) {
-            case 'admin':
-                setAuth(true);
-                navigate(`/${person[0].userType}/users`, 
-                { state: person[0].userType });
-                localStorage.setItem('user', `${person[0].userType}`);
-                break;
-            case 'developer':
-                setAuth(true);
-                navigate(`/${person[0].userType}/project-list`, 
-                { state: person[0].userType });
-                localStorage.setItem('user', `${person[0].userType}`);
-                break;
-            default:
-                break;
-        }
+        
+        setTimeout(() => {
+            const person = user.filter((item: IValueFromLoginForm) => {
+                return item.email === values.email
+            });
+            localStorage.clear();
+            switch (person[0].userType) {
+                case 'admin':
+                    setAuth(true);
+                    navigate(`/${person[0].userType}/users`,
+                        { state: person[0].userType });
+                    localStorage.setItem('user', `${person[0].userType}`);
+                    break;
+                case 'developer':
+                    setAuth(true);
+                    navigate(`/${person[0].userType}/project-list`,
+                        { state: person[0].userType });
+                    localStorage.setItem('user', `${person[0].userType}`);
+                    break;
+                default:
+                    break;
+            }
+        }, 1000);
+
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -83,11 +88,17 @@ const Login: FC = () => {
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item wrapperCol={{ offset: 20 }}>
-                    <Button className='brand__btn' htmlType="submit">
-                        Вход
-                    </Button>
-                </Form.Item>
+
+                <Spin spinning={loading} size="large">
+                    <Form.Item wrapperCol={{ offset: 20 }}>
+                        <Button className='brand__btn' htmlType="submit" onClick={() => {
+                            setLoading(true);
+                        }}>
+                            Вход
+                        </Button>
+                    </Form.Item>
+
+                </Spin>
             </Form>
 
         </Modal>
