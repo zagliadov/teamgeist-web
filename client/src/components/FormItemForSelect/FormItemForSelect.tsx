@@ -1,5 +1,5 @@
-import { Form, Input, Select } from 'antd';
-import { FC, useState } from 'react';
+import { Form, Select } from 'antd';
+import { FC } from 'react';
 
 const { Option } = Select;
 
@@ -16,6 +16,7 @@ interface IPropsFormItemForSelect {
     message?: string;
     name?: string;
     placeholder?: string;
+    setOpen?: (arg0: boolean) => void;
     mode?: 'multiple' | 'tags';
     required: boolean;
     value?: string | Array<string>;
@@ -29,6 +30,7 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
     className,
     message,
     label,
+    setOpen,
     name,
     placeholder,
     mode,
@@ -38,8 +40,6 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
     editable,
     optionValue,
 }) => {
-
-    const [open, setOpen] = useState<boolean>(false);
 
 
     return (
@@ -61,9 +61,11 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                     allowClear
                     value={value}
                     onChange={(value) => {
+                        if(typeof setOpen === 'undefined') return
                         if (mode === 'tags') {
-                            console.log(value)
+                            console.log(value.length)
                             setOpen(true);
+                            if(value.length === 0) setOpen(false)
                         }
 
 
@@ -80,7 +82,6 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                     })}
                 </Select>
             </Form.Item>
-            {open ? <Input name="project-type" /> : null}
         </>
 
     );

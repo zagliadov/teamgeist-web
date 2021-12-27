@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { Form, Button, message, Space } from 'antd';
 import { IValueAddUserForm, IPropsSetVisible } from '../../../interfaces/componentsInterface';
 import { UserContext } from '../../../state/UserContext';
@@ -16,6 +16,7 @@ const layout = {
 const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [form] = Form.useForm();
+    const [open, setOpen] = useState<boolean>(false);
     const [, setUser] = useContext(UserContext);
 
 
@@ -33,6 +34,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
             userType: value.userType,
             project: value.project,
             password: rndpass,
+            projectType: value.projectType
         }
         setUser((pre: IUser[]) => {
             return [...pre, newUser]
@@ -42,7 +44,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
 
     const onFinish = (value: IValueAddUserForm): void => {
-        console.log(value.project)
+        console.log(value)
         setVisible(false);
         onAddUser(value);
     }
@@ -102,6 +104,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
             <FormItemForSelect
                 name={"project"}
                 label={"Проект:"}
+                setOpen={setOpen}
                 required={false}
                 mode={"tags"}
                 message={"Please enter valid project"}
@@ -115,6 +118,16 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                     { id: 4, value: ' Teamgeist 4 ' },
                 ]}
             />
+            {open ? 
+            <FormItemForInput
+                className={"input-border"}
+                placeholder={"Выберите тип проекта"}
+                label={"Тип проекта:"}
+                required={true}
+                message={"Please enter valid project type"}
+                name={"projectType"}
+            />
+            : null }
 
 
             <Form.Item>

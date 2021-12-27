@@ -158,11 +158,11 @@ const UsersList: FC = () => {
             key: 'project',
             render: (text, row) => (
                 <>
-                    <p key="project"
+                    <span key="project"
                         style={{
                             color: (row["projectType"] === 'Внутренний') ? '#F4B700' : 'green'
 
-                        }}>{row["project"]}</p>
+                        }}>{row["project"]}</span>
                 </>
             )
         },
