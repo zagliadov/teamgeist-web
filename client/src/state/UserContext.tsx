@@ -13,7 +13,7 @@ export const UserProvider: FC = ({ children }) => {
             lastName: 'Brown',
             firstName: 'John',
             email: 'test',
-            project: ['teamgeist ', 'react ', 'redux'],
+            project: ['teamgeist '],
             userType: 'developer',
             password: '000',
             status: 'Открыт',

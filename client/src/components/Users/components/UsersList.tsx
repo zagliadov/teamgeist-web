@@ -154,8 +154,17 @@ const UsersList: FC = () => {
         },
         {
             title: 'Проекты',
-            dataIndex: 'project',
+            dataIndex: ['project', "projectType"],
             key: 'project',
+            render: (text, row) => (
+                <>
+                    <p key="project"
+                        style={{
+                            color: (row["projectType"] === 'Внутренний') ? '#F4B700' : 'green'
+
+                        }}>{row["project"]}</p>
+                </>
+            )
         },
         {
             title: 'Тип пользователя',

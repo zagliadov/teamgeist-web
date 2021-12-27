@@ -1,5 +1,5 @@
-import { FC, useContext, useEffect, useState } from 'react';
-import { Form, Button, message, Space, Progress } from 'antd';
+import { FC, useContext } from 'react';
+import { Form, Button, message, Space } from 'antd';
 import { IValueAddUserForm, IPropsSetVisible } from '../../../interfaces/componentsInterface';
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
