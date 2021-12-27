@@ -27,6 +27,8 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
         setVisible(false);
     }
 
+
+
     const onFinish = (): void => {
         setVisible(false);
         setUser((pre: IUser[]) => {
@@ -106,25 +108,35 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 style={{ marginBottom: "10px" }}
                 className={"input-border"}
                 label={"Проект:"}
-                mode={'multiple'}
+                mode={'tags'}
                 required={true}
                 value={editUser?.project}
                 setter={setEditUser}
                 editable={"project"}
                 optionValue={[
-                    { id: 0, value: 'Project 0' },
-                    { id: 1, value: 'Project 1' },
-                    { id: 2, value: 'Project 2' },
-                    { id: 3, value: 'Project 3' },
-                    { id: 4, value: 'Project 4' },
+                    { id: 0, value: ' Teamgeist 0 ' },
+                    { id: 1, value: ' Teamgeist 1 ' },
+                    { id: 2, value: ' Teamgeist 2 ' },
+                    { id: 3, value: ' Teamgeist 3 ' },
+                    { id: 4, value: ' Teamgeist 4 ' },
                 ]}
             />
-
-
-
-
-
-
+             
+             <FormItemForSelect
+                style={{ marginBottom: "10px" }}
+                className={"input-border"}
+                label={"Выберите тип проекта"}
+                message={"Please enter valid project type"}
+                required={true}
+                value={editUser?.projectType}
+                setter={setEditUser}
+                editable={"projectType"}
+                optionValue={[
+                    { id: 0, value: 'Внутренний' },
+                    { id: 1, value: 'Внешний' },
+                ]}
+            />
+            
             <Form.Item>
                 <Space style={{
                     display: 'flex',

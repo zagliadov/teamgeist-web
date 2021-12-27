@@ -61,20 +61,17 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                     allowClear
                     value={value}
                     onChange={(value) => {
-                        if(typeof setOpen === 'undefined') return
-                        if (mode === 'tags') {
-                            console.log(value.length)
-                            setOpen(true);
-                            if(value.length === 0) setOpen(false)
+                        if (typeof setter !== 'undefined'
+                            && typeof editable !== 'undefined') {
+                            setter((pre: any) => {
+                                return { ...pre, [editable]: value }
+                            });
                         }
 
-
-
-                        if (typeof setter === 'undefined') return
-                        if (typeof editable === 'undefined') return
-                        setter((pre: any) => {
-                            return { ...pre, [editable]: value }
-                        })
+                        if (typeof setOpen !== 'undefined') {
+                            setOpen(true);
+                            if (value.length === 0) setOpen(false)
+                        }
                     }}
                 >
                     {optionValue && optionValue.map((item: IOption) => {

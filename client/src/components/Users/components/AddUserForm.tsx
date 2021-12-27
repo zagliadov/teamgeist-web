@@ -41,10 +41,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
         })
     }
 
-
-
     const onFinish = (value: IValueAddUserForm): void => {
-        console.log(value)
         setVisible(false);
         onAddUser(value);
     }
@@ -118,16 +115,20 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                     { id: 4, value: ' Teamgeist 4 ' },
                 ]}
             />
-            {open ? 
-            <FormItemForInput
-                className={"input-border"}
-                placeholder={"Выберите тип проекта"}
-                label={"Тип проекта:"}
-                required={true}
-                message={"Please enter valid project type"}
-                name={"projectType"}
-            />
-            : null }
+            {open ?
+                <FormItemForSelect
+                    style={{ marginBottom: "10px" }}
+                    className={"input-border"}
+                    label={"Выберите тип проекта"}
+                    message={"Please enter valid project type"}
+                    required={true}
+                    name={"projectType"}
+                    optionValue={[
+                        { id: 0, value: 'Внутренний' },
+                        { id: 1, value: 'Внешний' },
+                    ]}
+                />
+                : null}
 
 
             <Form.Item>
