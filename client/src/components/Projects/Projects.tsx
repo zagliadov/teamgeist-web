@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import TableHeader from '../TableHeader/TableHeader';
-import AddUserForm from '../Users/components/AddUserForm';
+import AddProjectForm from './components/AddProjectForm/AddProjectForm';
 
 const Projects: FC = () => {
 
@@ -16,7 +16,7 @@ const Projects: FC = () => {
             visible={visible}
             maskClosable={false}
         >
-            <AddUserForm setVisible={setVisible} />
+            <AddProjectForm setVisible={setVisible} />
 
         </TableHeader>
     );

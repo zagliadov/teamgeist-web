@@ -24,7 +24,15 @@ export interface IValueAddUserForm {
 export interface IPropsSetVisible {
     setVisible: (arg0: boolean) => void
 }
+export interface IFooterForModal extends IPropsSetVisible {
+    firstButtonName: string;
+    secondButtonName: string;
+}
 
+export interface IDeleteButtonForModalEditUser extends IFooterForModal {
+    onDeleteUser: (arg0: any) => void;
+    editUser: IUser;
+}
 
 export interface IPropsEditUserForm {
     setVisible: (arg0: boolean) => void;

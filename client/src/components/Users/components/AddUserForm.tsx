@@ -5,6 +5,7 @@ import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import FormItemForInput from '../../FormItemForInput/FormItemForInput';
 import FormItemForSelect from '../../FormItemForSelect/FormItemForSelect';
+import FooterForModal from '../../FooterForModal/FooterForModal';
 
 const layout = {
     labelCol: { span: 8 },
@@ -130,8 +131,11 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 />
                 : null}
 
-
-            <Form.Item>
+            <FooterForModal
+                setVisible={setVisible}
+                firstButtonName="Отмена"
+                secondButtonName="Создать" />
+            {/* <Form.Item>
                 <Space style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -146,7 +150,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                         Добавить
                     </Button>
                 </Space>
-            </Form.Item>
+            </Form.Item> */}
 
         </Form>
     );

@@ -12,7 +12,7 @@ import AppLayout from '../AppLayout/AppLayout';
 import Statistics from '../Statistics/Statistics';
 import CrashReports from '../CrashReports/CrashReports';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import ProjectList from '../ProjectList/ProjectList';
+import ProjectList from '../Projects/components/ProjectList/ProjectList';
 
 const App: FC = () => {
 

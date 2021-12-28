@@ -2,16 +2,16 @@ import { FC, useContext } from 'react';
 import { IPropsEditUserForm } from '../../../interfaces/componentsInterface';
 import FormItemForInput from '../../FormItemForInput/FormItemForInput';
 import FormItemForSelect from '../../FormItemForSelect/FormItemForSelect';
+import FooterForModal from '../../FooterForModal/FooterForModal';
 import {
     Typography,
     Divider,
     Form,
-    Button,
     message,
-    Space
 } from 'antd';
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
+import DeleteButtonForModalEditUser from '../../DeleteButtonForModalEditUser/DeleteButtonForModalEditUser';
 
 const { Text } = Typography;
 
@@ -121,8 +121,8 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                     { id: 4, value: ' Teamgeist 4 ' },
                 ]}
             />
-             
-             <FormItemForSelect
+
+            <FormItemForSelect
                 style={{ marginBottom: "10px" }}
                 className={"input-border"}
                 label={"Выберите тип проекта"}
@@ -136,49 +136,22 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                     { id: 1, value: 'Внешний' },
                 ]}
             />
-            
-            <Form.Item>
-                <Space style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    paddingTop: '10px',
-                }}>
-                    <Button
-                        type="primary" danger
-                        onClick={() => setVisible(false)}>
-                        Удалить все скриншоты
-                    </Button>
 
+            <DeleteButtonForModalEditUser
+                setVisible={setVisible}
+                onDeleteUser={onDeleteUser}
+                editUser={editUser}
+                firstButtonName="Удалить все скриншоты"
+                secondButtonName="Удалить пользователя"
+            />
 
-                    <Button htmlType="submit"
-                        type="primary" danger
-                        onClick={() => {
-                            onDeleteUser(editUser)
-                        }
-                        }>
-                        Удалить пользователя
-                    </Button>
-                </Space>
-            </Form.Item>
             <Divider />
 
-            <Form.Item>
-                <Space style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    paddingTop: '10px',
-                }}>
-                    <Button className={'white__btn'} onClick={() => setVisible(false)}>
-                        Отмена
-                    </Button>
+            <FooterForModal
+                setVisible={setVisible}
+                firstButtonName="Отмена"
+                secondButtonName="Обновить" />
 
-                    <Button
-                        htmlType="submit"
-                        className="brand__btn">
-                        Обновить
-                    </Button>
-                </Space>
-            </Form.Item>
         </Form>
     );
 };
