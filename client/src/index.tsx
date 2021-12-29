@@ -4,20 +4,27 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
 import './index.css';
 import { UserProvider } from './state/UserContext';
-import {AuthProvider } from './state/AuthContext';
+import { AuthProvider } from './state/AuthContext';
+import { ProjectProvider } from './state/ProjectContext';
+import { UserTypeProvider } from './state/UserTypeContext';
 
 
 
 ReactDOM.render(
-  // <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <UserTypeProvider>
       <UserProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <ProjectProvider>
+
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+
+        </ProjectProvider>
       </UserProvider>
-    </BrowserRouter>
-  // </React.StrictMode>
+    </UserTypeProvider>
+
+  </BrowserRouter>
   ,
   document.getElementById('root')
 );

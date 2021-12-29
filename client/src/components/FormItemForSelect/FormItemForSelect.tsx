@@ -1,14 +1,15 @@
 import { Form, Select } from 'antd';
 import { FC } from 'react';
 
+
+
+
 const { Option } = Select;
 
-
 interface IOption {
-    id: number;
+    key: number;
     value: string;
 }
-
 interface IPropsFormItemForSelect {
     style?: any;
     className: any;
@@ -22,7 +23,7 @@ interface IPropsFormItemForSelect {
     value?: string | Array<string>;
     setter?: (arg0: any) => void;
     editable?: string;
-    optionValue: IOption[]
+    optionValue: any;
 }
 
 const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
@@ -40,6 +41,7 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
     editable,
     optionValue,
 }) => {
+
 
 
     return (
@@ -67,15 +69,17 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                                 return { ...pre, [editable]: value }
                             });
                         }
-
+                        
                         if (typeof setOpen !== 'undefined') {
                             setOpen(true);
                             if (value.length === 0) setOpen(false)
                         }
                     }}
                 >
-                    {optionValue && optionValue.map((item: IOption) => {
-                        return <Option value={item.value} key={item.id}>{item.value}</Option>
+
+                    {optionValue && optionValue.map((item: IOption[]) => {
+                        if (typeof item === 'undefined') return null
+                        return <Option value={item[0].value} key={item[0].key}>{item[0].value}</Option>
                     })}
                 </Select>
             </Form.Item>
