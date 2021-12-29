@@ -12,7 +12,9 @@ const UsersList: FC = () => {
 
 
     const [user, setUser] = useContext(UserContext);
+
     const [editUser, setEditUser] = useState<any>();
+
     const [visible, setVisible] = useState<boolean>(false);
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
 

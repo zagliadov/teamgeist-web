@@ -17,7 +17,7 @@ export const UserProvider: FC = ({ children }) => {
             userType: 'developer',
             password: '000',
             status: 'Открыт',
-            description: 'description',
+            description: 'Разработка сервиса',
             projectType: 'Внешний', 
         },
         {
@@ -29,7 +29,7 @@ export const UserProvider: FC = ({ children }) => {
             userType: 'admin',
             password: '000',
             status: 'Открыт',
-            description: 'description',
+            description: 'Внутренний проект',
             projectType: 'Внутренний', 
         },
         {

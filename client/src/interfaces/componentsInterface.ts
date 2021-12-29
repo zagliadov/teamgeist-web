@@ -1,4 +1,4 @@
-import { IUser } from './stateInterface/stateInterface';
+import { IProject, IUser } from './stateInterface/stateInterface';
 
 export interface IValueFromLoginForm {
     email: string,
@@ -38,7 +38,12 @@ export interface IPropsEditUserForm {
     setVisible: (arg0: boolean) => void;
     editUser: IUser;
     setEditUser: (arg0: any) => void;
+}
 
+export interface IPropsEditProjectForm {
+    setVisible: (arg0: boolean) => void;
+    editProject: IProject;
+    setEditProject: (arg0: any) => void;
 }
 
 export interface IPropsTableHeader {
