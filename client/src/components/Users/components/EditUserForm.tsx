@@ -10,14 +10,18 @@ import {
     message,
 } from 'antd';
 import { UserContext } from '../../../state/UserContext';
-import { IUser } from '../../../interfaces/stateInterface/stateInterface';
+import { UserTypeContext } from '../../../state/UserTypeContext'
+import { IProject, IUser } from '../../../interfaces/stateInterface/stateInterface';
 import DeleteButtonForModalEditUser from '../../DeleteButtonForModalEditUser/DeleteButtonForModalEditUser';
 
 const { Text } = Typography;
 
 const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUser }) => {
 
-    const [, setUser] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
+
+    const [userType, ] = useContext(UserTypeContext);
+
     const [form] = Form.useForm();
 
     const onDeleteUser = (editUser: IUser) => {
@@ -36,7 +40,7 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 if (user.key !== editUser.key) return user;
                 return editUser
             })
-        })
+        });
     }
 
     const onFinishFailed = (): void => {
@@ -95,13 +99,14 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 value={editUser?.userType}
                 setter={setEditUser}
                 editable={"userType"}
-                optionValue={[
-                    { id: 0, value: 'Developer' },
-                    { id: 1, value: 'Manager' },
-                    { id: 2, value: 'Admin company' },
-                    { id: 3, value: 'Owner company' },
-                    { id: 4, value: 'Sys Admin all system' },
-                ]}
+                optionValue={userType.map((item: any) => [{ key: item.key, value: item.userType }])}
+                // optionValue={[
+                //     { id: 0, value: 'Developer' },
+                //     { id: 1, value: 'Manager' },
+                //     { id: 2, value: 'Admin company' },
+                //     { id: 3, value: 'Owner company' },
+                //     { id: 4, value: 'Sys Admin all system' },
+                // ]}
             />
 
             <FormItemForSelect
@@ -113,13 +118,14 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 value={editUser?.project}
                 setter={setEditUser}
                 editable={"project"}
-                optionValue={[
-                    { id: 0, value: ' Teamgeist 0 ' },
-                    { id: 1, value: ' Teamgeist 1 ' },
-                    { id: 2, value: ' Teamgeist 2 ' },
-                    { id: 3, value: ' Teamgeist 3 ' },
-                    { id: 4, value: ' Teamgeist 4 ' },
-                ]}
+                optionValue={user.map((item: any) => [{ key: item.key, value: item.projectName }])}
+                // optionValue={[
+                //     { id: 0, value: ' Teamgeist 0 ' },
+                //     { id: 1, value: ' Teamgeist 1 ' },
+                //     { id: 2, value: ' Teamgeist 2 ' },
+                //     { id: 3, value: ' Teamgeist 3 ' },
+                //     { id: 4, value: ' Teamgeist 4 ' },
+                // ]}
             />
 
             <FormItemForSelect
@@ -132,8 +138,8 @@ const EditUserForm: FC<IPropsEditUserForm> = ({ setVisible, editUser, setEditUse
                 setter={setEditUser}
                 editable={"projectType"}
                 optionValue={[
-                    { id: 0, value: 'Внутренний' },
-                    { id: 1, value: 'Внешний' },
+                    [{ key: 0, value: 'Внутренний' }],
+                    [{ key: 1, value: 'Внешний' }],
                 ]}
             />
 

@@ -1,27 +1,27 @@
 import { FC, useContext, useState } from 'react';
-import { Form, Button, message, Space } from 'antd';
+import { Form, message } from 'antd';
 import { IValueAddUserForm, IPropsSetVisible } from '../../../interfaces/componentsInterface';
 import { UserContext } from '../../../state/UserContext';
-import { IUser } from '../../../interfaces/stateInterface/stateInterface';
+import { ProjectContext } from '../../../state/ProjectContext';
+import { IUser, IProject } from '../../../interfaces/stateInterface/stateInterface';
 import FormItemForInput from '../../FormItemForInput/FormItemForInput';
 import FormItemForSelect from '../../FormItemForSelect/FormItemForSelect';
 import FooterForModal from '../../FooterForModal/FooterForModal';
+import { UserTypeContext } from '../../../state/UserTypeContext';
 
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 24 },
 };
 
-
-
 const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [form] = Form.useForm();
     const [open, setOpen] = useState<boolean>(false);
-    const [, setUser] = useContext(UserContext);
-
-
-
+    const [user, setUser] = useContext(UserContext);
+    const [userType, setUserType] = useContext(UserTypeContext);
+    const [project, setProject] = useContext(ProjectContext)
+    console.log(project)
 
     const onAddUser = (value: any) => {
         let rndmnum = Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 111111);
@@ -40,11 +40,26 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
         setUser((pre: IUser[]) => {
             return [...pre, newUser]
         })
+    };
+    const onAddProject = (value: any) => {
+        let rndmnum = Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 111111);
+
+        let newProject = {
+            key: String(rndmnum),
+            projectName: value.project,
+            status: 'Открыт',
+            description: 'no description',
+            projectType: value.projectType,
+        }
+        setProject((pre: IProject[]) => {
+            return [...pre, newProject]
+        });
     }
 
     const onFinish = (value: IValueAddUserForm): void => {
         setVisible(false);
         onAddUser(value);
+        onAddProject(value);
     }
 
     const onFinishFailed = (): void => {
@@ -90,13 +105,14 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 message={"Please enter valid user type"}
                 placeholder={"Выберить тип пользователя"}
                 className={"input-border"}
-                optionValue={[
-                    { id: 0, value: 'Developer' },
-                    { id: 1, value: 'Manager' },
-                    { id: 2, value: 'Admin company' },
-                    { id: 3, value: 'Owner company' },
-                    { id: 4, value: 'Sys Admin all system' },
-                ]}
+                optionValue={userType.map((item: any) => [{ key: item.key, value: item.userType }])}
+            // optionValue={[
+            //     { key: 0, project: 'Developer' },
+            //     { key: 1, project: 'Manager' },
+            //     { key: 2, project: 'Admin company' },
+            //     { key: 3, project: 'Owner company' },
+            //     { key: 4, project: 'Sys Admin all system' },
+            // ]}
             />
 
             <FormItemForSelect
@@ -108,13 +124,14 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 message={"Please enter valid project"}
                 placeholder={"Выберирите проект..."}
                 className={"input-border"}
-                optionValue={[
-                    { id: 0, value: ' Teamgeist 0 ' },
-                    { id: 1, value: ' Teamgeist 1 ' },
-                    { id: 2, value: ' Teamgeist 2 ' },
-                    { id: 3, value: ' Teamgeist 3 ' },
-                    { id: 4, value: ' Teamgeist 4 ' },
-                ]}
+                optionValue={project.map((item: any) => [{ key: item.key, value: item.projectName }])}
+            // optionValue={[
+            //     { id: 0, value: ' Teamgeist 0 ' },
+            //     { id: 1, value: ' Teamgeist 1 ' },
+            //     { id: 2, value: ' Teamgeist 2 ' },
+            //     { id: 3, value: ' Teamgeist 3 ' },
+            //     { id: 4, value: ' Teamgeist 4 ' },
+            // ]}
             />
             {open ?
                 <FormItemForSelect
@@ -124,9 +141,10 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                     message={"Please enter valid project type"}
                     required={true}
                     name={"projectType"}
+                    //optionValue={project.map((item: any) => [{ key: item.key, value: item.project }])}
                     optionValue={[
-                        { id: 0, value: 'Внутренний' },
-                        { id: 1, value: 'Внешний' },
+                        [{ key: 0, value: 'Внутренний' }],
+                        [{ key: 1, value: 'Внешний' }],
                     ]}
                 />
                 : null}
@@ -135,22 +153,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 setVisible={setVisible}
                 firstButtonName="Отмена"
                 secondButtonName="Создать" />
-            {/* <Form.Item>
-                <Space style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    paddingTop: '10px',
-                }}>
-                    <Button className={'white__btn'} onClick={() => setVisible(false)}>
-                        Отмена
-                    </Button>
-
-
-                    <Button htmlType="submit" className="brand__btn">
-                        Добавить
-                    </Button>
-                </Space>
-            </Form.Item> */}
 
         </Form>
     );
