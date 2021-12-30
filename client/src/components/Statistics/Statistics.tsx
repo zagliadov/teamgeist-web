@@ -1,14 +1,9 @@
-import { FC, } from 'react';
-import StatisticsHeader from './components/StatisticsHeader/StatisticsHeader';
-
+import { FC } from 'react';
 
 const Statistics: FC = () => {
-
-
     return (
         <div>
-            <StatisticsHeader />
-
+            STATISTICS
         </div>
     );
 };
