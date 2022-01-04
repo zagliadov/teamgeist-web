@@ -5,9 +5,14 @@ import moment from 'moment';
 
 const { Option } = Select;
 
-const StatisticsDatePicker: FC = () => {
+interface IProps {
+    setTimeStep: (arg0: any) => void;
+    timeStep: any;
+}
 
-    let [timeStep, setTimeStep] = useState<moment.unitOfTime.StartOf>('week');
+const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
+
+
     const weekFormat = 'DD.MM.YYYY',
         monthFormat = 'MMMM.YYYY';
     const handleChange = (value: any) => {
