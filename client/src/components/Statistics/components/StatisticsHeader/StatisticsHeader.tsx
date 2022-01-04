@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import moment from 'moment';
 import {
     ReloadOutlined
@@ -12,12 +12,13 @@ const StatisticsHeader: FC = () => {
 
     let [timeStep, setTimeStep] = useState<moment.unitOfTime.StartOf>('week');
 
-
-
     return (
         <Row>
             <Col span={16}>
-                <StatisticsDatePicker setTimeStep={setTimeStep} timeStep={timeStep} />
+                <StatisticsDatePicker
+                    setTimeStep={setTimeStep}
+                    timeStep={timeStep}
+                />
             </Col>
 
             <Col span={8} style={{
@@ -29,6 +30,7 @@ const StatisticsHeader: FC = () => {
                     style={{ background: 'transparent', color: '#03A473' }}
                     onClick={() => {
                         setTimeStep('week');
+                        
                     }}
                 >
                     <ReloadOutlined />

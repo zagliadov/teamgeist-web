@@ -1,5 +1,5 @@
 import { DatePicker, Select, Space } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import moment from 'moment';
 
 
@@ -10,13 +10,17 @@ interface IProps {
     timeStep: any;
 }
 
-const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
-
+const StatisticsDatePicker: FC<IProps> = ({
+    setTimeStep,
+    timeStep,
+}) => {
 
     const weekFormat = 'DD.MM.YYYY',
         monthFormat = 'MMMM.YYYY';
     const handleChange = (value: any) => {
         setTimeStep(value);
+        console.log(value)
+        value = ''
     }
     const weekOrMonth = (timeStep === 'week') ? weekFormat : monthFormat;
 
@@ -26,17 +30,17 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
             .endOf(timeStep)
             .format(weekOrMonth) : ''}`;
 
-
+  
 
     return (
         <>
             <Space>
                 <Select
-                    defaultValue="week"
+                    defaultValue={(timeStep === 'week') ? 'week' : 'month'}
                     onChange={handleChange}
                     style={{ width: 160 }}>
-                    <Option value="week">Неделя</Option>
-                    <Option value="month">Месяц</Option>
+                    <Option value='week'>Неделя</Option>
+                    <Option value='month'>Месяц</Option>
                 </Select>
 
                 <DatePicker
@@ -52,3 +56,6 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
 };
 
 export default StatisticsDatePicker;
+
+
+
