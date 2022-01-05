@@ -17,39 +17,65 @@ const StatisticsDatePicker: FC<IProps> = ({
 
     const weekFormat = 'DD.MM.YYYY',
         monthFormat = 'MMMM.YYYY';
-    const handleChange = (value: any) => {
-        setTimeStep(value);
-        console.log(value)
-        value = ''
-    }
     const weekOrMonth = (timeStep === 'week') ? weekFormat : monthFormat;
 
-    const customWeekStartEndFormat = (value: any) =>
-        `    ${moment(value).startOf(timeStep).format(weekOrMonth)} 
-        ${(weekOrMonth !== monthFormat) ? '         -       ' + moment(value)
-            .endOf(timeStep)
-            .format(weekOrMonth) : ''}`;
 
-  
+    const handleChange = (value: any) => {
+        setTimeStep(value);
+    }
+    const handlePicker = () => {
+        console.log('')
+    }
+
+    const customWeekStartEndFormat = (value: moment.MomentInput) => {
+        return (
+            `    ${moment(value).startOf(timeStep).format(weekOrMonth)} 
+        ${(weekOrMonth !== monthFormat) ? '    -           ' + moment(value)
+                .endOf(timeStep)
+                .format(weekOrMonth) : ''}`
+        )
+    }
+
+
+    useEffect(() => {
+
+    }, [timeStep])
 
     return (
         <>
             <Space>
-                <Select
-                    defaultValue={(timeStep === 'week') ? 'week' : 'month'}
-                    onChange={handleChange}
-                    style={{ width: 160 }}>
-                    <Option value='week'>Неделя</Option>
-                    <Option value='month'>Месяц</Option>
-                </Select>
+                {(timeStep === "week") &&
+                    <Select
+                        defaultValue={(timeStep === 'week') ? 'week' : 'month'}
+                        onChange={handleChange}
+                        style={{ width: 160 }}>
+                        <Option value="week">Неделя</Option>
+                        <Option value="month">Месяц</Option>
+                    </Select>
+
+                }
+                {(timeStep === "month") &&
+                    <Select
+                        defaultValue={(timeStep === 'week') ? 'week' : 'month'}
+                        onChange={handleChange}
+                        style={{ width: 160 }}>
+                        <Option value="month">Месяц</Option>
+                        <Option value="week">Неделя</Option>
+                    </Select>
+
+                }
 
                 <DatePicker
                     suffixIcon={null}
                     style={{ width: '300px' }}
                     popupStyle={{ width: '300px' }}
                     defaultValue={moment()}
+                    onChange={() => handlePicker}
                     format={customWeekStartEndFormat}
                     picker={(timeStep === 'week') ? 'week' : 'month'} />
+
+
+
             </Space>
         </>
     );
