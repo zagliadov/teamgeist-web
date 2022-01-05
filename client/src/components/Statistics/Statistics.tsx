@@ -10,6 +10,7 @@ const Statistics: FC = () => {
         <>
             <StatisticsHeader />
             <Divider />
+            <Divider />
             <StatisticsList />
         </>
     );
