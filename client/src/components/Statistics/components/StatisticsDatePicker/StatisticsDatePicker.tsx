@@ -70,11 +70,8 @@ const StatisticsDatePicker: FC<IProps> = ({
                     style={{ width: '300px' }}
                     popupStyle={{ width: '300px' }}
                     defaultValue={moment()}
-                    onChange={() => handlePicker}
                     format={customWeekStartEndFormat}
                     picker={(timeStep === 'week') ? 'week' : 'month'} />
-
-
 
             </Space>
         </>
