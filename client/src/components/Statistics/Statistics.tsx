@@ -12,6 +12,7 @@ const Statistics: FC = () => {
             <StatisticsHeader timeStep={timeStep} setTimeStep={setTimeStep}/>
             <Divider />
             <StatisticsList timeStep={timeStep} />
+            <>test</>
         </>
     );
 };
