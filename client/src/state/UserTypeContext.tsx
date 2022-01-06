@@ -24,11 +24,6 @@ export const UserTypeProvider: FC = ({ children }) => {
             key: '3',
             userType: 'Owner company', 
         },
-        {
-            key: '4',
-            userType: 'Sys Admin all system', 
-        },
-        
     ]);
 
     return (
