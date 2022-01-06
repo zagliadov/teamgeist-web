@@ -103,7 +103,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 label={"Тип пользователя:"}
                 required={true}
                 message={"Please enter valid user type"}
-                placeholder={"Выберить тип пользователя"}
+                placeholder={"Выберите тип пользователя"}
                 className={"input-border"}
                 optionValue={userType.map((item: any) => [{ key: item.key, value: item.userType }])}
             // optionValue={[
@@ -122,7 +122,7 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 required={false}
                 mode={"tags"}
                 message={"Please enter valid project"}
-                placeholder={"Выберирите проект..."}
+                placeholder={"Выберите проект..."}
                 className={"input-border"}
                 optionValue={project.map((item: any) => [{ key: item.key, value: item.projectName }])}
             // optionValue={[
