@@ -1,5 +1,4 @@
-import { FC, useState } from 'react';
-import moment from 'moment';
+import { FC } from 'react';
 import {
     ReloadOutlined
 } from '@ant-design/icons';
@@ -8,11 +7,14 @@ import StatisticsDatePicker from '../StatisticsDatePicker/StatisticsDatePicker';
 
 const { Text } = Typography;
 
-const StatisticsHeader: FC = () => {
+interface IProps {
+    timeStep: string;
+    setTimeStep: (arg0: string) => void;
+}
 
-    let [timeStep, setTimeStep] = useState<moment.unitOfTime.StartOf>('week');
+const StatisticsHeader: FC<IProps> = ({timeStep, setTimeStep}) => {
 
-    
+
     return (
         <Row>
             <Col span={16}>

@@ -1,17 +1,19 @@
-import { FC, useContext, useState } from 'react';
-import { Input, Modal, Table } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons'
+import { FC, useContext } from 'react';
+import { Table } from 'antd';
 import { UserContext } from '../../../../state/UserContext';
-import { IProject } from '../../../../interfaces/stateInterface/stateInterface';
 import { ColumnsType } from 'antd/es/table';
-import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-const ProjectList: FC = () => {
+interface IProps {
+    timeStep: string;
+}
 
-    const [user, ] = useContext(UserContext);
- 
 
-    const columns: ColumnsType<IProject> = [
+const ProjectList: FC<IProps> = ({ timeStep }) => {
+
+    const [user,] = useContext(UserContext);
+
+
+    const week: ColumnsType<any> = [
         {
             title: 'Программисты',
             dataIndex: 'key',
@@ -25,7 +27,7 @@ const ProjectList: FC = () => {
         {
             title: 'Вт',
             dataIndex: 'key',
-            key: 'description',    
+            key: 'description',
         },
         {
             title: 'Ср',
@@ -59,14 +61,57 @@ const ProjectList: FC = () => {
         },
     ];
 
+    const month: ColumnsType<any> = [
+        {
+            title: 'Программисты',
+            dataIndex: 'key',
+            key: 'key',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'projectName',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'description',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'projectType',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'projectType',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'projectType',
+        },
+        {
+            title: '26.04.2021 | 02.05.2021',
+            dataIndex: 'key',
+            key: 'projectType',
+        },
+        {
+            title: 'Итого',
+            dataIndex: 'key',
+            key: 'projectType',
+        },
+    ];
+
     return (
         <>
 
-            <Table<IProject>
+            <Table<any>
                 dataSource={user}
-                columns={columns}
+                columns={(timeStep === 'week' ? week : month)}
             />
-            
+
 
         </>
 

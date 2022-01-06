@@ -1,13 +1,13 @@
 import { DatePicker, Select, Space } from 'antd';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import moment from 'moment';
 
 
 const { Option } = Select;
 
 interface IProps {
-    setTimeStep: (arg0: any) => void;
-    timeStep: any;
+    setTimeStep: (arg0: string) => void;
+    timeStep: string;
 }
 
 const StatisticsDatePicker: FC<IProps> = ({
@@ -20,26 +20,20 @@ const StatisticsDatePicker: FC<IProps> = ({
     const weekOrMonth = (timeStep === 'week') ? weekFormat : monthFormat;
 
 
-    const handleChange = (value: any) => {
+    const handleChange = (value: string) => {
         setTimeStep(value);
     }
-    const handlePicker = () => {
-        console.log('')
-    }
+    
 
     const customWeekStartEndFormat = (value: moment.MomentInput) => {
         return (
-            `    ${moment(value).startOf(timeStep).format(weekOrMonth)} 
+            `    ${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} 
         ${(weekOrMonth !== monthFormat) ? '    -           ' + moment(value)
-                .endOf(timeStep)
+                .endOf(timeStep as moment.unitOfTime.StartOf)
                 .format(weekOrMonth) : ''}`
         )
     }
 
-
-    useEffect(() => {
-
-    }, [timeStep])
 
     return (
         <>
@@ -56,7 +50,7 @@ const StatisticsDatePicker: FC<IProps> = ({
                 }
                 {(timeStep === "month") &&
                     <Select
-                        defaultValue={(timeStep === 'week') ? 'week' : 'month'}
+                        defaultValue={(timeStep === 'month') ? 'month' : 'week'}
                         onChange={handleChange}
                         style={{ width: 160 }}>
                         <Option value="month">Месяц</Option>
