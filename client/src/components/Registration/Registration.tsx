@@ -1,5 +1,5 @@
 import { FC, useState, useContext } from 'react';
-import { Button, Form, Space, Input, Modal, Spin } from 'antd';
+import { Modal, Tabs } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -9,6 +9,11 @@ const Registration: FC = () => {
     const handleOk = () => {
         setIsModalVisible(false);
     };
+
+    const { TabPane } = Tabs;
+    function callback(key: string) {
+        console.log(key);
+      }
 
     return (
     <Modal
@@ -20,6 +25,15 @@ const Registration: FC = () => {
         centered={true}
         footer={null}
         maskClosable={false}>
+             <Tabs onChange={callback} type="card">
+                <TabPane tab="План для компании" key="1">
+                Content of Tab Pane 1
+                </TabPane>
+
+                <TabPane tab="Индивидуальный план" key="2">
+                Content of Tab Pane 2
+                </TabPane>
+            </Tabs>
         </Modal>)
 };
 
