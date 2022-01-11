@@ -1,6 +1,10 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState } from 'react';
 import { Modal, Tabs } from 'antd';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import CompanyRegistration from './CompanyReg';
+import UserRegistration from './UserReg';
+// import {IUserRegisterForm, ICompanyRegisterForm } from '../../interfaces/componentsInterface';
+
 
 
 const Registration: FC = () => {
@@ -11,10 +15,17 @@ const Registration: FC = () => {
     };
 
     const { TabPane } = Tabs;
+
     function callback(key: string) {
         console.log(key);
-      }
+    }
 
+    const receivedValuesOfForm = (values: {}) => {
+        console.log('Received values of form: ', values);
+      };
+
+
+    //receivedValuesOfForm={receivedValuesOfForm}
     return (
     <Modal
         title="Регистрация"
@@ -26,12 +37,12 @@ const Registration: FC = () => {
         footer={null}
         maskClosable={false}>
              <Tabs onChange={callback} type="card">
-                <TabPane tab="План для компании" key="1">
-                Content of Tab Pane 1
+                <TabPane tab="План для компании" key="Company">
+                    <CompanyRegistration />
                 </TabPane>
 
-                <TabPane tab="Индивидуальный план" key="2">
-                Content of Tab Pane 2
+                <TabPane tab="Индивидуальный план" key="individualUser">
+                    <UserRegistration />
                 </TabPane>
             </Tabs>
         </Modal>)
