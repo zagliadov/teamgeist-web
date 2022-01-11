@@ -1,9 +1,10 @@
-import { Button, Form, Input, Modal, Spin } from 'antd';
+import { Button, Form, Space, Input, Modal, Spin } from 'antd';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserContext } from '../../state/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
+import FormItemForInput from '../FormItemForInput/FormItemForInput';
 
 const Login: FC = () => {
 
@@ -39,12 +40,13 @@ const Login: FC = () => {
                 default:
                     break;
             }
-        }, 1000);
+        }, 5000);
 
     };
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
+        setLoading(false);
     };
 
     const handleOk = () => {
@@ -72,13 +74,13 @@ const Login: FC = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <Form.Item
-                    label="E-mail:"
-                    name="email"
-                    rules={[{ required: true, message: 'Please input your email!' }]}
-                >
-                    <Input />
-                </Form.Item>
+                <FormItemForInput
+                    className={"input-border"}
+                    label={"E-mail:"}
+                    required={true}
+                    message={"Please input your email!"}
+                    name={"email"}
+                />
 
                 <Form.Item
                     label="Пароль:"
@@ -88,14 +90,31 @@ const Login: FC = () => {
                     <Input.Password />
                 </Form.Item>
 
+                <Form.Item>
+                    <Button type='link' style={{padding: 0}} onClick={() => {
+                        navigate('/reset_password')
+                    }}>
+                        Забыли пароль?
+                    </Button>
+                </Form.Item>
+
 
                 <Spin spinning={loading} size="large">
-                    <Form.Item wrapperCol={{ offset: 20 }}>
-                        <Button className='brand__btn' htmlType="submit" onClick={() => {
-                            setLoading(true);
-                        }}>
-                            Вход
-                        </Button>
+                    <Form.Item >
+                        <Space>
+                            <Button className='brand__btn' htmlType="submit" onClick={() => {
+                                setLoading(true);
+                            }}>
+                                Вход
+                            </Button>      
+
+                            <Button className='brand__btn' onClick={() => {
+                                navigate('/registration')
+                            }}>
+                                Регистрация
+                            </Button>                      
+                        </Space>
+
                     </Form.Item>
 
                 </Spin>
