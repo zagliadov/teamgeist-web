@@ -6,6 +6,7 @@ import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
+import { NavLink } from 'react-router-dom';
 
 const UsersList: FC = () => {
 
@@ -37,16 +38,19 @@ const UsersList: FC = () => {
     const columns: ColumnsType<IUser> = [
         {
             title: '#',
-            // defaultSortOrder: 'descend',
-            // sorter: (a, b) => Number(a.key) - Number(b.key),
             dataIndex: 'key',
             key: 'key',
 
         },
         {
-            title: 'Фамилия',
-            dataIndex: 'lastName',
+            title: 'Имя Фамилия',
+            dataIndex: ['lastName', 'firstName', 'key'],
             key: 'lastName',
+            render: (text, row) => {
+                return (
+                    <NavLink to={`${row['key']}`}>{row['firstName']} {row['lastName']}</NavLink>
+                )
+            },
             filterDropdown: ({
                 setSelectedKeys, selectedKeys, confirm
             }: FilterDropdownProps) => {
@@ -77,44 +81,8 @@ const UsersList: FC = () => {
             },
             onFilter: (value: string | number | boolean, record: IUser): boolean => {
                 if (typeof value !== 'string') return false
-                return record?.lastName.toLowerCase().includes(value.toLowerCase());
-            }
-        },
-        {
-            title: 'Имя',
-            dataIndex: 'firstName',
-            key: 'firstName',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.firstName.toLowerCase().includes(value.toLowerCase());
+                
+                return record?.lastName.toLowerCase().includes(value.toLowerCase())
             }
         },
         {
