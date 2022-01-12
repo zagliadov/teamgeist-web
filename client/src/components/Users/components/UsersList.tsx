@@ -118,43 +118,6 @@ const UsersList: FC = () => {
             }
         },
         {
-            title: 'E-mail',
-            dataIndex: 'email',
-            key: 'email',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.email.toLowerCase().includes(value.toLowerCase());
-            }
-        },
-        {
             title: 'Проекты',
             dataIndex: ['project', "projectType"],
             key: 'project',
