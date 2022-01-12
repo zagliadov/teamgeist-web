@@ -81,8 +81,10 @@ const UsersList: FC = () => {
             },
             onFilter: (value: string | number | boolean, record: IUser): boolean => {
                 if (typeof value !== 'string') return false
-                
-                return record?.lastName.toLowerCase().includes(value.toLowerCase())
+                let name = `${record?.firstName} ${record?.lastName}`;
+                let nameReverse = ` ${record?.lastName} ${record?.firstName}`
+                return name.toLowerCase().includes(value.toLowerCase()) ||
+                nameReverse.toLowerCase().includes(value.toLowerCase())
             }
         },
         {
