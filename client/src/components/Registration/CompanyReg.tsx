@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ICompanyRegisterForm } from '../../interfaces/componentsInterface';
+import { getValues } from '../../interfaces/componentsInterface';
 import {
   Form,
   Input,
@@ -42,13 +42,9 @@ const tailFormItemLayout = {
   },
 };
 
-const CompanyRegistration: FC = () => {
+const CompanyRegistration: FC<getValues> = ({ onFinish }) => {
 
-  const [form] = Form.useForm();
-
-  const onFinish = (values: ICompanyRegisterForm) => {
-    console.log('Received values of form: ', values);
-  };
+  const [ form ] = Form.useForm();
 
   return (
     <Form
@@ -62,7 +58,7 @@ const CompanyRegistration: FC = () => {
       }}
       scrollToFirstError
     >
-        <Form.Item
+      <Form.Item
         name="company_name"
         label="Имя компании"
         rules={[
@@ -108,7 +104,12 @@ const CompanyRegistration: FC = () => {
       <Form.Item
         name="role"
         label="Ваша должность"
-        rules={[{ required: true, message: 'Пожалуйста выберите вашу должность!' }]}
+        rules={[
+          { 
+            required: true,
+            message: 'Пожалуйста выберите вашу должность!' 
+          },
+        ]}
       >
         <Select placeholder="выберите вашу должность">
           <Option value="project_manager">Проджект менеджер</Option>
@@ -171,11 +172,13 @@ const CompanyRegistration: FC = () => {
           Я прочитал(а) <a href="">Соглашение</a>
         </Checkbox>
       </Form.Item>
+
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Зарегистрировать
         </Button>
       </Form.Item>
+
     </Form>
   );
 };

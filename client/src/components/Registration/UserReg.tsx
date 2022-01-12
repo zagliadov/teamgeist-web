@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IUserRegisterForm } from '../../interfaces/componentsInterface';
+import { getValues } from '../../interfaces/componentsInterface';
 import {
   Form,
   Input,
@@ -38,13 +38,9 @@ const tailFormItemLayout = {
   },
 };
 
-const UserRegistration: FC = () => {
+const UserRegistration: FC<getValues> = ({ onFinish })  => {
 
   const [form] = Form.useForm();
-
-  const onFinish = (values: IUserRegisterForm) => {
-    console.log('Received values of form: ', values);
-  };
 
   return (
     <Form

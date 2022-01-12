@@ -73,3 +73,7 @@ export interface IUserRegisterForm {
     password: string;
     register_name: string;
 }
+
+export interface getValues {
+    onFinish: (values: IUserRegisterForm | ICompanyRegisterForm) => void
+}

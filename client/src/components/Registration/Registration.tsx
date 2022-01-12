@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import { Modal, Tabs } from 'antd';
-// import { useNavigate } from 'react-router-dom';
+
 import CompanyRegistration from './CompanyReg';
 import UserRegistration from './UserReg';
-// import {IUserRegisterForm, ICompanyRegisterForm } from '../../interfaces/componentsInterface';
+// import { IUserRegisterForm, ICompanyRegisterForm } from '../../interfaces/componentsInterface';
 
 
 
@@ -20,12 +20,10 @@ const Registration: FC = () => {
         console.log(key);
     }
 
-    const receivedValuesOfForm = (values: {}) => {
+    const onFinish = (values: {}) => {
         console.log('Received values of form: ', values);
       };
 
-
-    //receivedValuesOfForm={receivedValuesOfForm}
     return (
     <Modal
         title="Регистрация"
@@ -38,11 +36,11 @@ const Registration: FC = () => {
         maskClosable={false}>
              <Tabs onChange={callback} type="card">
                 <TabPane tab="План для компании" key="Company">
-                    <CompanyRegistration />
+                    <CompanyRegistration onFinish={onFinish} />
                 </TabPane>
 
                 <TabPane tab="Индивидуальный план" key="individualUser">
-                    <UserRegistration />
+                    <UserRegistration onFinish={onFinish} />
                 </TabPane>
             </Tabs>
         </Modal>)
