@@ -110,11 +110,13 @@ const UserRegistration: FC<getValues> = ({ onFinish })  => {
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-
-              return Promise.reject(new Error('Пароли не совпадают!'));
+              return new Promise((resolve, reject) => {
+                if (!value || getFieldValue('password') === value) {
+                  return resolve("");
+                }
+  
+                return reject(new Error('Пароли не совпадают!'));
+              })
             },
           }),
         ]}
@@ -127,8 +129,14 @@ const UserRegistration: FC<getValues> = ({ onFinish })  => {
         valuePropName="checked"
         rules={[
           {
-            validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Необходимо принять Соглашение')),
+            validator: (_, value) => {
+              return new Promise((resolve, reject) => {
+                if (value) {
+                  return resolve("");
+                }
+                return reject(new Error('Необходимо принять Соглашение'))
+              })
+            }
           },
         ]}
         {...tailFormItemLayout}
