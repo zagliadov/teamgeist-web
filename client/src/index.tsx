@@ -7,7 +7,7 @@ import { UserProvider } from './state/UserContext';
 import { AuthProvider } from './state/AuthContext';
 import { ProjectProvider } from './state/ProjectContext';
 import { UserTypeProvider } from './state/UserTypeContext';
-
+import { AppProvider } from './state/AppContext';
 
 
 ReactDOM.render(
@@ -15,11 +15,11 @@ ReactDOM.render(
     <UserTypeProvider>
       <UserProvider>
         <ProjectProvider>
-
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-
+          <AppProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </AppProvider>
         </ProjectProvider>
       </UserProvider>
     </UserTypeProvider>
