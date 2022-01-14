@@ -1,0 +1,2 @@
+export const USER_ADDUSER = 'USER_ADDUSER';
+export const USER_GETALLUSER = 'USER_GETALLUSER';

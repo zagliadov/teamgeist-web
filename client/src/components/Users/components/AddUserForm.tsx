@@ -18,8 +18,8 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
     const [form] = Form.useForm();
     const [open, setOpen] = useState<boolean>(false);
-    const [user, setUser] = useContext(UserContext);
-    const [userType, setUserType] = useContext(UserTypeContext);
+    const [, setUser] = useContext(UserContext);
+    const [userType, ] = useContext(UserTypeContext);
     const [project, setProject] = useContext(ProjectContext)
     console.log(project)
 

@@ -16,7 +16,7 @@ const AddProjectForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
 
     const [form] = Form.useForm();
-    const [project, setProject] = useContext(ProjectContext);
+    const [, setProject] = useContext(ProjectContext);
 
 
     const onAddProject = (value: any) => {

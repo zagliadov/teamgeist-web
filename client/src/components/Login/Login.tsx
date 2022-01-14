@@ -40,7 +40,7 @@ const Login: FC = () => {
                 default:
                     break;
             }
-        }, 5000);
+        }, 1000);
 
     };
 
