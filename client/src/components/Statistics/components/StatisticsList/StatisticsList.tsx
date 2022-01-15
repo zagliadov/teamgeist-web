@@ -1,17 +1,15 @@
 import { FC, useContext } from 'react';
 import { Table } from 'antd';
-import { UserContext } from '../../../../state/UserContext';
 import { ColumnsType } from 'antd/es/table';
+import { UserContext } from '../../../../state/UserContext';
 
 interface IProps {
     timeStep: string;
 }
 
-
 const ProjectList: FC<IProps> = ({ timeStep }) => {
 
-    const [user,] = useContext(UserContext);
-
+    const [user, ] = useContext(UserContext);
 
     const week: ColumnsType<any> = [
         {
@@ -106,12 +104,10 @@ const ProjectList: FC<IProps> = ({ timeStep }) => {
 
     return (
         <>
-
-            <Table<any>
+            <Table
                 dataSource={user}
                 columns={(timeStep === 'week' ? week : month)}
             />
-
 
         </>
 

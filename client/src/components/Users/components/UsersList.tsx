@@ -1,5 +1,5 @@
 import { FC, useContext, useState } from 'react';
-import { Col, Input, Modal, Row, Table } from 'antd';
+import { Input, Modal, Table } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
@@ -39,8 +39,6 @@ const UsersList: FC = () => {
     const columns: ColumnsType<IUser> = [
         {
             title: '#',
-            // defaultSortOrder: 'descend',
-            // sorter: (a, b) => Number(a.key) - Number(b.key),
             dataIndex: 'key',
             key: 'key',
 

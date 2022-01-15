@@ -1,24 +1,22 @@
-
-import {
-    USER_ADDUSER,
-    USER_GETALLUSER,
-} from './actions';
-
-
+import { IAction, IInitialState } from '../interfaces/stateInterface/stateInterface';
+import { ActionType } from './actions';
 
 
 export const initialState = {
     statistics: [],
     isLoading: true
-}
+};
 
-
-export const reducer = (state: any, action: any) => {
+export const reducer = (state: IInitialState, action: IAction): IInitialState => {
 
     switch (action.type) {
-        case USER_ADDUSER:
-            return [...state, { ...action.payload }]
-        case USER_GETALLUSER:
+        case ActionType.STATISTICS_GET_STATISTICS:
+            return { ...state, statistics: action.payload }
+        case ActionType.STATISTICS_DELETE_STATISTICS:
+            return { ...state, statistics: action.payload }
+        case ActionType.STATISTICS_UPDATE_STATISTICS:
+            return { ...state, statistics: action.payload }
+        case ActionType.STATISTICS_TEST:
             return { ...state, statistics: action.payload }
         default:
             return state
