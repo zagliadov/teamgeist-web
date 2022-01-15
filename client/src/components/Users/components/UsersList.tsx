@@ -1,11 +1,13 @@
 import { FC, useContext, useState } from 'react';
 import { Input, Modal, Table } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
+import { NavLink } from 'react-router-dom';
+import './usersList.sass';
 
 const UsersList: FC = () => {
 
@@ -37,25 +39,33 @@ const UsersList: FC = () => {
     const columns: ColumnsType<IUser> = [
         {
             title: '#',
-            // defaultSortOrder: 'descend',
-            // sorter: (a, b) => Number(a.key) - Number(b.key),
             dataIndex: 'key',
             key: 'key',
 
         },
         {
-            title: 'Фамилия',
-            dataIndex: 'lastName',
+            title: null,
+            dataIndex: ['lastName', 'firstName', 'key'],
             key: 'lastName',
+            render: (text, row) => {
+                return (
+                    <NavLink
+                        style={{ color: '#000000' }}
+                        to={`${row['key']}`}>
+                        {row['firstName']} {row['lastName']}
+                    </NavLink>
+                )
+
+            },
+            filterDropdownVisible: true,
             filterDropdown: ({
                 setSelectedKeys, selectedKeys, confirm
             }: FilterDropdownProps) => {
                 return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
+                    <div
+                        className='nameFilterWrapper'>
                         <Input
+                            placeholder='Имя Фамилия'
                             value={selectedKeys[0]}
                             onPressEnter={() => {
                                 confirm();
@@ -70,88 +80,16 @@ const UsersList: FC = () => {
                         />
                     </div>
                 )
-
             },
             filterIcon: () => {
-                return <SearchOutlined />
+                return null
             },
             onFilter: (value: string | number | boolean, record: IUser): boolean => {
                 if (typeof value !== 'string') return false
-                return record?.lastName.toLowerCase().includes(value.toLowerCase());
-            }
-        },
-        {
-            title: 'Имя',
-            dataIndex: 'firstName',
-            key: 'firstName',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.firstName.toLowerCase().includes(value.toLowerCase());
-            }
-        },
-        {
-            title: 'E-mail',
-            dataIndex: 'email',
-            key: 'email',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.email.toLowerCase().includes(value.toLowerCase());
+                let name = `${record?.firstName} ${record?.lastName}`;
+                let nameReverse = ` ${record?.lastName} ${record?.firstName}`
+                return name.toLowerCase().includes(value.toLowerCase()) ||
+                    nameReverse.toLowerCase().includes(value.toLowerCase())
             }
         },
         {
@@ -169,18 +107,25 @@ const UsersList: FC = () => {
             )
         },
         {
-            title: 'Тип пользователя',
+            title:
+                <div style={{ height: '45px', textAlign: 'center' }}>
+                    Тип пользователя
+                </div>,
             dataIndex: 'userType',
             key: 'userType',
+            filterDropdownVisible: true,
             filterDropdown: ({
                 setSelectedKeys, selectedKeys, confirm
             }: FilterDropdownProps) => {
                 return (
                     <div style={{
-                        width: '230px',
-                        position: 'relative'
+                        width: '220px',
+                        position: 'absolute',
+                        right: '50%',
+                        bottom: '0px',
                     }}>
                         <Input
+                            placeholder='Введите тип пользователя'
                             value={selectedKeys[0]}
                             onPressEnter={() => {
                                 confirm();
@@ -198,7 +143,7 @@ const UsersList: FC = () => {
 
             },
             filterIcon: () => {
-                return <SearchOutlined />
+                return null
             },
             onFilter: (value: string | number | boolean, record: IUser): boolean => {
                 if (typeof value !== 'string') return false

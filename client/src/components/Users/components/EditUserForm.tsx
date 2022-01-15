@@ -11,7 +11,7 @@ import {
 } from 'antd';
 import { UserContext } from '../../../state/UserContext';
 import { UserTypeContext } from '../../../state/UserTypeContext'
-import { IProject, IUser } from '../../../interfaces/stateInterface/stateInterface';
+import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import DeleteButtonForModalEditUser from '../../DeleteButtonForModalEditUser/DeleteButtonForModalEditUser';
 
 const { Text } = Typography;

@@ -11,18 +11,9 @@ import FormItemForSelect from '../../../FormItemForSelect/FormItemForSelect';
 
 const EditProjectForm: FC<IPropsEditProjectForm> = ({ setVisible, editProject, setEditProject }) => {
 
-    const [project, setProject] = useContext(ProjectContext);
+    const [, setProject] = useContext(ProjectContext);
 
     const [form] = Form.useForm();
-
-    const onDeleteUser = (editProject: IProject) => {
-        setProject((previos: IProject[]) => {
-            return previos.filter((item: IProject) => item.key !== editProject.key)
-        })
-        setVisible(false);
-    }
-
-
 
     const onFinish = (): void => {
         setVisible(false);
@@ -76,9 +67,8 @@ const EditProjectForm: FC<IPropsEditProjectForm> = ({ setVisible, editProject, s
                 required={false}
                 editable={"status"}
                 message={"Please enter valid status"}
-                placeholder={"Выберирите статус проекта..."}
+                placeholder={"Выберите статус проекта..."}
                 className={"input-border"}
-                //optionValue={project}
                 optionValue={[
                     [{ key: 0, value: 'Открыт' }],
                     [{ key: 1, value: 'Удален' }],
@@ -92,11 +82,10 @@ const EditProjectForm: FC<IPropsEditProjectForm> = ({ setVisible, editProject, s
                 message={"Please enter valid project type"}
                 value={editProject?.projectType}
                 setter={setEditProject}
-                placeholder={"Выберирите тип проекта..."}
+                placeholder={"Выберите тип проекта..."}
                 required={true}
                 editable={"projectType"}
                 name={"projectType"}
-                //optionValue={[project.key, project.projectType]}
                 optionValue={[
                     [{ key: 0, value: 'Внутренний' }],
                     [{ key: 1, value: 'Внешний' }],

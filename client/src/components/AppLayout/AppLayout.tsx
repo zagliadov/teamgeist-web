@@ -11,7 +11,7 @@ const headerOptionsForAdmin: IHeaderOption[] = [
     { id: 0, name: 'Пользователи', to: '/admin/users' },
     { id: 1, name: 'Проекты', to: '/admin/projects' },
     { id: 2, name: 'Статистика', to: '/admin/statistics' },
-    { id: 3, name: 'Отчеты о собоях', to: '/admin/crash_reports' },
+    { id: 3, name: 'Отчеты о сбоях', to: '/admin/crash_reports' },
 ];
 const headerOptionsForDeveloper: IHeaderOption[] = [
     { id: 0, name: 'Список проектов', to: '/developer/project-list' },
