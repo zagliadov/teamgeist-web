@@ -1,11 +1,10 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { Input, Modal, Table } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
-import { FilterDropdownProps } from 'antd/lib/table/interface';
 import { NavLink } from 'react-router-dom';
 
 const UsersList: FC = () => {
@@ -43,14 +42,14 @@ const UsersList: FC = () => {
         arr.map((item: any) => {
             let name = `${item?.firstName} ${item?.lastName}`,
                 nameReverse = ` ${item?.lastName} ${item?.firstName}`;
-            if (name.toLowerCase().includes(value.toLowerCase()) || 
+            if (name.toLowerCase().includes(value.toLowerCase()) ||
                 nameReverse.toLowerCase().includes(value.toLowerCase())) {
                 return filterArray.push(item)
             }
             return null
         });
     };
-    
+
     useEffect(() => {
         makeNewArray(user, letter);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,7 +79,11 @@ const UsersList: FC = () => {
             key: 'lastName',
             render: (text, row) => {
                 return (
-                    <NavLink to={`${row['key']}`}>{row['firstName']} {row['lastName']}</NavLink>
+                    <NavLink
+                        style={{ color: '#000000' }}
+                        to={`${row['key']}`}>
+                        {row['firstName']} {row['lastName']}
+                    </NavLink>
                 )
             },
         },
