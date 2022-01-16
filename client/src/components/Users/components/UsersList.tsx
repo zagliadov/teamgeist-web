@@ -49,12 +49,8 @@ const UsersList: FC = () => {
             }
             return null
         });
-
-        //     let name = `${record?.firstName} ${record?.lastName}`;
-        //     let nameReverse = ` ${record?.lastName} ${record?.firstName}`
-        //     return name.toLowerCase().includes(value.toLowerCase()) ||
-        //         nameReverse.toLowerCase().includes(value.toLowerCase())
-    }
+    };
+    
     useEffect(() => {
         makeNewArray(user, letter);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,40 +83,6 @@ const UsersList: FC = () => {
                     <NavLink to={`${row['key']}`}>{row['firstName']} {row['lastName']}</NavLink>
                 )
             },
-            // filterDropdownVisible: true,
-            // filterDropdown: ({
-            //     setSelectedKeys, selectedKeys, confirm
-            // }: FilterDropdownProps) => {
-            //     return (
-            //         <div
-            //             className='nameFilterWrapper'>
-            //             <Input
-            //                 placeholder='Имя Фамилия'
-            //                 value={selectedKeys[0]}
-            //                 onPressEnter={() => {
-            //                     confirm();
-            //                 }}
-            //                 onChange={(e) => {
-            //                     setSelectedKeys(e.target.value ? [e.target.value] : []);
-            //                     confirm({ closeDropdown: false });
-            //                 }}
-            //                 onBlur={() => {
-            //                     confirm();
-            //                 }}
-            //             />
-            //         </div>
-            //     )
-            // },
-            // filterIcon: () => {
-            //     return null
-            // },
-            // onFilter: (value: string | number | boolean, record: IUser): boolean => {
-            //     if (typeof value !== 'string') return false
-            //     let name = `${record?.firstName} ${record?.lastName}`;
-            //     let nameReverse = ` ${record?.lastName} ${record?.firstName}`
-            //     return name.toLowerCase().includes(value.toLowerCase()) ||
-            //         nameReverse.toLowerCase().includes(value.toLowerCase())
-            // }
         },
         {
             title: 'Проекты',
@@ -140,38 +102,6 @@ const UsersList: FC = () => {
             title: 'Тип пользователя',
             dataIndex: 'userType',
             key: 'userType',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.userType.toLowerCase().includes(value.toLowerCase());
-            }
         },
         {
             title: 'Действия',
