@@ -6,6 +6,7 @@ import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
 import { NavLink } from 'react-router-dom';
+import { makeNewArrayForTable } from '../../../helpers/helpers';
 
 const UsersList: FC = () => {
 
@@ -14,6 +15,7 @@ const UsersList: FC = () => {
     const [user, setUser] = useContext(UserContext);
 
     const [userFilterArray, setUserFilterArray] = useState<any>();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const filterArray: any = [];
 
     const [letter, setLetter] = useState('');
@@ -37,21 +39,8 @@ const UsersList: FC = () => {
         setVisible(false);
     };
 
-    const makeNewArray = (arr: any, value: any) => {
-        if (typeof value !== 'string') return
-        arr.map((item: any) => {
-            let name = `${item?.firstName} ${item?.lastName}`,
-                nameReverse = ` ${item?.lastName} ${item?.firstName}`;
-            if (name.toLowerCase().includes(value.toLowerCase()) ||
-                nameReverse.toLowerCase().includes(value.toLowerCase())) {
-                return filterArray.push(item)
-            }
-            return null
-        });
-    };
-
     useEffect(() => {
-        makeNewArray(user, letter);
+        makeNewArrayForTable(user, letter, filterArray, 'firstName', 'lastName');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [letter, filterArray, user])
 
@@ -72,9 +61,8 @@ const UsersList: FC = () => {
         },
         {
             title: <Input
-                placeholder='First and Last name'
-                onChange={(e) => setLetter(e.target.value)}
-            />,
+                placeholder='Фамилия Имя'
+                onChange={(e) => setLetter(e.target.value)} />,
             dataIndex: ['lastName', 'firstName', 'key'],
             key: 'lastName',
             render: (text, row) => {
