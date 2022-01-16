@@ -7,6 +7,13 @@ export const UserContext: any = createContext([]);
 
 export const UserProvider: FC = ({ children }) => {
 
+
+    
+
+
+    // const [user, setUser] = useState<any>()
+
+
     const [user, setUser] = useState<IUser[]>([
         {
             key: '1',

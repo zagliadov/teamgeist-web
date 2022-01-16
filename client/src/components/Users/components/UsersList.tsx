@@ -90,7 +90,10 @@ const UsersList: FC = () => {
             )
         },
         {
-            title: 'Тип пользователя',
+            title:
+                <div style={{ height: '45px', textAlign: 'center' }}>
+                    Тип пользователя
+                </div>,
             dataIndex: 'userType',
             key: 'userType',
         },

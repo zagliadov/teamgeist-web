@@ -41,7 +41,6 @@ const Login: FC = () => {
                     break;
             }
         }, 500);
-
     };
 
     const onFinishFailed = (errorInfo: any) => {
