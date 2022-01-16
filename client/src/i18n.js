@@ -19,17 +19,29 @@ i18n
     resources: {
       en: {
         translation: {
-            description: {
-                part1: 'Sign in',
-                forgotPswr: 'Forgot password?'
-              }
+          description: {
+            logIn: 'Sign in',
+            pswrd: "Password:",
+            forgotPswrd: 'Forgot password?',
+            users: 'Users',
+            PleaseInputYourEmail:'Please input your email!',
+            signIn: 'Sign in',
+            signUp: 'Sign Up',
+            pswrdMessage: 'Please input your password!',
+          }
         }
       },
       ru: {
         translation: {
           description: {
-            part1: 'Вход в систему',
-            forgotPswr: 'Забыли пароль?'
+            logIn: 'Вход в систему',
+            pswrd: "Пароль:",
+            forgotPswrd: 'Забыли пароль?',
+            users: 'Пользователи',
+            PleaseInputYourEmail: 'Пожалуйста, введите ваш e-mail!',
+            signIn: 'Вход',
+            signUp: 'Регистрация',
+            pswrdMessage: 'Пожалуйста, введите свой пароль!',
           }
         }
       }

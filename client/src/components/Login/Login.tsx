@@ -1,14 +1,15 @@
-import { Button, Form, Space, Input, Modal, Spin } from 'antd';
+import { Button, Form, Space, Input, PageHeader, Spin, Layout, Row } from 'antd';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserContext } from '../../state/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
 import FormItemForInput from '../FormItemForInput/FormItemForInput';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import Logo from '../Logo/Logo';
 import '../../i18n';
 
-
+const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
 
 const lngs: any = {
     en: { nativeName: 'English' },
@@ -17,9 +18,9 @@ const lngs: any = {
 
 const Login: FC = () => {
     const { t, i18n } = useTranslation();
+    const { Header, Footer, Content } = Layout;
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [isModalVisible, setIsModalVisible] = useState(true);
     const [, setAuth] = useContext(AuthContext);
     const [user,] = useContext(UserContext);
 
@@ -50,7 +51,7 @@ const Login: FC = () => {
                 default:
                     break;
             }
-        }, 2000);
+        }, 1000);
 
     };
 
@@ -59,86 +60,98 @@ const Login: FC = () => {
         setLoading(false);
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
 
     return (
-        <Modal
-            title={t('description.part1')}
-            visible={isModalVisible}
-            closable={false}
-            maskStyle={{ background: 'silver' }}
-            onOk={handleOk}
-            centered={true}
-            footer={null}
-            maskClosable={false}>
 
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
-
-
-            <Form
-                name="basic"
-                labelCol={{ span: 16 }}
-                wrapperCol={{ span: 24 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-            >
-                <FormItemForInput
-                    className={"input-border"}
-                    label={"E-mail:"}
-                    required={true}
-                    message={"Please input your email!"}
-                    name={"email"}
-                />
-
-                <Form.Item
-                    label="Пароль:"
-                    name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+        <Layout>
+            <PageHeader 
+            ghost={false}
+            title={<Logo/>}
+            extra={[
+                <Button.Group>
+                    {Object.keys(lngs).map((lng) => (
+                        <Button key={lng} type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } onClick={() => i18n.changeLanguage(lng)}>
+                        {lngs[lng].nativeName}
+                        </Button>
+                    ))}
+                </Button.Group>]}>
+            </PageHeader>
+            
+            <Content>
+                <Layout style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                    }}
                 >
-                    <Input.Password />
-                </Form.Item>
+                    <PageHeader
+                        title={t('description.logIn')}
+                        
+                    />
 
-                <Form.Item>
-                    <Button type='link' style={{padding: 0}} onClick={() => {
-                        navigate('/reset_password')
-                    }}>{t('description.forgotPswr')}
-                        {/* Забыли пароль? */}
-                    </Button>
-                </Form.Item>
+                    <Content style={{width: 400}}>
+                        <Form
+                            name="basic"
+                            labelCol={{ span: 16 }}
+                            wrapperCol={{ span: 24 }}
+                            initialValues={{ remember: true }}
+                            onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
+                            autoComplete="off"
+                        >
+                            <FormItemForInput
+                                className={"input-border"}
+                                label={"E-mail:"}
+                                required={true}
+                                message={t('description.PleaseInputYourEmail')}
+                                name={"email"}
+                            />
 
+                            <Form.Item
+                                label={t('description.pswrd')}
+                                name="password"
+                                rules={[{ required: true, message: t('description.pswrdMessage') }]}
+                            >
+                                <Input.Password />
+                            </Form.Item>
 
-                <Spin spinning={loading} size="large">
-                    <Form.Item >
-                        <Space>
-                            <Button className='brand__btn' htmlType="submit" onClick={() => {
-                                setLoading(true);
-                            }}>
-                                Вход
-                            </Button>      
+                            <Form.Item>
+                                <Button type='link' style={{padding: 0}} onClick={() => {
+                                    navigate('/reset_password')
+                                }}>{t('description.forgotPswrd')}
+                                </Button>
+                            </Form.Item>
 
-                            <Button className='brand__btn' onClick={() => {
-                                navigate('/registration')
-                            }}>
-                                Регистрация
-                            </Button>                      
-                        </Space>
+                            <Spin spinning={loading} size="large">
+                                <Form.Item >
+                                    <Space>
+                                        <Button className='brand__btn' htmlType="submit" onClick={() => {
+                                            setLoading(true);
+                                        }}>
+                                            {t('description.signIn')}
+                                        </Button>      
 
-                    </Form.Item>
+                                        <Button className='brand__btn' onClick={() => {
+                                            navigate('/registration')
+                                        }}>
+                                            {t('description.signUp')}
+                                        </Button>                      
+                                    </Space>
 
-                </Spin>
-            </Form>
+                                </Form.Item>
 
-        </Modal>
+                            </Spin>
+                        </Form>
+
+                    </Content>
+                    
+                </Layout>
+
+            </Content>
+
+            <Footer style={{textAlign: 'center'}}>{FOOTER_DESCRIPTION}</Footer>
+
+        </Layout>
     );
 };
 
