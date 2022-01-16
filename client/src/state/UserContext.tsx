@@ -46,8 +46,8 @@ export const UserProvider: FC = ({ children }) => {
         },
         {
             key: '4',
-            lastName: 'Brown',
-            firstName: 'John',
+            lastName: 'Zahliadov',
+            firstName: 'Petro',
             email: 'test@gmail.com',
             project: ['teamgeist '],
             userType: 'admin',

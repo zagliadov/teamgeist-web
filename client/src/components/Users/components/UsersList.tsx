@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Input, Modal, Table } from 'antd';
 import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons'
 import { UserContext } from '../../../state/UserContext';
@@ -14,6 +14,10 @@ const UsersList: FC = () => {
 
     const [user, setUser] = useContext(UserContext);
 
+    const [userFilterArray, setUserFilterArray] = useState<any>();
+    const filterArray: any = [];
+
+    const [letter, setLetter] = useState('');
     const [editUser, setEditUser] = useState<any>();
 
     const [visible, setVisible] = useState<boolean>(false);
@@ -34,6 +38,35 @@ const UsersList: FC = () => {
         setVisible(false);
     };
 
+    const makeNewArray = (arr: any, value: any) => {
+        if (typeof value !== 'string') return
+        arr.map((item: any) => {
+            let name = `${item?.firstName} ${item?.lastName}`,
+                nameReverse = ` ${item?.lastName} ${item?.firstName}`;
+            if (name.toLowerCase().includes(value.toLowerCase()) || 
+                nameReverse.toLowerCase().includes(value.toLowerCase())) {
+                return filterArray.push(item)
+            }
+            return null
+        });
+
+        //     let name = `${record?.firstName} ${record?.lastName}`;
+        //     let nameReverse = ` ${record?.lastName} ${record?.firstName}`
+        //     return name.toLowerCase().includes(value.toLowerCase()) ||
+        //         nameReverse.toLowerCase().includes(value.toLowerCase())
+    }
+    useEffect(() => {
+        makeNewArray(user, letter);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letter, filterArray, user])
+
+    useEffect(() => {
+        setUserFilterArray(filterArray);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letter])
+
+
+
 
     const columns: ColumnsType<IUser> = [
         {
@@ -43,7 +76,10 @@ const UsersList: FC = () => {
 
         },
         {
-            title: 'Имя Фамилия',
+            title: <Input
+                placeholder='First and Last name'
+                onChange={(e) => setLetter(e.target.value)}
+            />,
             dataIndex: ['lastName', 'firstName', 'key'],
             key: 'lastName',
             render: (text, row) => {
@@ -51,41 +87,40 @@ const UsersList: FC = () => {
                     <NavLink to={`${row['key']}`}>{row['firstName']} {row['lastName']}</NavLink>
                 )
             },
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                let name = `${record?.firstName} ${record?.lastName}`;
-                let nameReverse = ` ${record?.lastName} ${record?.firstName}`
-                return name.toLowerCase().includes(value.toLowerCase()) ||
-                nameReverse.toLowerCase().includes(value.toLowerCase())
-            }
+            // filterDropdownVisible: true,
+            // filterDropdown: ({
+            //     setSelectedKeys, selectedKeys, confirm
+            // }: FilterDropdownProps) => {
+            //     return (
+            //         <div
+            //             className='nameFilterWrapper'>
+            //             <Input
+            //                 placeholder='Имя Фамилия'
+            //                 value={selectedKeys[0]}
+            //                 onPressEnter={() => {
+            //                     confirm();
+            //                 }}
+            //                 onChange={(e) => {
+            //                     setSelectedKeys(e.target.value ? [e.target.value] : []);
+            //                     confirm({ closeDropdown: false });
+            //                 }}
+            //                 onBlur={() => {
+            //                     confirm();
+            //                 }}
+            //             />
+            //         </div>
+            //     )
+            // },
+            // filterIcon: () => {
+            //     return null
+            // },
+            // onFilter: (value: string | number | boolean, record: IUser): boolean => {
+            //     if (typeof value !== 'string') return false
+            //     let name = `${record?.firstName} ${record?.lastName}`;
+            //     let nameReverse = ` ${record?.lastName} ${record?.firstName}`
+            //     return name.toLowerCase().includes(value.toLowerCase()) ||
+            //         nameReverse.toLowerCase().includes(value.toLowerCase())
+            // }
         },
         {
             title: 'Проекты',
@@ -183,7 +218,9 @@ const UsersList: FC = () => {
         <>
 
             <Table<IUser>
-                dataSource={user}
+                dataSource={
+                    (userFilterArray) ? userFilterArray : user
+                }
                 columns={columns}
             />
 
