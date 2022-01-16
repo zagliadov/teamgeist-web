@@ -1,13 +1,12 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Input, Modal, Table } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { UserContext } from '../../../state/UserContext';
 import { IUser } from '../../../interfaces/stateInterface/stateInterface';
 import EditUserForm from './EditUserForm';
 import { ColumnsType } from 'antd/es/table';
-import { FilterDropdownProps } from 'antd/lib/table/interface';
 import { NavLink } from 'react-router-dom';
-import './usersList.sass';
+import { makeNewArrayForTable } from '../../../helpers/helpers';
 
 const UsersList: FC = () => {
 
@@ -15,6 +14,11 @@ const UsersList: FC = () => {
 
     const [user, setUser] = useContext(UserContext);
 
+    const [userFilterArray, setUserFilterArray] = useState<any>();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const filterArray: any = [];
+
+    const [letter, setLetter] = useState('');
     const [editUser, setEditUser] = useState<any>();
 
     const [visible, setVisible] = useState<boolean>(false);
@@ -35,6 +39,18 @@ const UsersList: FC = () => {
         setVisible(false);
     };
 
+    useEffect(() => {
+        makeNewArrayForTable(user, letter, filterArray, 'firstName', 'lastName');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letter, filterArray, user])
+
+    useEffect(() => {
+        setUserFilterArray(filterArray);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letter])
+
+
+
 
     const columns: ColumnsType<IUser> = [
         {
@@ -44,7 +60,9 @@ const UsersList: FC = () => {
 
         },
         {
-            title: null,
+            title: <Input
+                placeholder='Фамилия Имя'
+                onChange={(e) => setLetter(e.target.value)} />,
             dataIndex: ['lastName', 'firstName', 'key'],
             key: 'lastName',
             render: (text, row) => {
@@ -55,42 +73,7 @@ const UsersList: FC = () => {
                         {row['firstName']} {row['lastName']}
                     </NavLink>
                 )
-
             },
-            filterDropdownVisible: true,
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div
-                        className='nameFilterWrapper'>
-                        <Input
-                            placeholder='Имя Фамилия'
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-            },
-            filterIcon: () => {
-                return null
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                let name = `${record?.firstName} ${record?.lastName}`;
-                let nameReverse = ` ${record?.lastName} ${record?.firstName}`
-                return name.toLowerCase().includes(value.toLowerCase()) ||
-                    nameReverse.toLowerCase().includes(value.toLowerCase())
-            }
         },
         {
             title: 'Проекты',
@@ -113,42 +96,6 @@ const UsersList: FC = () => {
                 </div>,
             dataIndex: 'userType',
             key: 'userType',
-            filterDropdownVisible: true,
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '220px',
-                        position: 'absolute',
-                        right: '50%',
-                        bottom: '0px',
-                    }}>
-                        <Input
-                            placeholder='Введите тип пользователя'
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return null
-            },
-            onFilter: (value: string | number | boolean, record: IUser): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.userType.toLowerCase().includes(value.toLowerCase());
-            }
         },
         {
             title: 'Действия',
@@ -195,7 +142,9 @@ const UsersList: FC = () => {
         <>
 
             <Table<IUser>
-                dataSource={user}
+                dataSource={
+                    (userFilterArray) ? userFilterArray : user
+                }
                 columns={columns}
             />
 

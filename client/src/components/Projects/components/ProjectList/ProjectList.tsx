@@ -1,18 +1,27 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Input, Modal, Table } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { ProjectContext } from '../../../../state/ProjectContext';
 import { IProject } from '../../../../interfaces/stateInterface/stateInterface';
 import { ColumnsType } from 'antd/es/table';
-import { FilterDropdownProps } from 'antd/lib/table/interface';
 import EditProjectForm from '../EditProjectForm/EditProjectForm';
+import { makeNewArrayForTable } from '../../../../helpers/helpers';
+
 
 const ProjectList: FC = () => {
 
     const [project, setProject] = useContext(ProjectContext);
+    const [projectFilterArray, setProjectFilterArray] = useState<any>();
+    // const [twoFilterArray, setTwoFilterArray] = useState<any>();
+    const [letterProjectName, setLetterProjectName] = useState('');
+    const [letterDescription, setLetterDescription] = useState('');
     const [editProject, setEditProject] = useState<any>();
     const [visible, setVisible] = useState<boolean>(false);
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    let firstFilterArray: any = [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    let secondFilterArray: any = [];
 
     const showModal = () => {
         setVisible(true);
@@ -29,6 +38,29 @@ const ProjectList: FC = () => {
         setVisible(false);
     };
 
+    useEffect(() => {
+        makeNewArrayForTable(project, letterProjectName, firstFilterArray, 'projectName');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letterProjectName, firstFilterArray, project]);
+
+    useEffect(() => {
+        makeNewArrayForTable(project, letterDescription, secondFilterArray, 'description');
+    }, [secondFilterArray, letterDescription, project]);
+
+
+    useEffect(() => {
+        if (firstFilterArray.length > 0) {
+            setProjectFilterArray(firstFilterArray);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letterProjectName])
+
+    useEffect(() => {
+        if (secondFilterArray.length > 0) {
+            setProjectFilterArray(secondFilterArray);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [letterDescription])
 
     const columns: ColumnsType<IProject> = [
         {
@@ -37,151 +69,32 @@ const ProjectList: FC = () => {
             key: 'key',
         },
         {
-            title: 'Название',
+            title: <Input
+                placeholder='Название'
+                onChange={(e) => {
+                    setLetterProjectName(e.target.value)
+                }} />,
             dataIndex: 'projectName',
             key: 'projectName',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IProject): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.projectName.includes(value.toLowerCase());
-            }
         },
         {
-            title: 'Описание',
+            title: <Input
+                placeholder='Описание'
+                onChange={(e) => {
+                    setLetterDescription(e.target.value)
+                }} />,
             dataIndex: 'description',
             key: 'description',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IProject): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.description.toLowerCase().includes(value.toLowerCase());
-            }
         },
         {
             title: 'Статус',
             dataIndex: 'status',
             key: 'status',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IProject): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.status.toLowerCase().includes(value.toLowerCase());
-            }
         },
         {
             title: 'Тип',
             dataIndex: 'projectType',
             key: 'projectType',
-            filterDropdown: ({
-                setSelectedKeys, selectedKeys, confirm
-            }: FilterDropdownProps) => {
-                return (
-                    <div style={{
-                        width: '230px',
-                        position: 'relative'
-                    }}>
-                        <Input
-                            value={selectedKeys[0]}
-                            onPressEnter={() => {
-                                confirm();
-                            }}
-                            onChange={(e) => {
-                                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                                confirm({ closeDropdown: false });
-                            }}
-                            onBlur={() => {
-                                confirm();
-                            }}
-                        />
-                    </div>
-                )
-
-            },
-            filterIcon: () => {
-                return <SearchOutlined />
-            },
-            onFilter: (value: string | number | boolean, record: IProject): boolean => {
-                if (typeof value !== 'string') return false
-                return record?.projectType.toLowerCase().includes(value.toLowerCase());
-            }
         },
         {
             title: 'Действия',
@@ -228,7 +141,7 @@ const ProjectList: FC = () => {
         <>
 
             <Table<IProject>
-                dataSource={project}
+                dataSource={(projectFilterArray?.length !== 0) ? projectFilterArray : project}
                 columns={columns}
             />
             <Modal

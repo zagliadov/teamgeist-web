@@ -31,7 +31,7 @@ export const ProjectProvider: FC = ({ children }) => {
         },
         {
             key: '4',
-            projectName: 'teamgeist',
+            projectName: 'Terminal',
             status: 'Открыт',
             description: 'description',
             projectType: 'Внешний', 
@@ -52,14 +52,14 @@ export const ProjectProvider: FC = ({ children }) => {
         },
         {
             key: '7',
-            projectName: 'teamgeist',
+            projectName: 'Window',
             status: 'Открыт',
             description: 'description',
             projectType: 'Внешний', 
         },
         {
             key: '8',
-            projectName: 'teamgeist',
+            projectName: 'View',
             status: 'Открыт',
             description: 'description',
             projectType: 'Внутренний', 

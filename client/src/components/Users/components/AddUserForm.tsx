@@ -106,13 +106,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 placeholder={"Выберите тип пользователя"}
                 className={"input-border"}
                 optionValue={userType.map((item: any) => [{ key: item.key, value: item.userType }])}
-            // optionValue={[
-            //     { key: 0, project: 'Developer' },
-            //     { key: 1, project: 'Manager' },
-            //     { key: 2, project: 'Admin company' },
-            //     { key: 3, project: 'Owner company' },
-            //     { key: 4, project: 'Sys Admin all system' },
-            // ]}
             />
 
             <FormItemForSelect
@@ -125,13 +118,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 placeholder={"Выберите проект..."}
                 className={"input-border"}
                 optionValue={project.map((item: any) => [{ key: item.key, value: item.projectName }])}
-            // optionValue={[
-            //     { id: 0, value: ' Teamgeist 0 ' },
-            //     { id: 1, value: ' Teamgeist 1 ' },
-            //     { id: 2, value: ' Teamgeist 2 ' },
-            //     { id: 3, value: ' Teamgeist 3 ' },
-            //     { id: 4, value: ' Teamgeist 4 ' },
-            // ]}
             />
             {open ?
                 <FormItemForSelect
@@ -141,7 +127,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                     message={"Please enter valid project type"}
                     required={true}
                     name={"projectType"}
-                    //optionValue={project.map((item: any) => [{ key: item.key, value: item.project }])}
                     optionValue={[
                         [{ key: 0, value: 'Внутренний' }],
                         [{ key: 1, value: 'Внешний' }],
