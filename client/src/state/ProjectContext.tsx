@@ -12,14 +12,14 @@ export const ProjectProvider: FC = ({ children }) => {
             key: '1',
             projectName: 'teamgeist',
             status: 'Открыт',
-            description: 'Разработка сервиса',
+            description: 'Service development',
             projectType: 'Внешний', 
         },
         {
             key: '2',
             projectName: 'teamgeist',
             status: 'Открыт',
-            description: 'Внутренний проект',
+            description: 'Internal project',
             projectType: 'Внутренний', 
         },
         {
@@ -33,7 +33,7 @@ export const ProjectProvider: FC = ({ children }) => {
             key: '4',
             projectName: 'Terminal',
             status: 'Открыт',
-            description: 'description',
+            description: 'Book store',
             projectType: 'Внешний', 
         },
         {
@@ -47,14 +47,14 @@ export const ProjectProvider: FC = ({ children }) => {
             key: '6',
             projectName: 'teamgeist',
             status: 'Удален',
-            description: 'description',
+            description: 'Internal project',
             projectType: 'Внешний', 
         },
         {
             key: '7',
             projectName: 'Window',
             status: 'Открыт',
-            description: 'description',
+            description: 'Internal project',
             projectType: 'Внешний', 
         },
         {
@@ -68,7 +68,7 @@ export const ProjectProvider: FC = ({ children }) => {
             key: '9',
             projectName: 'teamgeist',
             status: 'Открыт',
-            description: 'description',
+            description: 'Some project',
             projectType: 'Внешний', 
         },
         {

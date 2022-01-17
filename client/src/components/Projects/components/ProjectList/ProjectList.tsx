@@ -59,7 +59,11 @@ const ProjectList: FC = () => {
         if (secondFilterArray.length > 0) {
             setProjectFilterArray(secondFilterArray);
         }
+<<<<<<< HEAD
     // eslint-disable-next-line react-hooks/exhaustive-deps
+=======
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+>>>>>>> 8a3b689 (added filtering to the Projects table in the Project name column and in the Description column)
     }, [letterDescription])
 
     const columns: ColumnsType<IProject> = [
@@ -95,6 +99,18 @@ const ProjectList: FC = () => {
             title: 'Тип',
             dataIndex: 'projectType',
             key: 'projectType',
+<<<<<<< HEAD
+=======
+            render: (text, row) => (
+                <>
+                    <span key="projectType"
+                        style={{
+                            color: (row["projectType"] === 'Внутренний') ? '#F4B700' : 'green'
+
+                        }}>{row["projectType"]}</span>
+                </>
+            )
+>>>>>>> 8a3b689 (added filtering to the Projects table in the Project name column and in the Description column)
         },
         {
             title: 'Действия',

@@ -30,7 +30,10 @@ export const makeNewArrayForTable = (
                 return arr;
             });
         };
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 8a3b689 (added filtering to the Projects table in the Project name column and in the Description column)
 };

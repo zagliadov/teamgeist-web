@@ -16,7 +16,7 @@ const AddProjectForm: FC<IPropsSetVisible> = ({ setVisible }) => {
 
 
     const [form] = Form.useForm();
-    const [project, setProject] = useContext(ProjectContext);
+    const [, setProject] = useContext(ProjectContext);
 
 
     const onAddProject = (value: any) => {
@@ -88,7 +88,6 @@ const AddProjectForm: FC<IPropsSetVisible> = ({ setVisible }) => {
                 placeholder={"Выберирите тип проекта..."}
                 required={true}
                 name={"projectType"}
-                //optionValue={[project.key, project.projectType]}
                 optionValue={[
                     [{ key: 0, value: 'Внутренний'}],
                     [{ key: 1, value: 'Внешний' }],

@@ -27,9 +27,7 @@ const StatisticsDatePicker: FC<IProps> = ({
 
     const customWeekStartEndFormat = (value: moment.MomentInput) => {
         return (
-            `    ${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} 
-        ${(weekOrMonth !== monthFormat) ? '    -           ' + moment(value)
-                .endOf(timeStep as moment.unitOfTime.StartOf)
+            `${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} ${(weekOrMonth !== monthFormat) ? '-' + moment(value).endOf(timeStep as moment.unitOfTime.StartOf)
                 .format(weekOrMonth) : ''}`
         )
     }
