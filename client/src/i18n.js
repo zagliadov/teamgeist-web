@@ -20,12 +20,12 @@ i18n
       en: {
         translation: {
           description: {
-            logIn: 'Sign in',
+            logIn: 'Sign In',
             pswrd: "Password:",
             forgotPswrd: 'Forgot password?',
             users: 'Users',
             PleaseInputYourEmail:'Please input your email!',
-            signIn: 'Sign in',
+            signInBtn: 'Sign In',
             signUp: 'Sign Up',
             pswrdMessage: 'Please input your password!',
           }
@@ -39,7 +39,7 @@ i18n
             forgotPswrd: 'Забыли пароль?',
             users: 'Пользователи',
             PleaseInputYourEmail: 'Пожалуйста, введите ваш e-mail!',
-            signIn: 'Вход',
+            signInBtn: 'Вход',
             signUp: 'Регистрация',
             pswrdMessage: 'Пожалуйста, введите свой пароль!',
           }
