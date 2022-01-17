@@ -28,7 +28,7 @@ const AppHeader: FC<any> = ({ headerOption }) => {
 
                 <Col span={18}>
                     <Menu theme="light" mode='horizontal' defaultSelectedKeys={['5']} className='menu'>
-                        {headerOption.map((item: any) => {
+                        { headerOption.map((item: any) => {
                             return (
                                 <Menu.Item key={item.id} className='menu__item' >
                                     <NavLink to={item.to} key={item.id}

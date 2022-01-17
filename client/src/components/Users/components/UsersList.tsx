@@ -69,7 +69,7 @@ const UsersList: FC = () => {
                 return (
                     <NavLink
                         style={{ color: '#000000' }}
-                        to={`${row['key']}`}>
+                        to={`workdiary/${row['key']}`}>
                         {row['firstName']} {row['lastName']}
                     </NavLink>
                 )

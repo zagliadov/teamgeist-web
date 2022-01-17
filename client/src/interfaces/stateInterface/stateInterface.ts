@@ -1,4 +1,22 @@
 
+
+export interface IOneUserAnalitics {
+        activeWindow: string,
+        createdAt: string,
+        createdBy: number,
+        deleted: boolean, 
+        id: number,
+        keyboardClick: number,
+        memo: string,
+        mouseClick: number,
+        screenshotImg: string,
+        screenshotThumb: string,
+        sentDate: string,
+        updatedAd: string,
+        updatedBy: number,
+        userId: number,
+};
+
 export interface IStatistics {
     content: {
         createdAt: string,
@@ -18,15 +36,20 @@ export interface IStatistics {
 
 export interface IInitialState {
     statistics: IStatistics | [],
+    user: IOneUserAnalitics | [],
     isLoading: boolean,
 };
 
-interface IStatisticsActions {
-    type: string,
-    payload: IStatistics,
-};
+// interface IStatisticsActions {
+//     type: string,
+//     payload: IStatistics | IOneUserAnalitics,
+// };
+// interface IOneUserAnaliticsAction {
+//     type: string,
+//     payload: IOneUserAnalitics
+// }
 
-export type IAction = IStatisticsActions;
+// export type IAction = IStatisticsActions | IOneUserAnaliticsAction
 
 
 

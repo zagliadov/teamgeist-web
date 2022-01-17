@@ -1,7 +1,5 @@
-import { FC, useContext, useEffect } from 'react';
-import { getUsers } from '../../../../state/controllers/statisticsControllers';
-import { AppContext } from '../../../../state/AppContext';
-import { ActionType } from '../../../../state/actions';
+import { FC } from 'react';
+
 import {
     ReloadOutlined
 } from '@ant-design/icons';
@@ -20,19 +18,6 @@ interface IProps {
 
 const StatisticsHeader: FC<IProps> = ({ timeStep, setTimeStep }) => {
 
-    const [state, dispatch] = useContext(AppContext);
-
-    const test = async () => {
-        dispatch({
-            type: ActionType.STATISTICS_TEST,
-            payload: await getUsers(),
-        });
-    };
-
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
-
     return (
         <Row>
             <Col span={16}>
@@ -50,7 +35,6 @@ const StatisticsHeader: FC<IProps> = ({ timeStep, setTimeStep }) => {
                     style={{ background: 'transparent', color: '#03A473' }}
                     onClick={() => {
                         setTimeStep('week');
-                        test();
                     }}
                 >
                     <ReloadOutlined />
