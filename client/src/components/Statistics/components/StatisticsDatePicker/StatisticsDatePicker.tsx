@@ -1,6 +1,9 @@
 import { DatePicker, Select, Space } from 'antd';
 import { FC } from 'react';
 import moment from 'moment';
+import { ConfigProvider } from 'antd';
+import ruRU from 'antd/lib/locale/ru_RU';
+import 'moment/locale/ru';
 
 
 const { Option } = Select;
@@ -27,14 +30,26 @@ const StatisticsDatePicker: FC<IProps> = ({
 
     const customWeekStartEndFormat = (value: moment.MomentInput) => {
         return (
+<<<<<<< HEAD
             `${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} ${(weekOrMonth !== monthFormat) ? '-' + moment(value).endOf(timeStep as moment.unitOfTime.StartOf)
+=======
+<<<<<<< HEAD
+            `${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} ${(weekOrMonth !== monthFormat) ? '-' + moment(value).endOf(timeStep as moment.unitOfTime.StartOf)
+=======
+            `${moment(value).startOf(timeStep as moment.unitOfTime.StartOf).format(weekOrMonth)} ${(weekOrMonth !== monthFormat) ? '-' + moment(value)
+                .endOf(timeStep as moment.unitOfTime.StartOf)
+>>>>>>> dev
+>>>>>>> dev
                 .format(weekOrMonth) : ''}`
         )
     }
-
+// moment.locale('ru');
 
     return (
         <>
+        <ConfigProvider locale={ruRU}>
+    
+ 
             <Space>
                 {(timeStep === "week") &&
                     <Select
@@ -66,6 +81,8 @@ const StatisticsDatePicker: FC<IProps> = ({
                     picker={(timeStep === 'week') ? 'week' : 'month'} />
 
             </Space>
+
+            </ConfigProvider>
         </>
     );
 };

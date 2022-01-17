@@ -7,14 +7,12 @@ import { Button, Col, Row, Typography } from 'antd';
 import StatisticsDatePicker from '../StatisticsDatePicker/StatisticsDatePicker';
 
 
-
 const { Text } = Typography;
 
 interface IProps {
     timeStep: string;
     setTimeStep: (arg0: string) => void;
 };
-
 
 const StatisticsHeader: FC<IProps> = ({ timeStep, setTimeStep }) => {
 

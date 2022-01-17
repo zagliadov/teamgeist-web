@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './app.sass';
 /////////////////////////////////////pages
+import Registration from '../Registration/Registration';
 import Login from '../Login/Login';
 import Users from '../Users/Users';
 import NotFound from '../NotFound/NotFound';
@@ -36,6 +37,7 @@ const App: FC = () => {
                 </Route>
 
                 <Route path='/login' element={<Login />} />
+                <Route path='/registration' element={<Registration />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>
