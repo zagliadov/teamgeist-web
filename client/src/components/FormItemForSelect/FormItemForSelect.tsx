@@ -55,7 +55,7 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                 ]}
                 hasFeedback>
                 <Select
-                    bordered={false}
+                    bordered={true}
                     maxTagTextLength={15}
                     className={className}
                     mode={mode}
