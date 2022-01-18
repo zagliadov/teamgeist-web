@@ -10,7 +10,9 @@ import Logo from '../Logo/Logo';
 import '../../i18n';
 
 
+
 const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
+
 
 
 const lngs: any = {
