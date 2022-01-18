@@ -12,7 +12,7 @@ interface IOption {
 }
 interface IPropsFormItemForSelect {
     style?: any;
-    className: any;
+    className?: any;
     label: string;
     message?: string;
     name?: string;

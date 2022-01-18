@@ -18,10 +18,10 @@ const FooterForModal: FC<IFooterForModal> = ({
                 justifyContent: 'space-between',
                 paddingTop: '10px',
             }}>
-                <Button className={'white__btn'} onClick={() => setVisible(false)}>
+                <Button onClick={() => setVisible(false)}>
                     {firstButtonName}
                 </Button>
-                <Button htmlType="submit" className="brand__btn">
+                <Button htmlType="submit" type="primary">
                     {secondButtonName}
                 </Button>
             </Space>
