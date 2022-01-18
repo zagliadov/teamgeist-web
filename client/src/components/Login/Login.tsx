@@ -9,56 +9,15 @@ import { useTranslation } from 'react-i18next';
 import Logo from '../Logo/Logo';
 import '../../i18n';
 
-<<<<<<< HEAD
-const Login: FC = () => {
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [isModalVisible, setIsModalVisible] = useState(true);
-    const [, setAuth] = useContext(AuthContext);
-    const [user,] = useContext(UserContext);
-
-    const navigate = useNavigate();
-
-
-
-    const onFinish = (values: IValueFromLoginForm) => {
-        
-        setTimeout(() => {
-            const person = user.filter((item: IValueFromLoginForm) => {
-                return item.email === values.email
-            });
-            localStorage.clear();
-            switch (person[0].userType) {
-                case 'admin':
-                    setAuth(true);
-                    navigate(`/${person[0].userType}/users`,
-                        { state: person[0].userType });
-                    localStorage.setItem('user', `${person[0].userType}`);
-                    break;
-                case 'developer':
-                    setAuth(true);
-                    navigate(`/${person[0].userType}/project-list`,
-                        { state: person[0].userType });
-                    localStorage.setItem('user', `${person[0].userType}`);
-                    break;
-                default:
-                    break;
-            }
-<<<<<<< HEAD
-        }, 500);
-
-    };
-=======
-        }, 1000);
-=======
 const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
->>>>>>> dev
+
 
 const lngs: any = {
   en: { nativeName: 'English' },
   ru: { nativeName: 'Русский' }
 };
->>>>>>> dev
+
 
 const Login: FC = () => {
   const { t, i18n } = useTranslation();

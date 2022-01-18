@@ -21,7 +21,6 @@ const AddUserForm: FC<IPropsSetVisible> = ({ setVisible }) => {
     const [, setUser] = useContext(UserContext);
     const [userType, ] = useContext(UserTypeContext);
     const [project, setProject] = useContext(ProjectContext)
-    console.log(project)
 
     const onAddUser = (value: any) => {
         let rndmnum = Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 111111);

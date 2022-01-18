@@ -1,15 +1,13 @@
 import { FC, useContext, useEffect } from 'react';
 import { AppContext } from '../../state/AppContext';
 import { ActionType } from '../../state/actions';
-import { useParams } from 'react-router-dom';
 import { Image } from 'antd';
-import { getOneUserAnalitics, getStatistics } from '../../state/controllers/statistics';
+import { getStatistics } from '../../state/controllers/statistics';
 import { asyncDispatch } from '../../helpers/helpers';
 
 export const Workdiary: FC = () => {
 
     const [state, dispatch] = useContext(AppContext);
-    // const params = useParams();
 
     useEffect(() => {
         asyncDispatch(
