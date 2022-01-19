@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { Input, Modal, Table } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Col, Input, Modal, Row, Table } from "antd";
+import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { UserContext } from "../../../state/UserContext";
 import { IUser } from "../../../interfaces/stateInterface/stateInterface";
 import EditUserForm from "./EditUserForm";
@@ -97,11 +97,7 @@ const UsersList: FC = () => {
       ),
     },
     {
-      title: (
-        <div style={{ height: "45px", textAlign: "center" }}>
-          Тип пользователя
-        </div>
-      ),
+      title: "Тип пользователя",
       dataIndex: "userType",
       key: "userType",
     },
@@ -110,21 +106,41 @@ const UsersList: FC = () => {
       dataIndex: "actions",
       render: (value: boolean, record: IUser) => {
         return (
-          <>
-            <EditOutlined
-              style={{ padding: "0px 5px" }}
-              onClick={() => {
-                setEditUser(record);
-                showModal();
+          <Row>
+            <Col
+              span={8}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
               }}
-            />
-            <DeleteOutlined
-              style={{ padding: "0px 5px" }}
-              onClick={() => {
-                onDeleteUser(value, record);
+            >
+              <EditTwoTone
+                twoToneColor="#03a473"
+                style={{ fontSize: "20px" }}
+                onClick={() => {
+                  setEditUser(record);
+                  showModal();
+                }}
+              />
+            </Col>
+            <Col
+              span={8}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "flex-start",
               }}
-            />
-          </>
+            >
+              <DeleteTwoTone
+                twoToneColor="#eb2f96"
+                style={{ fontSize: "20px" }}
+                onClick={() => {
+                  onDeleteUser(value, record);
+                }}
+              />
+            </Col>
+          </Row>
         );
       },
     },

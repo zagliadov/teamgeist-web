@@ -31,7 +31,7 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
     editable
 }) => {
     return (
-        <Form.Item style={style} label={label} name={name} 
+        <Form.Item style={style} label={label} name={name}
             rules={[
                 {
                     required: required,
@@ -45,7 +45,6 @@ const FormItemForInput: FC<IPropsFormItemForInput> = ({
             ]}
             hasFeedback>
             <Input
-                className={className}
                 value={value}
                 placeholder={placeholder}
                 allowClear
