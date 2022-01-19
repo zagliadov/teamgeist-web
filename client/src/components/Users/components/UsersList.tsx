@@ -96,13 +96,17 @@ const UsersList: FC = () => {
       dataIndex: "actions",
       render: (value: boolean, record: IUser) => {
         return (
-          <Row>
+          <Row style={{ border: "1px solid red" }}
+          justify="center">
             <Col
-              span={8}
+            //   span={10}
+              lg={10}
+              
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
+                border: "1px solid red",
               }}
             >
               <EditTwoTone
@@ -115,11 +119,12 @@ const UsersList: FC = () => {
               />
             </Col>
             <Col
-              span={8}
+              span={10}
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
+                border: "1px solid red",
               }}
             >
               <DeleteTwoTone

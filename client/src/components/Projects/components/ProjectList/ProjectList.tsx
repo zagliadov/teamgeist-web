@@ -126,13 +126,13 @@ const ProjectList: FC = () => {
       dataIndex: "actions",
       render: (value: boolean, record: IProject) => {
         return (
-          <Row>
+          <Row justify="center">
             <Col
-              span={12}
+              span={10}
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
               }}
             >
               <EditTwoTone
@@ -145,11 +145,11 @@ const ProjectList: FC = () => {
               />
             </Col>
             <Col
-              span={12}
+              span={10}
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
               }}
             >
               <DeleteTwoTone
