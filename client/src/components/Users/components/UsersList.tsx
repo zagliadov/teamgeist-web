@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { Col, Input, Modal, Row, Table } from "antd";
+import { Col, Input, Modal, Row, Table, Tooltip } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { UserContext } from "../../../state/UserContext";
 import { IUser } from "../../../interfaces/stateInterface/stateInterface";
@@ -93,30 +93,32 @@ const UsersList: FC = () => {
     },
     {
       title: "Действия",
+      align: "center",
       dataIndex: "actions",
       render: (value: boolean, record: IUser) => {
         return (
-          <Row style={{ border: "1px solid red" }}
-          justify="center">
+          <Row justify="center">
             <Col
-            //   span={10}
-              lg={10}
-              
+              span={10}
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "1px solid red",
               }}
             >
-              <EditTwoTone
-                twoToneColor="#03a473"
-                style={{ fontSize: "20px" }}
-                onClick={() => {
-                  setEditUser(record);
-                  showModal();
-                }}
-              />
+              <Tooltip
+                placement="left"
+                title={<span>Edit this user?</span>}
+              >
+                <EditTwoTone
+                  twoToneColor="#03a473"
+                  style={{ fontSize: "20px" }}
+                  onClick={() => {
+                    setEditUser(record);
+                    showModal();
+                  }}
+                />
+              </Tooltip>
             </Col>
             <Col
               span={10}
@@ -124,16 +126,21 @@ const UsersList: FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "1px solid red",
               }}
             >
-              <DeleteTwoTone
+              <Tooltip
+                placement="right"
+                title={<span>Remove this user</span>}
+              >
+                <DeleteTwoTone
                 twoToneColor="#eb2f96"
                 style={{ fontSize: "20px" }}
                 onClick={() => {
                   onDeleteUser(value, record);
                 }}
               />
+              </Tooltip>
+              
             </Col>
           </Row>
         );

@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { Col, Input, Modal, Row, Table } from "antd";
+import { Col, Input, Modal, Row, Table, Tooltip } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { ProjectContext } from "../../../../state/ProjectContext";
 import { IProject } from "../../../../interfaces/stateInterface/stateInterface";
@@ -124,6 +124,7 @@ const ProjectList: FC = () => {
     {
       title: "Действия",
       dataIndex: "actions",
+      align: "center",
       render: (value: boolean, record: IProject) => {
         return (
           <Row justify="center">
@@ -135,14 +136,16 @@ const ProjectList: FC = () => {
                 justifyContent: "center",
               }}
             >
-              <EditTwoTone
-                twoToneColor="#03a473"
-                style={{ fontSize: "20px" }}
-                onClick={() => {
-                  setEditProject(record);
-                  showModal();
-                }}
-              />
+              <Tooltip placement="left" title={<span>Edit this project?</span>}>
+                <EditTwoTone
+                  twoToneColor="#03a473"
+                  style={{ fontSize: "20px" }}
+                  onClick={() => {
+                    setEditProject(record);
+                    showModal();
+                  }}
+                />
+              </Tooltip>
             </Col>
             <Col
               span={10}
@@ -152,13 +155,19 @@ const ProjectList: FC = () => {
                 justifyContent: "center",
               }}
             >
-              <DeleteTwoTone
+              <Tooltip
+                placement="right"
+                title={<span>Remove this project</span>}
+              >
+                <DeleteTwoTone
                 twoToneColor="#eb2f96"
                 style={{ fontSize: "20px" }}
                 onClick={() => {
                   onDeleteProject(value, record);
                 }}
               />
+              </Tooltip>
+              
             </Col>
           </Row>
         );
