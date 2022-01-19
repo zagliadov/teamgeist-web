@@ -6,9 +6,14 @@ import { IUser } from "../../../interfaces/stateInterface/stateInterface";
 import EditUserForm from "./EditUserForm";
 import { ColumnsType } from "antd/es/table";
 import { NavLink } from "react-router-dom";
-import { makeNewArrayForTable } from "../../../helpers/helpers";
+import { asyncDispatch, makeNewArrayForTable } from "../../../helpers/helpers";
+import { AppContext } from "../../../state/AppContext";
+import { ActionType } from "../../../state/actions";
+import { getAllUsers } from "../../../state/controllers/users";
 
 const UsersList: FC = () => {
+  const [state, dispatch] = useContext(AppContext);
+
   const [user, setUser] = useContext(UserContext);
 
   const [userFilterArray, setUserFilterArray] = useState<any>();
@@ -45,6 +50,11 @@ const UsersList: FC = () => {
     setUserFilterArray(filterArray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [letter]);
+
+  useEffect(() => {
+    asyncDispatch(dispatch, ActionType.USER_GET_ALL_USERS, getAllUsers());
+  }, [dispatch]);
+  console.log(state.users);
 
   const columns: ColumnsType<IUser> = [
     {
