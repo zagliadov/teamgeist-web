@@ -1,7 +1,6 @@
 import axios from "axios"
-import { IStatistics } from '../../interfaces/stateInterface/stateInterface';
+import { IStatistics, IOneUserAnalitics } from '../../interfaces/stateInterface/stateInterface';
 
-const URI = 'https://jsonplaceholder.typicode.com/users';
 
 export const getStatistics = async (date: string) => {
     try {
@@ -13,11 +12,14 @@ export const getStatistics = async (date: string) => {
     };
 };
 
-export const getUsers = async () => {
+
+export const getOneUserAnalitics = async (id: string | undefined) => {
     try {
-        return await axios.get<any>(`${URI}`)
+        return await axios.get<IOneUserAnalitics>(`http://192.168.115.51:8083/v1/receive-data/${id}`)
             .then(response => response.data)
+            .then(data => data)
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 }
+

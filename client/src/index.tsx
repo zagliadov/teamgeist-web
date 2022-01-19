@@ -10,19 +10,15 @@ import { UserTypeProvider } from './state/UserTypeContext';
 import { AppProvider } from './state/AppContext';
 
 
-
 ReactDOM.render(
   <BrowserRouter>
     <UserTypeProvider>
       <UserProvider>
         <ProjectProvider>
           <AppProvider>
-
             <AuthProvider>
               <App />
-              
             </AuthProvider>
-
           </AppProvider>
         </ProjectProvider>
       </UserProvider>

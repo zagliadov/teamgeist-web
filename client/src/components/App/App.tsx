@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import './app.sass';
+import './app.less';
 /////////////////////////////////////pages
+import Registration from '../Registration/Registration';
 import Login from '../Login/Login';
 import Users from '../Users/Users';
 import NotFound from '../NotFound/NotFound';
@@ -13,6 +14,7 @@ import Statistics from '../Statistics/Statistics';
 import CrashReports from '../CrashReports/CrashReports';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import ProjectList from '../Projects/components/ProjectList/ProjectList';
+import { Workdiary } from '../Workdiary/Workdiary';
 
 const App: FC = () => {
 
@@ -26,6 +28,7 @@ const App: FC = () => {
                     <Route path='/admin/projects' element={<Projects />} />
                     <Route path='/admin/statistics' element={<Statistics />} />
                     <Route path='/admin/crash_reports' element={<CrashReports />} />
+                    <Route path='/admin/users/workdiary/:id' element={<Workdiary />} />
                 </Route>
                 {/* Route prototype for developer */}
                 <Route element={<ProtectedRoute />}>
@@ -34,6 +37,7 @@ const App: FC = () => {
                 </Route>
 
                 <Route path='/login' element={<Login />} />
+                <Route path='/registration' element={<Registration />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>

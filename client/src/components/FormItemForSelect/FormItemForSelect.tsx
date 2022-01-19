@@ -12,7 +12,7 @@ interface IOption {
 }
 interface IPropsFormItemForSelect {
     style?: any;
-    className: any;
+    className?: any;
     label: string;
     message?: string;
     name?: string;
@@ -55,7 +55,7 @@ const FormItemForSelect: FC<IPropsFormItemForSelect> = ({
                 ]}
                 hasFeedback>
                 <Select
-                    bordered={false}
+                    bordered={true}
                     maxTagTextLength={15}
                     className={className}
                     mode={mode}

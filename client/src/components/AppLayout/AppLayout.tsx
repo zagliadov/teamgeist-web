@@ -17,6 +17,7 @@ const headerOptionsForDeveloper: IHeaderOption[] = [
     { id: 0, name: 'Список проектов', to: '/developer/project-list' },
 ];
 
+
 const AppLayout: FC = () => {
     const userType = localStorage.getItem('user');
     const location = useLocation();
@@ -27,6 +28,7 @@ const AppLayout: FC = () => {
             display: 'flex',
             alignItems: 'center',
         }}>
+
             {(userType === 'admin' || location?.state === 'admin')
                 && <AppHeader headerOption={headerOptionsForAdmin} />}
             {(userType === 'developer' || location?.state === 'developer')
@@ -35,6 +37,7 @@ const AppLayout: FC = () => {
             <AppContent>
                 <Outlet />
             </AppContent>
+            
         </Layout>
     )
 };

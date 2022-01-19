@@ -55,3 +55,25 @@ export interface IPropsTableHeader {
     setVisible(arg0: boolean): void;
     visible: boolean;
 }
+
+export interface ICompanyRegisterForm {
+    agreement: boolean;
+    company_name: string;
+    confirm: string;
+    email: string;
+    password: string;
+    register_name: string;
+    role: "admin" | "leader" | "project_manager";
+}
+
+export interface IUserRegisterForm {
+    agreement: boolean;
+    confirm: string;
+    email: string;
+    password: string;
+    register_name: string;
+}
+
+export interface getValues {
+    onFinish: (values: IUserRegisterForm | ICompanyRegisterForm) => void
+}
