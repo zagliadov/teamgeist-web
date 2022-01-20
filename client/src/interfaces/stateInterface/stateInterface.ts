@@ -64,12 +64,6 @@ export interface IOneUserAnalitics {
 
 
 
-
-
-
-
-
-
 export interface IUser {
     key: string;
     lastName: string;

@@ -27,6 +27,11 @@ const UsersList: FC = () => {
     confirmLoading,
   } = useModal();
 
+  useEffect(() => {
+    asyncDispatch(dispatch, ActionType.USER_GET_ALL_USERS, getAllUsers());
+  }, [dispatch]);
+  console.log(state.users);
+
   const columns: ColumnsType<IUser> = [
     {
       title: "#",
