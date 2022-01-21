@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 /**
-* const {
-*   showModal,
-*   handleOk,
-*   handleCancel,
-*   visible,
-*   setVisible,
-*   confirmLoading,
-*  } = useModal(); Скопировать в компонент
+ const {
+   showModal,
+   handleOk,
+   handleCancel,
+   visible,
+   setVisible,
+   confirmLoading,
+  } = useModal(); Скопировать в компонент
  */
 export const useModal = () => {
   const [visible, setVisible] = useState<boolean>(false);
