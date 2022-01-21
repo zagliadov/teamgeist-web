@@ -19,8 +19,9 @@ i18n
     resources: {
       en: {
         translation: {
-          description: {
+          logInForm: {
             logIn: 'Sign In',
+            eMail: 'E-mail',
             pswrd: "Password:",
             forgotPswrd: 'Forgot password?',
             users: 'Users',
@@ -33,8 +34,9 @@ i18n
       },
       ru: {
         translation: {
-          description: {
+          logInForm: {
             logIn: 'Вход в систему',
+            eMail: 'E-mail',
             pswrd: "Пароль:",
             forgotPswrd: 'Забыли пароль?',
             users: 'Пользователи',

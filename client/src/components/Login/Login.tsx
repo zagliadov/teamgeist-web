@@ -1,21 +1,22 @@
 import { Button, Form, Space, Input, PageHeader, Spin, Layout } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
 import { UserContext } from '../../state/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
-import FormItemForInput from '../FormItemForInput/FormItemForInput';
 import { useTranslation } from 'react-i18next';
 import Logo from '../Logo/Logo';
 import '../../i18n';
+import { NONAME } from 'dns';
 
 
 const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
 
 
 const lngs: any = {
-  en: { nativeName: 'English' },
-  ru: { nativeName: 'Русский' }
+  en: { nativeName: 'en' },
+  ru: { nativeName: 'ру' }
 };
 
 
@@ -66,13 +67,19 @@ const Login: FC = () => {
         ghost={false}
         title={<Logo/>}
         extra={[
-          <Button.Group>
+          <div>
             {Object.keys(lngs).map((lng) => (
-              <Button key={lng} type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } onClick={() => i18n.changeLanguage(lng)}>
+              <Button 
+              key={lng} 
+              type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } 
+              ghost
+              size="small"
+              shape="round"
+              onClick={() => i18n.changeLanguage(lng)}>
               {lngs[lng].nativeName}
               </Button>
             ))}
-          </Button.Group>]}>
+          </div>]}>
       </PageHeader>
 
         <Content>
@@ -83,7 +90,7 @@ const Login: FC = () => {
             }}
           >
             <PageHeader
-              title={t('description.logIn')}
+              title={t('logInForm.logIn')}
             />
 
             <Content style={{width: 400}}>
@@ -96,45 +103,56 @@ const Login: FC = () => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
               >
-                <FormItemForInput
-                  className={"input-border"}
-                  label={"E-mail:"}
-                  required={true}
-                  message={t('description.PleaseInputYourEmail')}
-                  name={"email"}
-                />
+                <Form.Item
+                  name="e-mail"
+                  label={t('logInForm.eMail')}
+                  rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
+                >
+                  <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                </Form.Item>
 
                 <Form.Item
-                  label={t('description.pswrd')}
+                  noStyle
+                  label={t('logInForm.pswrd')}
                   name="password"
-                  rules={[{ required: true, message: t('description.pswrdMessage') }]}
+                  rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
                 >
-                  <Input.Password />
+                  <Input.Password/>
                 </Form.Item>
 
                 <Form.Item>
                   <Button type='link' style={{padding: 0}} onClick={() => {
                     navigate('/reset_password')
-                  }}>{t('description.forgotPswrd')}
+                  }}>{t('logInForm.forgotPswrd')}
                   </Button>
                 </Form.Item>
 
                 <Spin spinning={loading} size="large">
                   <Form.Item >
-                    <Space>
-                      <Button className='brand__btn' htmlType="submit" onClick={() => {
+                    {/* <Space direction='vertical'> */}
+                      <Button 
+                      block
+                      type='primary' 
+                      shape='round' 
+                      htmlType="submit" 
+                      onClick={() => {
                         setLoading(true);
                       }}>
-                        {t('description.signInBtn')}
+                        {t('logInForm.signInBtn')}
                       </Button>
+                  </Form.Item>
 
-                      <Button className='brand__btn' onClick={() => {
+                      <Button 
+                      block
+                      type='primary' 
+                      shape='round' 
+                      onClick={() => {
                         navigate('/registration')
                       }}>
-                        {t('description.signUp')}
+                        {t('logInForm.signUp')}
                       </Button>
-                    </Space>
-                  </Form.Item>
+                    {/* </Space> */}
+                  
                 </Spin>
               </Form>
             </Content>
