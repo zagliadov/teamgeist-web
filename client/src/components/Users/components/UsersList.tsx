@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Col, Input, Modal, Row, Table, Tooltip } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { UserContext } from "../../../state/UserContext";
@@ -6,55 +6,26 @@ import { IUser } from "../../../interfaces/stateInterface/stateInterface";
 import EditUserForm from "./EditUserForm";
 import { ColumnsType } from "antd/es/table";
 import { NavLink } from "react-router-dom";
-import { asyncDispatch, makeNewArrayForTable } from "../../../helpers/helpers";
-import { AppContext } from "../../../state/AppContext";
-import { ActionType } from "../../../state/actions";
-import { getAllUsers } from "../../../state/controllers/users";
+import { useFilter } from "../../../hooks/filter";
+import { useModal } from "../../../hooks/useModal";
+
+/**
+ * @const filterArray - Отфильтрованый массив
+ */
 
 const UsersList: FC = () => {
-  const [state, dispatch] = useContext(AppContext);
-
-  const [user, setUser] = useContext(UserContext);
-
-  const [userFilterArray, setUserFilterArray] = useState<any>();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const filterArray: any = [];
-
   const [letter, setLetter] = useState("");
   const [editUser, setEditUser] = useState<any>();
-
-  const [visible, setVisible] = useState<boolean>(false);
-  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-
-  const showModal = () => {
-    setVisible(true);
-  };
-  const handleOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-  const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setVisible(false);
-  };
-
-  useEffect(() => {
-    makeNewArrayForTable(user, letter, filterArray, "firstName", "lastName");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [letter, filterArray, user]);
-
-  useEffect(() => {
-    setUserFilterArray(filterArray);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [letter]);
-
-  useEffect(() => {
-    asyncDispatch(dispatch, ActionType.USER_GET_ALL_USERS, getAllUsers());
-  }, [dispatch]);
-  console.log(state.users);
+  const [user, setUser] = useContext(UserContext);
+  const filterArray = useFilter(user, letter, "firstName", "lastName");
+  const {
+    showModal,
+    handleOk,
+    handleCancel,
+    visible,
+    setVisible,
+    confirmLoading,
+  } = useModal();
 
   const columns: ColumnsType<IUser> = [
     {
@@ -116,10 +87,7 @@ const UsersList: FC = () => {
                 justifyContent: "center",
               }}
             >
-              <Tooltip
-                placement="left"
-                title={<span>Edit this user?</span>}
-              >
+              <Tooltip placement="left" title={<span>Edit this user?</span>}>
                 <EditTwoTone
                   twoToneColor="#03a473"
                   style={{ fontSize: "20px" }}
@@ -138,19 +106,15 @@ const UsersList: FC = () => {
                 justifyContent: "center",
               }}
             >
-              <Tooltip
-                placement="right"
-                title={<span>Remove this user</span>}
-              >
+              <Tooltip placement="right" title={<span>Remove this user</span>}>
                 <DeleteTwoTone
-                twoToneColor="#eb2f96"
-                style={{ fontSize: "20px" }}
-                onClick={() => {
-                  onDeleteUser(value, record);
-                }}
-              />
+                  twoToneColor="#eb2f96"
+                  style={{ fontSize: "20px" }}
+                  onClick={() => {
+                    onDeleteUser(value, record);
+                  }}
+                />
               </Tooltip>
-              
             </Col>
           </Row>
         );
@@ -174,7 +138,7 @@ const UsersList: FC = () => {
   return (
     <>
       <Table<IUser>
-        dataSource={userFilterArray ? userFilterArray : user}
+        dataSource={filterArray ? filterArray : user}
         columns={columns}
       />
 

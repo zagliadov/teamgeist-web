@@ -1,73 +1,26 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Col, Input, Modal, Row, Table, Tooltip } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 import { ProjectContext } from "../../../../state/ProjectContext";
 import { IProject } from "../../../../interfaces/stateInterface/stateInterface";
 import { ColumnsType } from "antd/es/table";
 import EditProjectForm from "../EditProjectForm/EditProjectForm";
-import { makeNewArrayForTable } from "../../../../helpers/helpers";
+import { useFilter } from "../../../../hooks/filter";
+import { useModal } from "../../../../hooks/useModal";
 
 const ProjectList: FC = () => {
   const [project, setProject] = useContext(ProjectContext);
-  const [projectFilterArray, setProjectFilterArray] = useState<any>();
-  // const [twoFilterArray, setTwoFilterArray] = useState<any>();
-  const [letterProjectName, setLetterProjectName] = useState("");
-  const [letterDescription, setLetterDescription] = useState("");
+  const [letter, setLetter] = useState("");
   const [editProject, setEditProject] = useState<any>();
-  const [visible, setVisible] = useState<boolean>(false);
-  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let firstFilterArray: any = [];
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let secondFilterArray: any = [];
-
-  const showModal = () => {
-    setVisible(true);
-  };
-  const handleOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-  const handleCancel = () => {
-    console.log("Clicked cancel button");
-    setVisible(false);
-  };
-
-  useEffect(() => {
-    makeNewArrayForTable(
-      project,
-      letterProjectName,
-      firstFilterArray,
-      "projectName"
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [letterProjectName, firstFilterArray, project]);
-
-  useEffect(() => {
-    makeNewArrayForTable(
-      project,
-      letterDescription,
-      secondFilterArray,
-      "description"
-    );
-  }, [secondFilterArray, letterDescription, project]);
-
-  useEffect(() => {
-    if (firstFilterArray.length > 0) {
-      setProjectFilterArray(firstFilterArray);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [letterProjectName]);
-
-  useEffect(() => {
-    if (secondFilterArray.length > 0) {
-      setProjectFilterArray(secondFilterArray);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [letterDescription]);
+  const filterArray = useFilter(project, letter, "projectName");
+  const {
+    showModal,
+    handleOk,
+    handleCancel,
+    visible,
+    setVisible,
+    confirmLoading,
+  } = useModal();
 
   const columns: ColumnsType<IProject> = [
     {
@@ -80,7 +33,7 @@ const ProjectList: FC = () => {
         <Input
           placeholder="Название"
           onChange={(e) => {
-            setLetterProjectName(e.target.value);
+            setLetter(e.target.value);
           }}
         />
       ),
@@ -88,14 +41,7 @@ const ProjectList: FC = () => {
       key: "projectName",
     },
     {
-      title: (
-        <Input
-          placeholder="Описание"
-          onChange={(e) => {
-            setLetterDescription(e.target.value);
-          }}
-        />
-      ),
+      title: "Описание",
       dataIndex: "description",
       key: "description",
     },
@@ -160,14 +106,13 @@ const ProjectList: FC = () => {
                 title={<span>Remove this project</span>}
               >
                 <DeleteTwoTone
-                twoToneColor="#eb2f96"
-                style={{ fontSize: "20px" }}
-                onClick={() => {
-                  onDeleteProject(value, record);
-                }}
-              />
+                  twoToneColor="#eb2f96"
+                  style={{ fontSize: "20px" }}
+                  onClick={() => {
+                    onDeleteProject(value, record);
+                  }}
+                />
               </Tooltip>
-              
             </Col>
           </Row>
         );
@@ -192,9 +137,7 @@ const ProjectList: FC = () => {
   return (
     <>
       <Table<IProject>
-        dataSource={
-          projectFilterArray?.length !== 0 ? projectFilterArray : project
-        }
+        dataSource={filterArray ? filterArray : project}
         columns={columns}
       />
       <Modal
