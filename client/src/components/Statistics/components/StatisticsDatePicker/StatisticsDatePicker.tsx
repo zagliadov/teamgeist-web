@@ -1,16 +1,15 @@
-import { DatePicker, Select, Space } from 'antd';
-import { FC } from 'react';
-import moment from 'moment';
-import { ConfigProvider } from 'antd';
-import ruRU from 'antd/lib/locale/ru_RU';
-import 'moment/locale/ru';
-
+import { DatePicker, Select, Space } from "antd";
+import { FC } from "react";
+import moment from "moment";
+import { ConfigProvider } from "antd";
+import ruRU from "antd/lib/locale/ru_RU";
+import "moment/locale/ru";
 
 const { Option } = Select;
 
 interface IProps {
-    setTimeStep: (arg0: string) => void;
-    timeStep: string;
+  setTimeStep: (arg0: string) => void;
+  timeStep: string;
 }
 
 const StatisticsDatePicker: FC<IProps> = ({
@@ -81,6 +80,3 @@ const StatisticsDatePicker: FC<IProps> = ({
 };
 
 export default StatisticsDatePicker;
-
-
-
