@@ -35,7 +35,6 @@ const App: FC = () => {
           <Route path="/developer/project-list" element={<ProjectList />} />
         </Route>
 
-        <Route path="/" element={<AppLayout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="*" element={<NotFound />} />
