@@ -1,15 +1,7 @@
-import { FC } from 'react';
-
-
+import { FC } from "react";
 
 const CrashReports: FC = () => {
-
-   
-    return (
-        <>
-            CRASHREPORTS 
-        </>
-    )
+  return <>CRASHREPORTS</>;
 };
 
 export default CrashReports;
