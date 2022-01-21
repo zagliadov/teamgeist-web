@@ -8,7 +8,6 @@ import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
 import { useTranslation } from 'react-i18next';
 import Logo from '../Logo/Logo';
 import '../../i18n';
-import { NONAME } from 'dns';
 
 
 const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
@@ -105,19 +104,25 @@ const Login: FC = () => {
               >
                 <Form.Item
                   name="e-mail"
-                  label={t('logInForm.eMail')}
+                  // label={t('logInForm.eMail')}
                   rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
                 >
-                  <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                  <Input 
+                  bordered={false} 
+                  prefix={<UserOutlined style={{ color: "#BDBDBD"}} />} 
+                  placeholder={t('logInForm.eMail')} />
                 </Form.Item>
 
                 <Form.Item
-                  noStyle
-                  label={t('logInForm.pswrd')}
+                  // label={t('logInForm.pswrd')}
                   name="password"
                   rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
                 >
-                  <Input.Password/>
+                  <Input.Password
+                  bordered={false} 
+                  prefix={<LockOutlined style={{ color: "#BDBDBD"}} />}
+                  placeholder={t('logInForm.pswrd')}
+                  />
                 </Form.Item>
 
                 <Form.Item>
