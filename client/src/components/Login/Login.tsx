@@ -11,6 +11,7 @@ import "../../i18n";
 
 const FOOTER_DESCRIPTION: string = "FaceIt - 2022";
 
+
 const lngs: any = {
   en: { nativeName: "English" },
   ru: { nativeName: "Русский" },
