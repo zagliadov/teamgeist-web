@@ -64,12 +64,14 @@ const Login: FC = () => {
       <div className="background-part-1" />
       <div className="background-part-2" />
       <PageHeader
+        title={<img src={logo} className='Logo' />}
         className='transparent'
         ghost={true}
         extra={
           <div>
             {Object.keys(lngs).map((lng) => (
               <Button 
+              style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)"}}
               key={lng} 
               type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } 
               ghost
@@ -82,9 +84,9 @@ const Login: FC = () => {
           </div>}>
       </PageHeader>
 
-      <PageHeader className='text-center transparent'>
+      {/* <PageHeader className='text-center transparent'>
         <img src={logo} className='Logo' />
-      </PageHeader>
+      </PageHeader> */}
 
       <Content>
         <Layout className='white_content'> 
@@ -96,7 +98,7 @@ const Login: FC = () => {
               boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.07)",
               margin: 'auto',
               }}>
-            <h2 style={{textAlign: 'center'}}>{t('logInForm.logIn')}</h2>
+            <h2 style={{textAlign: 'center', fontWeight: 600}}>{t('logInForm.logIn')}</h2>
             <Form
               name="basic"
               labelCol={{ span: 16 }}
@@ -156,6 +158,7 @@ const Login: FC = () => {
 
                 <Button 
                 block
+                ghost
                 type='primary' 
                 shape='round' 
                 onClick={() => {
