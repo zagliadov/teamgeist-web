@@ -17,45 +17,44 @@ const lngs: any = {
   ru: { nativeName: 'ру' }
 };
 
-
 const Login: FC = () => {
   const { t, i18n } = useTranslation();
   const { Footer, Content } = Layout;
   const [loading, setLoading] = useState<boolean>(false);
   const [, setAuth] = useContext(AuthContext);
-  const [user,] = useContext(UserContext);
+  const [user] = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const onFinish = (values: IValueFromLoginForm) => {
-
     setTimeout(() => {
       const person = user.filter((item: IValueFromLoginForm) => {
-        return item.email === values.email
+        return item.email === values.email;
       });
       localStorage.clear();
       switch (person[0].userType) {
-          case 'admin':
-            setAuth(true);
-            navigate(`/${person[0].userType}/users`,
-                { state: person[0].userType });
-            localStorage.setItem('user', `${person[0].userType}`);
-            break;
-          case 'developer':
-            setAuth(true);
-            navigate(`/${person[0].userType}/project-list`,
-                { state: person[0].userType });
-            localStorage.setItem('user', `${person[0].userType}`);
-            break;
-          default:
-              break;
-        }
-      }, 1000);
-
-    };
+        case "admin":
+          setAuth(true);
+          navigate(`/${person[0].userType}/users`, {
+            state: person[0].userType,
+          });
+          localStorage.setItem("user", `${person[0].userType}`);
+          break;
+        case "developer":
+          setAuth(true);
+          navigate(`/${person[0].userType}/project-list`, {
+            state: person[0].userType,
+          });
+          localStorage.setItem("user", `${person[0].userType}`);
+          break;
+        default:
+          break;
+      }
+    }, 1000);
+  };
 
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
     setLoading(false);
   };
 
