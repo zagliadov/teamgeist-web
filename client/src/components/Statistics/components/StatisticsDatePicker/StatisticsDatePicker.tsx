@@ -10,9 +10,14 @@ const { Option } = Select;
 interface IProps {
   setTimeStep: (arg0: string) => void;
   timeStep: string;
+  setMonthString: (arg0: string) => void;
 }
 
-const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
+const StatisticsDatePicker: FC<IProps> = ({
+  setTimeStep,
+  timeStep,
+  setMonthString,
+}) => {
   const weekFormat = "DD.MM.YYYY",
     monthFormat = "MMMM.YYYY";
   const weekOrMonth = timeStep === "week" ? weekFormat : monthFormat;
@@ -59,12 +64,14 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
               <Option value="week">Неделя</Option>
             </Select>
           )}
-
           <DatePicker
             suffixIcon={null}
             style={{ width: "300px" }}
             popupStyle={{ width: "300px" }}
             defaultValue={moment()}
+            onChange={(date: any, dateString: string) => {
+              setMonthString(dateString)
+            }}
             format={customWeekStartEndFormat}
             picker={timeStep === "week" ? "week" : "month"}
           />

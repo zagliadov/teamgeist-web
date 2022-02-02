@@ -2,13 +2,16 @@ import { FC, useContext } from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { UserContext } from "../../../../state/UserContext";
+import { useToGetWeeks } from "../../../../hooks/useToGetWeeks";
 
 interface IProps {
-  timeStep: string;
+  timeStep: string,
+  monthString: string,
 }
 
-const ProjectList: FC<IProps> = ({ timeStep }) => {
+const ProjectList: FC<IProps> = ({ timeStep, monthString }) => {
   const [user] = useContext(UserContext);
+  const arrayOfWeeks = useToGetWeeks(monthString);
 
   const week: ColumnsType<any> = [
     {
@@ -60,50 +63,38 @@ const ProjectList: FC<IProps> = ({ timeStep }) => {
 
   const month: ColumnsType<any> = [
     {
-      title: "Программисты",
-      dataIndex: "key",
-      key: "key",
+      title: "id",
+      dataIndex: "id",
+      key: "id",
     },
     {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "projectName",
+      title: <span>{arrayOfWeeks[0].firstWeekOfMonth}</span>,
+      dataIndex: "id",
+      key: "firstWeekOfMonth",
     },
     {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "description",
+      title: <span>{arrayOfWeeks[1].secondWeekOfMonth}</span>,
+      dataIndex: "id",
+      key: "secondWeekOfMonth",
     },
     {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "projectType",
+      title: <span>{arrayOfWeeks[2].thirdWeekOfMonth}</span>,
+      dataIndex: "id",
+      key: "thirdWeekOfMonth",
     },
     {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "projectType",
-    },
-    {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "projectType",
-    },
-    {
-      title: "26.04.2021 | 02.05.2021",
-      dataIndex: "key",
-      key: "projectType",
-    },
-    {
-      title: "Итого",
-      dataIndex: "key",
-      key: "projectType",
+      title: <span>{arrayOfWeeks[3].fourthWeekOfMonth}</span>,
+      dataIndex: "id",
+      key: "fourthWeekOfMonth",
     },
   ];
 
   return (
     <>
-      <Table dataSource={user} columns={timeStep === "week" ? week : month} />
+      <Table
+        dataSource={timeStep === "week" ? user : arrayOfWeeks}
+        columns={timeStep === "week" ? week : month}
+      />
     </>
   );
 };
