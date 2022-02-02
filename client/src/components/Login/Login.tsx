@@ -10,8 +10,6 @@ import logo from '../Logo/logo.svg';
 import '../../i18n';
 import './login.sass';
 
-const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
-const VERSION = '10 1.53';
 
 const lngs: any = {
   en: { nativeName: 'en' },
@@ -20,7 +18,7 @@ const lngs: any = {
 
 const Login: FC = () => {
   const { t, i18n } = useTranslation();
-  const { Footer, Content } = Layout;
+  const { Content } = Layout;
   const [loading, setLoading] = useState<boolean>(false);
   const [, setAuth] = useContext(AuthContext);
   const [user] = useContext(UserContext);
@@ -64,20 +62,17 @@ const Login: FC = () => {
       <div className="background-part-1" />
       <div className="background-part-2" />
       <PageHeader
-        // title={<img src={logo} className='Logo' />}
         className='text-center transparent'
-        // ghost={true}
         extra={
-          <div>
+          <div className='lang-buttons'>
             {Object.keys(lngs).map((lng) => (
               <Button 
-              // style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)"}}
               key={lng} 
               type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } 
               ghost
               size="small"
               shape="round"
-              onClick={() => i18n.changeLanguage(lng)}>3
+              onClick={() => i18n.changeLanguage(lng)}>
               {lngs[lng].nativeName}
               </Button>
             ))}
@@ -92,7 +87,8 @@ const Login: FC = () => {
         <Layout className='white_content'> 
           <Content style={{
             width: '35%',
-            margin:'6vh'
+            margin:'6vh',
+            backgroundColor: "#ffffff"
             }}>
             <Card style={{
               boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.07)",
@@ -110,33 +106,29 @@ const Login: FC = () => {
               >
                 <Form.Item
                   name="e-mail"
-                  style={{borderBottom: "line-width"}}
-                  // label={t('logInForm.eMail')}
                   rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
                 >
                   <Input 
-                  bordered={false} 
                   prefix={<UserOutlined style={{ color: "#BDBDBD"}} />} 
                   placeholder={t('logInForm.eMail')} 
                   />
                 </Form.Item>
-                <Divider/>
-                
+
                 <Form.Item
-                  // label={t('logInForm.pswrd')}
                   name="password"
                   rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
                 >
                   <Input.Password
-                  bordered={false} 
+                  // bordered={false} 
                   prefix={<LockOutlined style={{ color: "#BDBDBD"}} />}
                   placeholder={t('logInForm.pswrd')}
                   />  
                 </Form.Item>
-                <Divider/>
 
                 <Form.Item>
-                  <Button type='link' style={{padding: 0}} onClick={() => {
+                  <Button type='link' 
+                  style={{padding: 0}} 
+                  onClick={() => {
                     navigate('/reset_password')
                   }}>{t('logInForm.forgotPswrd')}
                   </Button>
@@ -163,8 +155,7 @@ const Login: FC = () => {
                   >
                     <span>{t('logInForm.DontHaveAnAccount')}</span>
                     <Button 
-                    type='link' 
-                    shape='round' 
+                    type='link'
                     style={{color: "#03A473"}}
                     onClick={() => {
                       navigate('/registration')
@@ -177,7 +168,7 @@ const Login: FC = () => {
               </Form>         
             </Card>
           
-            <Divider>Download App:</Divider>
+            <Divider style={{ marginTop: "4vh" }}>Download App:</Divider>
 
           <Row
           justify='space-between'
@@ -189,6 +180,9 @@ const Login: FC = () => {
               color: '#03A473',
               border: '1px solid #03A473',
             }}
+            onClick={() => {
+              console.log("download Ubuntu")
+            }}
             >
               Ubuntu
             </Button>
@@ -198,6 +192,9 @@ const Login: FC = () => {
             style={{
               color: '#03A473',
               border: '1px solid #03A473',
+            }}
+            onClick={() => {
+              console.log("download MacOs")
             }}
             >
               MacOs 
