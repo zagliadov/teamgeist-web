@@ -1,11 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-// import LanguageDetector from 'i18next-browser-languagedetector';
+import LanguageDetector from 'i18next-browser-languagedetector';
 // for commit
 i18n
   // detect user language
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
-//   .use(LanguageDetector)
+  .use(LanguageDetector)
   // pass the i18n instance to react-i18next.
   .use(initReactI18next)
   // init i18next
@@ -19,8 +19,9 @@ i18n
     resources: {
       en: {
         translation: {
-          description: {
-            logIn: 'Sign In',
+          logInForm: {
+            logIn: 'Login',
+            eMail: 'E-mail',
             pswrd: "Password:",
             forgotPswrd: 'Forgot password?',
             users: 'Users',
@@ -33,8 +34,9 @@ i18n
       },
       ru: {
         translation: {
-          description: {
+          logInForm: {
             logIn: 'Вход в систему',
+            eMail: 'E-mail',
             pswrd: "Пароль:",
             forgotPswrd: 'Забыли пароль?',
             users: 'Пользователи',

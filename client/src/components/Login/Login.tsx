@@ -1,20 +1,20 @@
-import { Button, Form, Space, Input, PageHeader, Spin, Layout } from "antd";
-import { FC, useState, useContext } from "react";
-import { AuthContext } from "../../state/AuthContext";
-import { UserContext } from "../../state/UserContext";
-import { useNavigate } from "react-router-dom";
-import { IValueFromLoginForm } from "../../interfaces/componentsInterface";
-import FormItemForInput from "../FormItemForInput/FormItemForInput";
-import { useTranslation } from "react-i18next";
-import Logo from "../Logo/Logo";
-import "../../i18n";
+import { Button, Form, Input, PageHeader, Spin, Layout, Card, Divider } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { FC, useState, useContext } from 'react';
+import { AuthContext } from '../../state/AuthContext';
+import { UserContext } from '../../state/UserContext';
+import { useNavigate } from 'react-router-dom';
+import { IValueFromLoginForm } from '../../interfaces/componentsInterface';
+import { useTranslation } from 'react-i18next';
+import logo from '../Logo/logo.svg';
+import '../../i18n';
+import './login.sass';
 
-const FOOTER_DESCRIPTION: string = "FaceIt - 2022";
-
+const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
 
 const lngs: any = {
-  en: { nativeName: "English" },
-  ru: { nativeName: "Русский" },
+  en: { nativeName: 'en' },
+  ru: { nativeName: 'ру' }
 };
 
 const Login: FC = () => {
@@ -59,36 +59,45 @@ const Login: FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout className='transparent'>
+      <div className="background-part-1" />
+      <div className="background-part-2" />
       <PageHeader
-        ghost={false}
-        title={<Logo />}
-        extra={[
-          <Button.Group>
+        title={<img src={logo} className='Logo' />}
+        className='transparent'
+        ghost={true}
+        extra={
+          <div>
             {Object.keys(lngs).map((lng) => (
-              <Button
-                key={lng}
-                type={i18n.resolvedLanguage === lng ? "primary" : "default"}
-                onClick={() => i18n.changeLanguage(lng)}
-              >
-                {lngs[lng].nativeName}
+              <Button 
+              style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)"}}
+              key={lng} 
+              type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } 
+              ghost
+              size="small"
+              shape="round"
+              onClick={() => i18n.changeLanguage(lng)}>
+              {lngs[lng].nativeName}
               </Button>
             ))}
-          </Button.Group>,
-        ]}
-      ></PageHeader>
+          </div>}>
+      </PageHeader>
+
+      {/* <PageHeader className='text-center transparent'>
+        <img src={logo} className='Logo' />
+      </PageHeader> */}
 
       <Content>
-        <Layout
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <PageHeader title={t("description.logIn")} />
-
-          <Content style={{ width: 400 }}>
+        <Layout className='white_content'> 
+          <Content style={{
+            width: '35%',
+            margin:'6vh'
+            }}>
+            <Card style={{
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.07)",
+              margin: 'auto',
+              }}>
+            <h2 style={{textAlign: 'center', fontWeight: 600}}>{t('logInForm.logIn')}</h2>
             <Form
               name="basic"
               labelCol={{ span: 16 }}
@@ -98,67 +107,73 @@ const Login: FC = () => {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <FormItemForInput
-                className={"input-border"}
-                label={"E-mail:"}
-                required={true}
-                message={t("description.PleaseInputYourEmail")}
-                name={"email"}
-              />
-
               <Form.Item
-                label={t("description.pswrd")}
-                name="password"
-                rules={[
-                  { required: true, message: t("description.pswrdMessage") },
-                ]}
+                name="e-mail"
+                style={{borderBottom: "line-width"}}
+                // label={t('logInForm.eMail')}
+                rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
               >
-                <Input.Password />
+                <Input 
+                bordered={false} 
+                prefix={<UserOutlined style={{ color: "#BDBDBD"}} />} 
+                placeholder={t('logInForm.eMail')} 
+                />
               </Form.Item>
+              <Divider/>
+              
+              <Form.Item
+                // label={t('logInForm.pswrd')}
+                name="password"
+                rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
+              >
+                <Input.Password
+                bordered={false} 
+                prefix={<LockOutlined style={{ color: "#BDBDBD"}} />}
+                placeholder={t('logInForm.pswrd')}
+                />  
+              </Form.Item>
+              <Divider/>
 
               <Form.Item>
-                <Button
-                  type="link"
-                  style={{ padding: 0 }}
-                  onClick={() => {
-                    navigate("/reset_password");
-                  }}
-                >
-                  {t("description.forgotPswrd")}
+                <Button type='link' style={{padding: 0}} onClick={() => {
+                  navigate('/reset_password')
+                }}>{t('logInForm.forgotPswrd')}
                 </Button>
               </Form.Item>
 
               <Spin spinning={loading} size="large">
-                <Form.Item>
-                  <Space>
-                    <Button
-                      className="brand__btn"
-                      htmlType="submit"
-                      onClick={() => {
-                        setLoading(true);
-                      }}
-                    >
-                      {t("description.signInBtn")}
-                    </Button>
-
-                    <Button
-                      className="brand__btn"
-                      onClick={() => {
-                        navigate("/registration");
-                      }}
-                    >
-                      {t("description.signUp")}
-                    </Button>
-                  </Space>
+                <Form.Item >
+                  <Button 
+                  block
+                  type='primary' 
+                  shape='round' 
+                  htmlType="submit" 
+                  onClick={() => {
+                    setLoading(true);
+                  }}>
+                    {t('logInForm.signInBtn')}
+                  </Button>
                 </Form.Item>
+
+                <Button 
+                block
+                ghost
+                type='primary' 
+                shape='round' 
+                onClick={() => {
+                  navigate('/registration')
+                }}>
+                  {t('logInForm.signUp')}
+                </Button>
+
               </Spin>
-            </Form>
+            </Form>          
+            </Card>
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: "center" }}>{FOOTER_DESCRIPTION}</Footer>
     </Layout>
-  );
-};
+  )
+}
 
 export default Login;

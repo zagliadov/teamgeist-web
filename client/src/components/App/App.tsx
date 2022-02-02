@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import "antd/dist/antd.css";
-import "./app.less";
+import '../../../src/result.css';
+import './app.sass';
 /////////////////////////////////////pages
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
