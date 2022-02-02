@@ -5,9 +5,10 @@ import AppLayout from '../AppLayout/AppLayout';
 
 
 
- const ProtectedRoute: FC = (): any => {
+ const ProtectedRoute: FC = (props): any => {
     const [auth, ] = useContext(AuthContext);
-
+    // const { role } = props;
+    //if auth.role = role
     return auth ? <AppLayout /> : <Navigate to='/login' />;
 
 };

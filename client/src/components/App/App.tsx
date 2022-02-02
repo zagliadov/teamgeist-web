@@ -19,7 +19,7 @@ import { Workdiary } from "../Workdiary/Workdiary";
 const App: FC = () => {
   return (
     <>
-      {/* Route prototype for admin */}
+      {/* Route prototype for admin role="admin"*/}
       <Routes>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<AppLayout />} />
@@ -29,7 +29,7 @@ const App: FC = () => {
           <Route path="/admin/crash_reports" element={<CrashReports />} />
           <Route path="/admin/users/workdiary/:id" element={<Workdiary />} />
         </Route>
-        {/* Route prototype for developer */}
+        {/* Route prototype for developer role="developer"*/}
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<AppLayout />} />
           <Route path="/developer/project-list" element={<ProjectList />} />

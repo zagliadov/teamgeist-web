@@ -1,9 +1,10 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import AppHeader from "../AppHeader/AppHeader";
 import AppContent from "../AppContent/AppContent";
 import { Outlet, useLocation } from "react-router-dom";
 import { Layout } from "antd";
 import { IHeaderOption } from "../../interfaces/componentsInterface";
+import { AuthContext } from '../../state/AuthContext';
 
 const headerOptionsForAdmin: IHeaderOption[] = [
   { id: 0, name: "Пользователи", to: "/admin/users" },
@@ -18,7 +19,8 @@ const headerOptionsForDeveloper: IHeaderOption[] = [
 const AppLayout: FC = () => {
   const userType = localStorage.getItem("user");
   const location = useLocation();
-
+  const [auth, setAuth] = useContext(AuthContext);
+  console.log('auth', auth);
   return (
     <Layout
       style={{
@@ -27,6 +29,7 @@ const AppLayout: FC = () => {
         alignItems: "center",
       }}
     >
+
       {(userType === "admin" || location?.state === "admin") && (
         <AppHeader headerOption={headerOptionsForAdmin} />
       )}
