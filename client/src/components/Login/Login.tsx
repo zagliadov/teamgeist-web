@@ -105,7 +105,7 @@ const Login: FC = () => {
                 autoComplete="off"
               >
                 <Form.Item
-                  name="e-mail"
+                  name="email"
                   rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
                 >
                   <Input 
