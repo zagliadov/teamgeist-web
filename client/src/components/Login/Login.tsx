@@ -1,4 +1,4 @@
-import { Button, Form, Input, PageHeader, Spin, Layout, Card, Divider } from 'antd';
+import { Button, Form, Input, PageHeader, Spin, Layout, Card, Divider, Row } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { FC, useState, useContext } from 'react';
 import { AuthContext } from '../../state/AuthContext';
@@ -10,7 +10,6 @@ import logo from '../Logo/logo.svg';
 import '../../i18n';
 import './login.sass';
 
-const FOOTER_DESCRIPTION: string = 'FaceIt - 2022';
 
 const lngs: any = {
   en: { nativeName: 'en' },
@@ -19,7 +18,7 @@ const lngs: any = {
 
 const Login: FC = () => {
   const { t, i18n } = useTranslation();
-  const { Footer, Content } = Layout;
+  const { Content } = Layout;
   const [loading, setLoading] = useState<boolean>(false);
   const [, setAuth] = useContext(AuthContext);
   const [user] = useContext(UserContext);
@@ -63,14 +62,11 @@ const Login: FC = () => {
       <div className="background-part-1" />
       <div className="background-part-2" />
       <PageHeader
-        title={<img src={logo} className='Logo' />}
-        className='transparent'
-        ghost={true}
+        className='text-center transparent'
         extra={
-          <div>
+          <div className='lang-buttons'>
             {Object.keys(lngs).map((lng) => (
               <Button 
-              style={{boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.2)"}}
               key={lng} 
               type={i18n.resolvedLanguage === lng ? 'primary' : 'default' } 
               ghost
@@ -83,92 +79,129 @@ const Login: FC = () => {
           </div>}>
       </PageHeader>
 
-      {/* <PageHeader className='text-center transparent'>
+      <PageHeader className='text-center transparent'>
         <img src={logo} className='Logo' />
-      </PageHeader> */}
+      </PageHeader>
 
       <Content>
         <Layout className='white_content'> 
           <Content style={{
             width: '35%',
-            margin:'6vh'
+            margin:'6vh',
+            backgroundColor: "#ffffff"
             }}>
             <Card style={{
               boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.07)",
               margin: 'auto',
               }}>
-            <h2 style={{textAlign: 'center', fontWeight: 600}}>{t('logInForm.logIn')}</h2>
-            <Form
-              name="basic"
-              labelCol={{ span: 16 }}
-              wrapperCol={{ span: 24 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                name="e-mail"
-                style={{borderBottom: "line-width"}}
-                // label={t('logInForm.eMail')}
-                rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
+              <h2 style={{textAlign: 'center', fontWeight: 600}}>{t('logInForm.logIn')}</h2>
+              <Form
+                name="basic"
+                labelCol={{ span: 16 }}
+                wrapperCol={{ span: 24 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
               >
-                <Input 
-                bordered={false} 
-                prefix={<UserOutlined style={{ color: "#BDBDBD"}} />} 
-                placeholder={t('logInForm.eMail')} 
-                />
-              </Form.Item>
-              <Divider/>
-              
-              <Form.Item
-                // label={t('logInForm.pswrd')}
-                name="password"
-                rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
-              >
-                <Input.Password
-                bordered={false} 
-                prefix={<LockOutlined style={{ color: "#BDBDBD"}} />}
-                placeholder={t('logInForm.pswrd')}
-                />  
-              </Form.Item>
-              <Divider/>
+                <Form.Item
+                  name="email"
+                  rules={[{ required: true, message: t('logInForm.PleaseInputYourEmail') }]}
+                >
+                  <Input 
+                  prefix={<UserOutlined style={{ color: "#BDBDBD"}} />} 
+                  placeholder={t('logInForm.eMail')} 
+                  />
+                </Form.Item>
 
-              <Form.Item>
-                <Button type='link' style={{padding: 0}} onClick={() => {
-                  navigate('/reset_password')
-                }}>{t('logInForm.forgotPswrd')}
-                </Button>
-              </Form.Item>
+                <Form.Item
+                  name="password"
+                  rules={[{ required: true, message: t('logInForm.pswrdMessage') }]}
+                >
+                  <Input.Password
+                  // bordered={false} 
+                  prefix={<LockOutlined style={{ color: "#BDBDBD"}} />}
+                  placeholder={t('logInForm.pswrd')}
+                  />  
+                </Form.Item>
 
-              <Spin spinning={loading} size="large">
-                <Form.Item >
-                  <Button 
-                  block
-                  type='primary' 
-                  shape='round' 
-                  htmlType="submit" 
+                <Form.Item>
+                  <Button type='link' 
+                  style={{padding: 0}} 
                   onClick={() => {
-                    setLoading(true);
-                  }}>
-                    {t('logInForm.signInBtn')}
+                    navigate('/reset_password')
+                  }}>{t('logInForm.forgotPswrd')}
                   </Button>
                 </Form.Item>
 
-                <Button 
-                block
-                ghost
-                type='primary' 
-                shape='round' 
-                onClick={() => {
-                  navigate('/registration')
-                }}>
-                  {t('logInForm.signUp')}
-                </Button>
+                <Spin spinning={loading} size="large">
+                  <Form.Item >
+                    <Button 
+                    block
+                    type='primary'
+                    size='large'
+                    shape='round' 
+                    htmlType="submit" 
+                    onClick={() => {
+                      setLoading(true);
+                    }}>
+                      {t('logInForm.signInBtn')}
+                    </Button>
+                  </Form.Item>
 
-              </Spin>
-            </Form>          
+                  <Row
+                  justify='center'
+                  align='middle'
+                  >
+                    <span>{t('logInForm.DontHaveAnAccount')}</span>
+                    <Button 
+                    type='link'
+                    style={{color: "#03A473"}}
+                    onClick={() => {
+                      navigate('/registration')
+                    }}>
+                      {t('logInForm.signUp')}
+                    </Button>                  
+                  </Row>
+                </Spin>
+                
+              </Form>         
             </Card>
+          
+            <Divider style={{ marginTop: "4vh" }}>Download App:</Divider>
+
+          <Row
+          justify='space-between'
+          >
+            <Button
+            shape='round'
+            type='default'
+            style={{
+              color: '#03A473',
+              border: '1px solid #03A473',
+            }}
+            onClick={() => {
+              console.log("download Ubuntu")
+            }}
+            >
+              Ubuntu
+            </Button>
+            <Button
+            shape='round'
+            type='default'
+            style={{
+              color: '#03A473',
+              border: '1px solid #03A473',
+            }}
+            onClick={() => {
+              console.log("download MacOs")
+            }}
+            >
+              MacOs 
+            </Button>            
+          </Row>
+
+
           </Content>
         </Layout>
       </Content>

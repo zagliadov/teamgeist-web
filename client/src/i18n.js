@@ -27,6 +27,7 @@ i18n
             users: 'Users',
             PleaseInputYourEmail:'Please input your email!',
             signInBtn: 'Sign In',
+            DontHaveAnAccount: "Don't have an account?",
             signUp: 'Sign Up',
             pswrdMessage: 'Please input your password!',
           }
@@ -42,6 +43,7 @@ i18n
             users: 'Пользователи',
             PleaseInputYourEmail: 'Пожалуйста, введите ваш e-mail!',
             signInBtn: 'Вход',
+            DontHaveAnAccount: 'Еще не зарегистрированы?',
             signUp: 'Регистрация',
             pswrdMessage: 'Пожалуйста, введите свой пароль!',
           }

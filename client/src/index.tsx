@@ -11,6 +11,7 @@ import { AppProvider } from './state/AppContext';
 
 
 ReactDOM.render(
+  
   <BrowserRouter>
     <UserTypeProvider>
       <UserProvider>
