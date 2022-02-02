@@ -5,17 +5,24 @@ export const initialState = {
   statistics: [],
   user: [],
   users: [],
-  isLoading: true,
+  isLoading: false,
   auth: {
-    isAuthificated: true,
-    role: "admin",
+    isAuthificated: false,
+    role: "",
+  },
+  adminUsers: {
+    admin: true,
+    superadmin: true,
+    moderator: true,
   },
 };
 
 export const reducer = (state: IInitialState, action: any): IInitialState => {
   switch (action.type) {
     case ActionType.SET_AUTH:
-        return { ...state, auth: action.payload };
+      return { ...state, auth: action.payload };
+    case ActionType.SET_ISLOADING:
+      return { ...state, isLoading: action.payload };
     case ActionType.STATISTICS_GET_STATISTICS:
       return { ...state, statistics: action.payload };
     case ActionType.STATISTICS_DELETE_STATISTICS:

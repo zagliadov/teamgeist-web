@@ -1,15 +1,15 @@
 import { FC, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../state/AuthContext';
+import { AppContext } from '../../state/AppContext';
 import AppLayout from '../AppLayout/AppLayout';
 
 
 
  const ProtectedRoute: FC = (props): any => {
-    const [auth, ] = useContext(AuthContext);
+    const [state, ] = useContext(AppContext)
     // const { role } = props;
     //if auth.role = role
-    return auth ? <AppLayout /> : <Navigate to='/login' />;
+    return state.auth.role ? <AppLayout /> : <Navigate to='/login' />;
 
 };
 
