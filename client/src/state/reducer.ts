@@ -16,16 +16,24 @@ export const initialState = {
     superadmin: true,
     moderator: true,
   },
-  monthString: moment().format('MMMM.YYYY'),
+  month: moment().month(),
+  year: moment().year(),
+  week: moment().week(),
   timeStep: "week",
+  weekFormat: "DD.MM.YYYY",
+  monthFormat: "MMMM.YYYY",
 };
 
 export const reducer = (state: IInitialState, action: any): IInitialState => {
   switch (action.type) {
     case ActionType.SET_TIME_STEP:
       return { ...state, timeStep: action.payload };
-    case ActionType.SET_MONTH_STRING:
-      return { ...state, monthString: action.payload };
+    case ActionType.SET_YEAR:
+      return { ...state, year: action.payload };
+    case ActionType.SET_MONTH:
+      return { ...state, month: action.payload };
+    case ActionType.SET_WEEK:
+      return { ...state, week: action.payload };
     case ActionType.SET_AUTH:
       return { ...state, auth: action.payload };
     case ActionType.SET_ISLOADING:

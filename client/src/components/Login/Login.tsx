@@ -33,16 +33,14 @@ const Login: FC = () => {
   const [user] = useContext(UserContext);
 
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log(state.isLoading)
-  }, [state])
   const onFinish = (values: IValueFromLoginForm) => {
     setTimeout(() => {
-      const person = user.filter((item: IValueFromLoginForm) => {
+      const [person] = user.filter((item: IValueFromLoginForm) => {
         return item.email === values.email;
       });
+      if(!person) return 
       localStorage.clear();
-      switch (person[0].userType) {
+      switch (person.userType) {
         case "admin":
           dispatch({
             type: ActionType.SET_AUTH,
@@ -51,10 +49,10 @@ const Login: FC = () => {
               role: "admin",
             },
           });
-          navigate(`/${person[0].userType}/users`, {
-            state: person[0].userType,
+          navigate(`/${person.userType}/users`, {
+            state: person.userType,
           });
-          localStorage.setItem("user", `${person[0].userType}`);
+          localStorage.setItem("user", `${person.userType}`);
           break;
         case "developer":
           dispatch({
@@ -64,10 +62,10 @@ const Login: FC = () => {
               role: "developer",
             },
           });
-          navigate(`/${person[0].userType}/project-list`, {
-            state: person[0].userType,
+          navigate(`/${person.userType}/project-list`, {
+            state: person.userType,
           });
-          localStorage.setItem("user", `${person[0].userType}`);
+          localStorage.setItem("user", `${person.userType}`);
           break;
         default:
           break;
