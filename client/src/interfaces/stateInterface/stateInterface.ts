@@ -3,8 +3,20 @@ export interface IInitialState {
   user: IOneUserAnalitics | [];
   users: IAllUsers | [];
   isLoading: boolean;
+  auth: IAuth;
+  adminUsers: IAdminUsers;
+  monthString: string;
+  timeStep: string;
 }
-
+export interface IAuth {
+  isAuthificated: boolean;
+  role: string;
+}
+export interface IAdminUsers {
+  admin: boolean;
+  superadmin: boolean;
+  moderator: boolean;
+}
 export interface IStatistics {
   content: {
     createdAt: string;

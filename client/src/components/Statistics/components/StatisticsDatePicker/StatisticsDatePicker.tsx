@@ -1,24 +1,33 @@
 import { DatePicker, Select, Space } from "antd";
-import { FC } from "react";
+import { FC, useContext, useState } from "react";
 import moment from "moment";
 import { ConfigProvider } from "antd";
 import ruRU from "antd/lib/locale/ru_RU";
 import "moment/locale/ru";
+import { AppContext } from "../../../../state/AppContext";
+import { ActionType } from "../../../../state/actions";
 
 const { Option } = Select;
 
-interface IProps {
-  setTimeStep: (arg0: string) => void;
-  timeStep: string;
-}
-
-const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
+const StatisticsDatePicker: FC = () => {
+  const [state, dispatch] = useContext(AppContext);
+  const { timeStep } = state;
   const weekFormat = "DD.MM.YYYY",
     monthFormat = "MMMM.YYYY";
   const weekOrMonth = timeStep === "week" ? weekFormat : monthFormat;
 
   const handleChange = (value: string) => {
-    setTimeStep(value);
+    dispatch({
+      type: ActionType.SET_TIME_STEP,
+      payload: value,
+    });
+  };
+  const datePickerChange = (date: any, dateString: any) => {
+    console.log(date);
+    dispatch({
+      type: ActionType.SET_MONTH_STRING,
+      payload: dateString,
+    })
   };
 
   const customWeekStartEndFormat = (value: moment.MomentInput) => {
@@ -41,7 +50,7 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
         <Space>
           {timeStep === "week" && (
             <Select
-              defaultValue={timeStep === "week" ? "week" : "month"}
+              defaultValue={timeStep}
               onChange={handleChange}
               style={{ width: 160 }}
             >
@@ -51,7 +60,7 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
           )}
           {timeStep === "month" && (
             <Select
-              defaultValue={timeStep === "month" ? "month" : "week"}
+              defaultValue={timeStep}
               onChange={handleChange}
               style={{ width: 160 }}
             >
@@ -59,14 +68,15 @@ const StatisticsDatePicker: FC<IProps> = ({ setTimeStep, timeStep }) => {
               <Option value="week">Неделя</Option>
             </Select>
           )}
-
           <DatePicker
+            defaultValue={state.monthString}
+            value={state.monthString}
             suffixIcon={null}
             style={{ width: "300px" }}
             popupStyle={{ width: "300px" }}
-            defaultValue={moment()}
+            onChange={datePickerChange}
             format={customWeekStartEndFormat}
-            picker={timeStep === "week" ? "week" : "month"}
+            picker={timeStep}
           />
         </Space>
       </ConfigProvider>

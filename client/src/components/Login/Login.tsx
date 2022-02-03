@@ -1,31 +1,41 @@
-import { Button, Form, Space, Input, PageHeader, Spin, Layout } from "antd";
-import { FC, useState, useContext } from "react";
-import { AuthContext } from "../../state/AuthContext";
+import {
+  Button,
+  Form,
+  Input,
+  PageHeader,
+  Spin,
+  Layout,
+  Card,
+  Divider,
+  Row,
+} from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { FC, useContext, useEffect } from "react";
+import { AppContext } from "../../state/AppContext";
 import { UserContext } from "../../state/UserContext";
 import { useNavigate } from "react-router-dom";
 import { IValueFromLoginForm } from "../../interfaces/componentsInterface";
-import FormItemForInput from "../FormItemForInput/FormItemForInput";
 import { useTranslation } from "react-i18next";
-import Logo from "../Logo/Logo";
+import logo from "../Logo/logo.svg";
 import "../../i18n";
-
-const FOOTER_DESCRIPTION: string = "FaceIt - 2022";
-
+import "./login.sass";
+import { ActionType } from "../../state/actions";
 
 const lngs: any = {
-  en: { nativeName: "English" },
-  ru: { nativeName: "Русский" },
+  en: { nativeName: "en" },
+  ru: { nativeName: "ру" },
 };
 
 const Login: FC = () => {
   const { t, i18n } = useTranslation();
-  const { Footer, Content } = Layout;
-  const [loading, setLoading] = useState<boolean>(false);
-  const [, setAuth] = useContext(AuthContext);
+  const { Content } = Layout;
+  const [state, dispatch] = useContext(AppContext);
   const [user] = useContext(UserContext);
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    console.log(state.isLoading)
+  }, [state])
   const onFinish = (values: IValueFromLoginForm) => {
     setTimeout(() => {
       const person = user.filter((item: IValueFromLoginForm) => {
@@ -34,14 +44,26 @@ const Login: FC = () => {
       localStorage.clear();
       switch (person[0].userType) {
         case "admin":
-          setAuth(true);
+          dispatch({
+            type: ActionType.SET_AUTH,
+            payload: {
+              isAuthificated: true,
+              role: "admin",
+            },
+          });
           navigate(`/${person[0].userType}/users`, {
             state: person[0].userType,
           });
           localStorage.setItem("user", `${person[0].userType}`);
           break;
         case "developer":
-          setAuth(true);
+          dispatch({
+            type: ActionType.SET_AUTH,
+            payload: {
+              isAuthificated: true,
+              role: "developer",
+            },
+          });
           navigate(`/${person[0].userType}/project-list`, {
             state: person[0].userType,
           });
@@ -55,108 +77,175 @@ const Login: FC = () => {
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
-    setLoading(false);
+    dispatch({
+      type: ActionType.SET_ISLOADING,
+      payload: false,
+    });
   };
 
   return (
-    <Layout>
+    <Layout className="transparent">
+      <div className="background-part-1" />
+      <div className="background-part-2" />
       <PageHeader
-        ghost={false}
-        title={<Logo />}
-        extra={[
-          <Button.Group>
+        className="text-center transparent"
+        extra={
+          <div className="lang-buttons">
             {Object.keys(lngs).map((lng) => (
               <Button
                 key={lng}
                 type={i18n.resolvedLanguage === lng ? "primary" : "default"}
+                ghost
+                size="small"
+                shape="round"
                 onClick={() => i18n.changeLanguage(lng)}
               >
                 {lngs[lng].nativeName}
               </Button>
             ))}
-          </Button.Group>,
-        ]}
+          </div>
+        }
       ></PageHeader>
 
+      <PageHeader className="text-center transparent">
+        <img src={logo} className="Logo" alt="img" />
+      </PageHeader>
+
       <Content>
-        <Layout
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <PageHeader title={t("description.logIn")} />
-
-          <Content style={{ width: 400 }}>
-            <Form
-              name="basic"
-              labelCol={{ span: 16 }}
-              wrapperCol={{ span: 24 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
+        <Layout className="white_content">
+          <Content
+            style={{
+              width: "35%",
+              margin: "6vh",
+              backgroundColor: "#ffffff",
+            }}
+          >
+            <Card
+              style={{
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.07)",
+                margin: "auto",
+              }}
             >
-              <FormItemForInput
-                className={"input-border"}
-                label={"E-mail:"}
-                required={true}
-                message={t("description.PleaseInputYourEmail")}
-                name={"email"}
-              />
-
-              <Form.Item
-                label={t("description.pswrd")}
-                name="password"
-                rules={[
-                  { required: true, message: t("description.pswrdMessage") },
-                ]}
+              <h2 style={{ textAlign: "center", fontWeight: 600 }}>
+                {t("logInForm.logIn")}
+              </h2>
+              <Form
+                name="basic"
+                labelCol={{ span: 16 }}
+                wrapperCol={{ span: 24 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
               >
-                <Input.Password />
-              </Form.Item>
-
-              <Form.Item>
-                <Button
-                  type="link"
-                  style={{ padding: 0 }}
-                  onClick={() => {
-                    navigate("/reset_password");
-                  }}
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: t("logInForm.PleaseInputYourEmail"),
+                    },
+                  ]}
                 >
-                  {t("description.forgotPswrd")}
-                </Button>
-              </Form.Item>
+                  <Input
+                    prefix={<UserOutlined style={{ color: "#BDBDBD" }} />}
+                    placeholder={t("logInForm.eMail")}
+                  />
+                </Form.Item>
 
-              <Spin spinning={loading} size="large">
+                <Form.Item
+                  name="password"
+                  rules={[
+                    { required: true, message: t("logInForm.pswrdMessage") },
+                  ]}
+                >
+                  <Input.Password
+                    // bordered={false}
+                    prefix={<LockOutlined style={{ color: "#BDBDBD" }} />}
+                    placeholder={t("logInForm.pswrd")}
+                  />
+                </Form.Item>
+
                 <Form.Item>
-                  <Space>
+                  <Button
+                    type="link"
+                    style={{ padding: 0 }}
+                    onClick={() => {
+                      navigate("/reset_password");
+                    }}
+                  >
+                    {t("logInForm.forgotPswrd")}
+                  </Button>
+                </Form.Item>
+
+                <Spin spinning={state?.isLoading} size="large">
+                  <Form.Item>
                     <Button
-                      className="brand__btn"
+                      block
+                      type="primary"
+                      size="large"
+                      shape="round"
                       htmlType="submit"
                       onClick={() => {
-                        setLoading(true);
+                        dispatch({
+                          type: ActionType.SET_ISLOADING,
+                          payload: true,
+                        });
                       }}
                     >
-                      {t("description.signInBtn")}
+                      {t("logInForm.signInBtn")}
                     </Button>
+                  </Form.Item>
 
+                  <Row justify="center" align="middle">
+                    <span>{t("logInForm.DontHaveAnAccount")}</span>
                     <Button
-                      className="brand__btn"
+                      type="link"
+                      style={{ color: "#03A473" }}
                       onClick={() => {
                         navigate("/registration");
                       }}
                     >
-                      {t("description.signUp")}
+                      {t("logInForm.signUp")}
                     </Button>
-                  </Space>
-                </Form.Item>
-              </Spin>
-            </Form>
+                  </Row>
+                </Spin>
+              </Form>
+            </Card>
+
+            <Divider style={{ marginTop: "4vh" }}>Download App:</Divider>
+
+            <Row justify="space-between">
+              <Button
+                shape="round"
+                type="default"
+                style={{
+                  color: "#03A473",
+                  border: "1px solid #03A473",
+                }}
+                onClick={() => {
+                  console.log("download Ubuntu");
+                }}
+              >
+                Ubuntu
+              </Button>
+              <Button
+                shape="round"
+                type="default"
+                style={{
+                  color: "#03A473",
+                  border: "1px solid #03A473",
+                }}
+                onClick={() => {
+                  console.log("download MacOs");
+                }}
+              >
+                MacOs
+              </Button>
+            </Row>
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: "center" }}>{FOOTER_DESCRIPTION}</Footer>
     </Layout>
   );
 };
