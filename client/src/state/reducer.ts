@@ -15,10 +15,16 @@ export const initialState = {
     superadmin: true,
     moderator: true,
   },
+  monthString: "",
+  timeStep: "",
 };
 
 export const reducer = (state: IInitialState, action: any): IInitialState => {
   switch (action.type) {
+    case ActionType.SET_TIME_STEP:
+      return { ...state, timeStep: action.payload };
+    case ActionType.SET_MONTH_STRING:
+      return { ...state, monthString: action.payload };
     case ActionType.SET_AUTH:
       return { ...state, auth: action.payload };
     case ActionType.SET_ISLOADING:

@@ -3,15 +3,16 @@ import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { UserContext } from "../../../../state/UserContext";
 import { useToGetWeeks } from "../../../../hooks/useToGetWeeks";
+import {AppContext} from '../../../../state/AppContext';
 
 interface IProps {
   timeStep: string,
-  monthString: string,
 }
 
-const ProjectList: FC<IProps> = ({ timeStep, monthString }) => {
+const ProjectList: FC<IProps> = ({ timeStep }) => {
   const [user] = useContext(UserContext);
-  const arrayOfWeeks = useToGetWeeks(monthString);
+  const [state, ] = useContext(AppContext);
+  const arrayOfWeeks = useToGetWeeks(state.monthString);
 
   const week: ColumnsType<any> = [
     {

@@ -5,6 +5,8 @@ export interface IInitialState {
   isLoading: boolean;
   auth: IAuth;
   adminUsers: IAdminUsers;
+  monthString: string;
+  timeStep: string;
 }
 export interface IAuth {
   isAuthificated: boolean;

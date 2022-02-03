@@ -1,10 +1,23 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Col, Layout, Menu, Row } from "antd";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router-dom";
+import {AppContext} from '../../state/AppContext';
+import { ActionType } from "../../state/actions";
 const { Header } = Layout;
 
 const AppHeader: FC<any> = ({ headerOption }) => {
+  const [state, dispatch] = useContext(AppContext);
+
+
+  const handleClick = () => {
+    dispatch({
+      type: ActionType.SET_ISLOADING,
+      payload: false,
+    });
+  }
+
+
   return (
     <Header
       style={{
@@ -60,6 +73,7 @@ const AppHeader: FC<any> = ({ headerOption }) => {
         >
           <NavLink
             to="/login"
+            onClick={() => handleClick()}
             className={({ isActive }) => (isActive ? "active" : "link")}
           >
             Выход

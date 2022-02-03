@@ -10,7 +10,7 @@ import {
   Row,
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { AppContext } from "../../state/AppContext";
 import { UserContext } from "../../state/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +33,9 @@ const Login: FC = () => {
   const [user] = useContext(UserContext);
 
   const navigate = useNavigate();
-
+  useEffect(() => {
+    console.log(state.isLoading)
+  }, [state])
   const onFinish = (values: IValueFromLoginForm) => {
     setTimeout(() => {
       const person = user.filter((item: IValueFromLoginForm) => {
