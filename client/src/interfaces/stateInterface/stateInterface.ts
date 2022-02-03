@@ -5,7 +5,9 @@ export interface IInitialState {
   isLoading: boolean;
   auth: IAuth;
   adminUsers: IAdminUsers;
-  monthString: string;
+  month: string | number;
+  week: string | number;
+  year: string | number;
   timeStep: string;
 }
 export interface IAuth {

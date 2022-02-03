@@ -1,5 +1,5 @@
 import { DatePicker, Select, Space } from "antd";
-import { FC, useContext, useState } from "react";
+import { FC, useContext } from "react";
 import moment from "moment";
 import { ConfigProvider } from "antd";
 import ruRU from "antd/lib/locale/ru_RU";
@@ -23,10 +23,17 @@ const StatisticsDatePicker: FC = () => {
     });
   };
   const datePickerChange = (date: any, dateString: any) => {
-    console.log(date);
     dispatch({
-      type: ActionType.SET_MONTH_STRING,
-      payload: dateString,
+      type: ActionType.SET_MONTH,
+      payload: date.month(),
+    });
+    dispatch({
+      type: ActionType.SET_YEAR,
+      payload: date.year(),
+    })
+    dispatch({
+      type: ActionType.SET_WEEK,
+      payload: date.week(),
     })
   };
 
@@ -69,8 +76,7 @@ const StatisticsDatePicker: FC = () => {
             </Select>
           )}
           <DatePicker
-            defaultValue={state.monthString}
-            value={state.monthString}
+            value={moment().month(state.month).year(state.year).week(state.week)}
             suffixIcon={null}
             style={{ width: "300px" }}
             popupStyle={{ width: "300px" }}

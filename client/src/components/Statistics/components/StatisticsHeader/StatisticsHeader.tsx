@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 import { ReloadOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Typography } from "antd";
 import StatisticsDatePicker from "../StatisticsDatePicker/StatisticsDatePicker";
@@ -9,20 +9,27 @@ import moment from "moment";
 const { Text } = Typography;
 
 const StatisticsHeader: FC = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const [, dispatch] = useContext(AppContext);
+
   const handleClick = () => {
     dispatch({
       type: ActionType.SET_TIME_STEP,
       payload: "week",
     });
     dispatch({
-      type: ActionType.SET_MONTH_STRING,
-      payload: moment().format('MMMM.YYYY'),
+      type: ActionType.SET_MONTH,
+      payload: moment().month(),
     });
+    dispatch({
+      type: ActionType.SET_YEAR,
+      payload: moment().year(),
+    });
+    dispatch({
+      type: ActionType.SET_WEEK,
+      payload: moment().week(),
+    })
   };
-  useEffect(() => {
-    console.log(state)
-  }, [state])
+
   return (
     <Row>
       <Col span={16}>

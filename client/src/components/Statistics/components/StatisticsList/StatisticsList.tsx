@@ -8,7 +8,7 @@ import { AppContext } from "../../../../state/AppContext";
 const ProjectList: FC = () => {
   const [user] = useContext(UserContext);
   const [state] = useContext(AppContext);
-  const arrayOfWeeks = useToGetWeeks(state.monthString);
+  const arrayOfWeeks = useToGetWeeks(state.month, state.year, state.week);
   const { timeStep } = state;
 
   const week: ColumnsType<any> = [
@@ -67,22 +67,22 @@ const ProjectList: FC = () => {
     },
     {
       title: arrayOfWeeks[0].firstWeekOfMonth,
-      dataIndex: "id",
+      dataIndex: "firstWeekOfMonth",
       key: "firstWeekOfMonth",
     },
     {
       title: arrayOfWeeks[1].secondWeekOfMonth,
-      dataIndex: "id",
+      dataIndex: "secondWeekOfMonth",
       key: "secondWeekOfMonth",
     },
     {
       title: arrayOfWeeks[2].thirdWeekOfMonth,
-      dataIndex: "id",
+      dataIndex: "thirdWeekOfMonth",
       key: "thirdWeekOfMonth",
     },
     {
       title: arrayOfWeeks[3].fourthWeekOfMonth,
-      dataIndex: "id",
+      dataIndex: "fourthWeekOfMonth",
       key: "fourthWeekOfMonth",
     },
   ];
@@ -90,8 +90,9 @@ const ProjectList: FC = () => {
   return (
     <>
       <Table
-        dataSource={timeStep === "week" ? user : arrayOfWeeks}
+        dataSource={timeStep === "week" ? user : user}
         columns={timeStep === "week" ? week : month}
+        key={timeStep}
       />
     </>
   );

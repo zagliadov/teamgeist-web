@@ -1,11 +1,11 @@
 import moment from "moment";
 
 
-export const useToGetWeeks = (monthString: string) => {
+export const useToGetWeeks = (month: string, year: number, week: number) => {
 
   let point = moment();
-  const firstDayOfMonth = point.clone().month(monthString).startOf("month");
-  const lastDayOfMonth = point.clone().month(monthString).endOf("month").format("DD.MM.YYYY");
+  const firstDayOfMonth = point.clone().month(month).year(year).week(week).startOf("month");
+  const lastDayOfMonth = point.clone().month(month).year(year).week(week).endOf("month").format("DD.MM.YYYY");
   const firstWeekOfMonth =
     firstDayOfMonth.format("DD.MM.YYYY") +
     "-" +
