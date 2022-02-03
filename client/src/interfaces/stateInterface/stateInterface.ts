@@ -9,6 +9,8 @@ export interface IInitialState {
   week: string | number;
   year: string | number;
   timeStep: string;
+  weekFormat: string;
+  monthFormat: string;
 }
 export interface IAuth {
   isAuthificated: boolean;

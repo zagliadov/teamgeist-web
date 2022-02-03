@@ -10,7 +10,6 @@ import { AppProvider } from './state/AppContext';
 
 
 ReactDOM.render(
-  
   <BrowserRouter>
     <UserTypeProvider>
       <UserProvider>
@@ -21,7 +20,6 @@ ReactDOM.render(
         </ProjectProvider>
       </UserProvider>
     </UserTypeProvider>
-
   </BrowserRouter>
   ,
   document.getElementById('root')

@@ -11,9 +11,7 @@ const { Option } = Select;
 
 const StatisticsDatePicker: FC = () => {
   const [state, dispatch] = useContext(AppContext);
-  const { timeStep } = state;
-  const weekFormat = "DD.MM.YYYY",
-    monthFormat = "MMMM.YYYY";
+  const { timeStep, month, weekFormat, monthFormat, year, week } = state;
   const weekOrMonth = timeStep === "week" ? weekFormat : monthFormat;
 
   const handleChange = (value: string) => {
@@ -30,11 +28,11 @@ const StatisticsDatePicker: FC = () => {
     dispatch({
       type: ActionType.SET_YEAR,
       payload: date.year(),
-    })
+    });
     dispatch({
       type: ActionType.SET_WEEK,
       payload: date.week(),
-    })
+    });
   };
 
   const customWeekStartEndFormat = (value: moment.MomentInput) => {
@@ -76,7 +74,8 @@ const StatisticsDatePicker: FC = () => {
             </Select>
           )}
           <DatePicker
-            value={moment().month(state.month).year(state.year).week(state.week)}
+          defaultValue={moment()}
+            value={moment().month(month).year(year).week(week)}
             suffixIcon={null}
             style={{ width: "300px" }}
             popupStyle={{ width: "300px" }}

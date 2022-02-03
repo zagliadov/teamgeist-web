@@ -16,10 +16,12 @@ export const initialState = {
     superadmin: true,
     moderator: true,
   },
-  month: "",
+  month: moment().month(),
   year: moment().year(),
-  week: "",
+  week: moment().week(),
   timeStep: "week",
+  weekFormat: "DD.MM.YYYY",
+  monthFormat: "MMMM.YYYY",
 };
 
 export const reducer = (state: IInitialState, action: any): IInitialState => {
