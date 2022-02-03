@@ -7,7 +7,7 @@ import { ActionType } from "../../state/actions";
 const { Header } = Layout;
 
 const AppHeader: FC<any> = ({ headerOption }) => {
-  const [state, dispatch] = useContext(AppContext);
+  const [, dispatch] = useContext(AppContext);
 
 
   const handleClick = () => {

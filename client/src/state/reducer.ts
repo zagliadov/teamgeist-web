@@ -1,3 +1,4 @@
+import moment from "moment";
 import { IInitialState } from "../interfaces/stateInterface/stateInterface";
 import { ActionType } from "./actions";
 
@@ -15,8 +16,8 @@ export const initialState = {
     superadmin: true,
     moderator: true,
   },
-  monthString: "",
-  timeStep: "",
+  monthString: moment().format('MMMM.YYYY'),
+  timeStep: "week",
 };
 
 export const reducer = (state: IInitialState, action: any): IInitialState => {

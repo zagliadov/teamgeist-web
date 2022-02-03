@@ -3,16 +3,13 @@ import { Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { UserContext } from "../../../../state/UserContext";
 import { useToGetWeeks } from "../../../../hooks/useToGetWeeks";
-import {AppContext} from '../../../../state/AppContext';
+import { AppContext } from "../../../../state/AppContext";
 
-interface IProps {
-  timeStep: string,
-}
-
-const ProjectList: FC<IProps> = ({ timeStep }) => {
+const ProjectList: FC = () => {
   const [user] = useContext(UserContext);
-  const [state, ] = useContext(AppContext);
+  const [state] = useContext(AppContext);
   const arrayOfWeeks = useToGetWeeks(state.monthString);
+  const { timeStep } = state;
 
   const week: ColumnsType<any> = [
     {
@@ -69,22 +66,22 @@ const ProjectList: FC<IProps> = ({ timeStep }) => {
       key: "id",
     },
     {
-      title: <span>{arrayOfWeeks[0].firstWeekOfMonth}</span>,
+      title: arrayOfWeeks[0].firstWeekOfMonth,
       dataIndex: "id",
       key: "firstWeekOfMonth",
     },
     {
-      title: <span>{arrayOfWeeks[1].secondWeekOfMonth}</span>,
+      title: arrayOfWeeks[1].secondWeekOfMonth,
       dataIndex: "id",
       key: "secondWeekOfMonth",
     },
     {
-      title: <span>{arrayOfWeeks[2].thirdWeekOfMonth}</span>,
+      title: arrayOfWeeks[2].thirdWeekOfMonth,
       dataIndex: "id",
       key: "thirdWeekOfMonth",
     },
     {
-      title: <span>{arrayOfWeeks[3].fourthWeekOfMonth}</span>,
+      title: arrayOfWeeks[3].fourthWeekOfMonth,
       dataIndex: "id",
       key: "fourthWeekOfMonth",
     },

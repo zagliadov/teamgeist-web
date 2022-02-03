@@ -108,7 +108,7 @@ const Login: FC = () => {
       ></PageHeader>
 
       <PageHeader className="text-center transparent">
-        <img src={logo} className="Logo" />
+        <img src={logo} className="Logo" alt="img" />
       </PageHeader>
 
       <Content>

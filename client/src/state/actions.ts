@@ -1,3 +1,8 @@
+
+/**
+ * @const SET_MONTH_STRING Получить месяц года из DatePicker. Значение нужно для хука useToGetWeeks.
+ * @const SET_TIME_STEP Получить значение week or month из StatisticsDatePicker
+ */
 export enum ActionType {
   STATISTICS_GET_STATISTICS = "STATISTICS_GET_STATISTICS",
   STATISTICS_DELETE_STATISTICS = "STATISTICS_DELETE_STATISTICS",

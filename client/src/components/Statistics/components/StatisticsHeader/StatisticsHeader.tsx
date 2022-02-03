@@ -1,21 +1,32 @@
-import { FC } from "react";
+import { FC, useContext, useEffect } from "react";
 import { ReloadOutlined } from "@ant-design/icons";
 import { Button, Col, Row, Typography } from "antd";
 import StatisticsDatePicker from "../StatisticsDatePicker/StatisticsDatePicker";
+import { AppContext } from "../../../../state/AppContext";
+import { ActionType } from "../../../../state/actions";
+import moment from "moment";
 
 const { Text } = Typography;
 
-interface IProps {
-  timeStep: string;
-  setTimeStep: (arg0: string) => void;
-}
-
-const StatisticsHeader: FC<IProps> = ({ timeStep, setTimeStep }) => {
-
+const StatisticsHeader: FC = () => {
+  const [state, dispatch] = useContext(AppContext);
+  const handleClick = () => {
+    dispatch({
+      type: ActionType.SET_TIME_STEP,
+      payload: "week",
+    });
+    dispatch({
+      type: ActionType.SET_MONTH_STRING,
+      payload: moment().format('MMMM.YYYY'),
+    });
+  };
+  useEffect(() => {
+    console.log(state)
+  }, [state])
   return (
     <Row>
       <Col span={16}>
-        <StatisticsDatePicker setTimeStep={setTimeStep} timeStep={timeStep} />
+        <StatisticsDatePicker />
       </Col>
       <Col
         span={8}
@@ -27,9 +38,7 @@ const StatisticsHeader: FC<IProps> = ({ timeStep, setTimeStep }) => {
         <Button
           type="text"
           style={{ background: "transparent", color: "#03A473" }}
-          onClick={() => {
-            setTimeStep("week");
-          }}
+          onClick={() => handleClick()}
         >
           <ReloadOutlined />
         </Button>
